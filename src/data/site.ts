@@ -85,7 +85,10 @@ export type PageContent = {
   faq: {
     title: string;
     intro: string;
-    items: Array<{ question: string; answer: string }>;
+    groups: Array<{
+      category: string;
+      items: Array<{ question: string; answer: string }>;
+    }>;
   };
   photos: {
     title: string;
@@ -219,32 +222,26 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           dimension: "地理坐标",
           value: "32°21'S, 64°58'W",
-          note: "位于南半球、阿根廷中部内陆的 Comechingones 山脉西侧。",
         },
         {
           dimension: "海拔高度",
           value: "约 1,470 米 / 4,822 英尺",
-          note: "大致位于 Villa de Merlo 市区与更高山脊主线之间的中继高度。",
         },
         {
           dimension: "地质年代",
           value: "古生代",
-          note: "属于 Comechingones 山脉较古老的基岩体系背景。",
         },
         {
           dimension: "主要岩性",
           value: "结晶岩、花岗岩、片麻岩",
-          note: "地表景观明显受到长期风化与水蚀塑形的影响。",
         },
         {
           dimension: "年均气温",
           value: "约 17°C（Merlo 基准）",
-          note: "观景台体感通常比市区低约 4 至 6°C，且受风寒影响更明显。",
         },
         {
           dimension: "植被带",
           value: "查科高山过渡带",
-          note: "以灌木、耐旱草本与高地草甸特征为主，呈现明显垂直变化。",
         },
       ],
     },
@@ -298,22 +295,77 @@ export const contentByLocale: Record<Locale, PageContent> = {
     faq: {
       title: "常见地质与出行释疑",
       intro:
-        "关于地质特征、气候影响与出行规划的高频释疑。",
-      items: [
+        "为了帮助您做出最合理的行程决策，我们基于实地地理条件与高频到访反馈，将常见问题归纳为以下三个核心维度：",
+      groups: [
         {
-          question: "到达 Tirolesa Mirador Del Sol 必须驾驶四驱越野车（4x4）吗？",
-          answer:
-            "通常不需要。通往观景台的 Ruta 5 主要为铺装山路，标准两驱车辆一般即可抵达；但由于发夹弯密集、坡度变化明显，驾驶者仍应具备基本山路驾驶经验，并合理使用发动机制动。",
+          category: "一、 地质特征与自然环境 (Geología y Entorno)",
+          items: [
+            {
+              question: "科门钦戈内斯山脉（Comechingones）的地质稳定性如何？在这里进行高空滑索安全吗？",
+              answer:
+                "该山脉属于阿根廷中部的潘帕斯断块山系（Sierras Pampeanas），基岩主要由古生代的结晶岩、花岗岩和片麻岩构成，地质结构极其古老且稳定。滑索工程的承重锚点均采用重型机械深度打入这些坚硬的无缝基岩中，其抗拉扯与承重能力远超常规土质或喀斯特地貌山体。",
+            },
+            {
+              question: "为什么观景台这一侧的山势如此陡峭，而山脉另一侧却很平缓？",
+              answer:
+                "这是一个典型的“断块山”地质特征。科门钦戈内斯山脉的西坡（即梅洛市和观景台所在的一侧）处于地质断层面，地势受挤压陡然抬升，造就了滑索所需的巨大峡谷落差；而东坡（朝向科尔多瓦省）则是平缓下降的斜坡。这种不对称地形是数百万年地壳构造运动的直接结果。",
+            },
+            {
+              question: "如果不体验高空滑索，单纯观景的价值在哪里？",
+              answer:
+                "即使不参加滑索，这里依然提供约 180 度无遮挡山谷视野，可观察山体切割、谷地冲刷地貌以及不同海拔带的植被变化。作为一处地理地貌观测台，它本身就具有很高的独立价值。",
+            },
+          ],
         },
         {
-          question: "这里的“微气候”会对高空滑索体验产生什么物理影响？",
-          answer:
-            "微气候在现场最直接的体现之一，是热气流与峡谷穿堂风对速度和体感的影响。实际运营通常需要依据实时风况监测决定是否暂停项目，因此风速阈值比宣传描述更重要。",
+          category: "二、 微气候与物理影响 (Microclima y Física)",
+          items: [
+            {
+              question: "“微气候”是否意味着观景台这里四季如春、从不下雨？",
+              answer:
+                "这是一个常见的误区。梅洛的“微气候”主要指空气富氧、极高比例的负离子以及低污染，而非恒温或无降水。实际上，受海拔抬升影响，观景台区域的气象变化比山下市区更剧烈。阵雨、速生云雾以及昼夜大温差是非常典型的山地气候特征。",
+            },
+            {
+              question: "观景台区域适合使用无人机（Drone）进行航拍吗？",
+              answer:
+                "需极度谨慎。由于深邃的峡谷地形和微气候特性，这里白天会产生强烈的上升热气流（Térmicas）和不可预测的穿堂阵风（Ráfagas）。重量较轻的消费级无人机在此极易偏航失控甚至坠毁。建议仅在清晨风力处于最低谷时谨慎起飞，并密切关注风速警报。",
+            },
+            {
+              question: "山风会对高空滑索体验产生什么影响？",
+              answer:
+                "滑索是一项依赖重力与空气动力学的户外项目。现场运营方配备了专业测风仪进行实时监控。当峡谷风速或横风超过工程安全阈值时，出于物理规律与访客安全考量，项目会强制暂停。因此，滑索体验具有一定的天气随机性。",
+            },
+          ],
         },
         {
-          question: "如果不体验高空滑索，单纯观景的价值在哪里？",
-          answer:
-            "即使不参加滑索，这里依然提供约 180 度无遮挡山谷视野，可观察山体切割、谷地冲刷地貌以及不同海拔带的植被变化。作为一处地理地貌观测台，它本身就具有很高的独立价值。",
+          category: "三、 行程规划与到访条件 (Planificación y Accesibilidad)",
+          items: [
+            {
+              question: "到达 Tirolesa Mirador Del Sol 必须驾驶四驱越野车（4x4）吗？",
+              answer:
+                "通常不需要。通往观景台的 Ruta 5 主要为铺装山路，标准两驱车辆一般即可抵达；但由于发夹弯密集、坡度变化明显，驾驶者仍应具备基本山路驾驶经验，并合理使用发动机制动。",
+            },
+            {
+              question: "前往 1,470 米的海拔，会有高原反应（Soroche / Puna）吗？",
+              answer:
+                "通常不会。医学上的高原反应一般出现在海拔 2,500 米以上的地区。Tirolesa Mirador Del Sol 的海拔为 1,470 米，绝大多数访客（包括老人和儿童）在此高度不会出现缺氧症状。但由于气温骤降，更容易发生的是因未带保暖衣物而受凉。",
+            },
+            {
+              question: "这里的设施是否适合老年人或轮椅使用者？",
+              answer:
+                "观景台主体区域紧邻 Ruta 5 景观公路，停车后步行距离极短，且平坦度尚可，老年人及轮椅使用者可以轻松抵达边缘地带欣赏全景。但高空滑索区域以及周边未经铺设的岩石小径，出于安全考虑，不建议行动不便者前往。",
+            },
+            {
+              question: "山区的移动网络信号如何？需要提前准备什么？",
+              answer:
+                "由于庞大山体的物理遮挡，Ruta 5 沿线及观景台的移动网络信号（4G/3G）非常不稳定，甚至部分路段会完全丢失信号。强烈建议访客在离开梅洛市区前，提前下载好 Google Maps 离线地图，并随身携带少量比索现金，以防山上因断网无法使用电子支付（如 Mercado Pago）。",
+            },
+            {
+              question: "高空滑索（Tirolesa）对参与者有什么具体的物理限制？",
+              answer:
+                "除去天气变量，参与者自身需满足物理阈值。通常要求体重在 30 公斤至 100 公斤之间（具体以现场称重为准），以确保滑行动能与机械制动系统的最佳匹配，避免动能不足停在半空或动能过载。患有心血管疾病、严重恐高症或近期接受过手术的访客，建议将其作为纯粹的观景行程。",
+            },
+          ],
         },
       ],
     },
@@ -442,8 +494,6 @@ export const contentByLocale: Record<Locale, PageContent> = {
       ],
     },
     footer: {
-      note:
-        "本站为聚焦地理环境、观景体验与到访安全，不承载预订、促销或品牌背书。该刊物完全免费，旨在促进阿根廷旅游业的发展。",
       copyright: "© 2026 Tirolesa Mirador Del Sol指南 · 保留所有权利。",
       disclaimer:
         "本网站是一个独立的第三方非盈利科普指南项目，我们与阿根廷政府或任何官方机构均无隶属关系。",
@@ -535,32 +585,26 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           dimension: "Coordinates",
           value: "32°21'S, 64°58'W",
-          note: "Southern Hemisphere location in inland central Argentina along the western side of the Comechingones range.",
         },
         {
           dimension: "Elevation",
           value: "Approx. 1,470 m / 4,822 ft",
-          note: "An intermediate height between urban Merlo and the higher ridge crest above.",
         },
         {
           dimension: "Geologic age",
           value: "Paleozoic",
-          note: "Part of the older basement context associated with the Comechingones mountains.",
         },
         {
           dimension: "Dominant lithology",
           value: "Crystalline rock, granite, gneiss",
-          note: "The exposed landscape reflects long-term weathering and water erosion.",
         },
         {
           dimension: "Mean annual temperature",
           value: "About 17°C in Merlo",
-          note: "The lookout often feels 4 to 6°C cooler than the town below, especially under wind exposure.",
         },
         {
           dimension: "Vegetation belt",
           value: "Transitional Chaco upland zone",
-          note: "Shrubs, dry-adapted grasses, and highland meadow characteristics appear along the ascent.",
         },
       ],
     },
@@ -758,8 +802,6 @@ export const contentByLocale: Record<Locale, PageContent> = {
       ],
     },
     footer: {
-      note:
-        "This site focuses on geography, viewpoint experience, and visitor safety. It does not provide booking, promotions, or brand endorsement. The publication is fully free and aims to support the development of tourism in Argentina.",
       copyright: "© 2026 Tirolesa Mirador Del Sol Guide. All rights reserved.",
       disclaimer:
         "This website is an independent third-party non-profit educational guide project and has no institutional affiliation with the Government of Argentina or any official authority.",
@@ -851,32 +893,26 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           dimension: "Coordinate",
           value: "32°21'S, 64°58'W",
-          note: "Posizione dell'emisfero australe nell'Argentina interna centrale, sul versante occidentale dei Comechingones.",
         },
         {
           dimension: "Quota",
           value: "Circa 1.470 m / 4.822 ft",
-          note: "Altezza intermedia tra Merlo urbana e la linea di cresta piu elevata.",
         },
         {
           dimension: "Eta geologica",
           value: "Paleozoico",
-          note: "Inserita nel contesto del basamento antico della catena.",
         },
         {
           dimension: "Litologia principale",
           value: "Rocce cristalline, granito, gneiss",
-          note: "Il paesaggio esposto riflette lunga alterazione e incisione idrica.",
         },
         {
           dimension: "Temperatura media annua",
           value: "Circa 17°C a Merlo",
-          note: "Il belvedere risulta spesso 4-6°C piu fresco del centro abitato, soprattutto con vento.",
         },
         {
           dimension: "Fascia vegetazionale",
           value: "Transizione alto Chaco",
-          note: "Arbusti, graminacee resistenti alla siccita e caratteri di prateria montana.",
         },
       ],
     },
@@ -1074,8 +1110,6 @@ export const contentByLocale: Record<Locale, PageContent> = {
       ],
     },
     footer: {
-      note:
-        "Il sito si concentra su contesto geografico, esperienza panoramica e sicurezza di visita. Non ospita prenotazioni, promozioni o sostegni di marchio. La pubblicazione e completamente gratuita e intende favorire lo sviluppo del turismo in Argentina.",
       copyright: "© 2026 Guida Tirolesa Mirador Del Sol. Tutti i diritti riservati.",
       disclaimer:
         "Questo sito e un progetto indipendente, non profit e divulgativo di terza parte; non ha alcun rapporto istituzionale con il governo argentino o con enti ufficiali.",
@@ -1167,32 +1201,26 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           dimension: "Coordenadas",
           value: "32°21'S, 64°58'W",
-          note: "Ubicacion del hemisferio sur en el interior central argentino, sobre el lado occidental de los Comechingones.",
         },
         {
           dimension: "Altitud",
           value: "Aprox. 1.470 m / 4.822 ft",
-          note: "Cota intermedia entre el Merlo urbano y la cresta mas alta.",
         },
         {
           dimension: "Edad geologica",
           value: "Paleozoico",
-          note: "Parte del contexto de basamento antiguo de la sierra.",
         },
         {
           dimension: "Litologia dominante",
           value: "Roca cristalina, granito, gneis",
-          note: "El relieve visible refleja meteorizacion prolongada y erosion hidrica.",
         },
         {
           dimension: "Temperatura media anual",
           value: "Cerca de 17°C en Merlo",
-          note: "El mirador suele sentirse 4-6°C mas fresco que el pueblo, sobre todo con viento.",
         },
         {
           dimension: "Piso de vegetacion",
           value: "Transicion de Chaco serrano",
-          note: "Predominan arbustos, pastos resistentes a la sequia y rasgos de pastizal alto.",
         },
       ],
     },
@@ -1390,8 +1418,6 @@ export const contentByLocale: Record<Locale, PageContent> = {
       ],
     },
     footer: {
-      note:
-        "Este sitio se centra en el entorno geografico, la experiencia panoramica y la seguridad de visita. No ofrece reservas, promociones ni respaldo de marca. La publicacion es completamente gratuita y busca contribuir al desarrollo del turismo en Argentina.",
       copyright: "© 2026 Guia Tirolesa Mirador Del Sol. Todos los derechos reservados.",
       disclaimer:
         "Este sitio web es un proyecto independiente, no lucrativo y divulgativo de terceros; no tiene relacion institucional con el Gobierno de Argentina ni con ninguna entidad oficial.",
