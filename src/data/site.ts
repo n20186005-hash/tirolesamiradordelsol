@@ -222,26 +222,32 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           dimension: "地理坐标",
           value: "32°21'S, 64°58'W",
+          note: "南半球，阿根廷中部内陆",
         },
         {
           dimension: "海拔高度",
-          value: "约 1,470 米 / 4,822 英尺",
+          value: "约 1,470 米 (4,822 英尺)",
+          note: "位于梅洛市区与山脉主峰之间",
         },
         {
           dimension: "地质年代",
-          value: "古生代",
+          value: "古生代 (Paleozoico)",
+          note: "科门钦戈内斯山脉基岩",
         },
         {
           dimension: "主要岩性",
           value: "结晶岩、花岗岩、片麻岩",
+          note: "呈现强烈的风化与水蚀地貌",
         },
         {
           dimension: "年均气温",
           value: "约 17°C（Merlo 基准）",
+          note: "观景台气温通常比市区低 4-6°C",
         },
         {
           dimension: "植被带",
           value: "查科高山过渡带",
+          note: "以灌木与耐旱高山草甸为主",
         },
       ],
     },
