@@ -151,7 +151,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "阿根廷圣路易斯省 | 梅洛山地观景与高空滑索",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "这是一处位于 Villa de Merlo 东侧山脊道路上的高海拔观景点与冒险活动节点。页面以非商业、科普化方式整理地貌背景、微气候、交通方式、现场照片与安全提示，帮助访客在抵达前先理解地点本身。",
+        "本站为聚焦地理环境、观景体验与到访安全，不承载预订、促销或品牌背书。该刊物完全免费，旨在促进阿根廷旅游业的发展。",
       ratingLabel: "Google 评分",
       typeLabel: "类型",
       addressLabel: "地址",
@@ -192,7 +192,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
     insights: {
       title: "自然与工程观察",
       intro:
-        "如果把这里视为一个科普节点，而不是普通打卡点，可以从生态、工程与光线三个维度理解这处山地景观。",
+        "可以从生态、工程与光线三个维度理解这处山地景观。",
       cards: [
         {
           title: "山地生态群落",
@@ -214,7 +214,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
     technical: {
       title: "基础空间与地质数据",
       intro:
-        "专业景点页面通常需要一张可快速检索的技术卡片，用以概括坐标、海拔、岩性、气候与植被带。以下数据可帮助访客以更地理学的方式理解该地点。",
+        "以下结构化数据概括了该地点的坐标、海拔、岩性、气候与植被带，帮助访客以地理学视角快速理解其空间特征。",
       rows: [
         {
           dimension: "地理坐标",
@@ -251,7 +251,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
     routeProfile: {
       title: "Ruta 5（Camino al Filo）垂直动线",
       intro:
-        "Tirolesa Mirador Del Sol 并不是孤立的观景台节点，而是整条山脊景观公路上的关键中继点。理解这条爬升线，才能真正理解访客的空间体验。",
+        "Tirolesa Mirador Del Sol 是整条山脊景观公路上的关键中继点。理解这条爬升线，才能真正理解该地点的空间关系。",
       stages: [
         {
           title: "起点：梅洛市区",
@@ -276,7 +276,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
     astronomy: {
       title: "夜空保护与天文观测",
       intro:
-        "如果把这里视为长期观测点，夜间价值并不低于白天。远离核心城镇光源后，山地观景台会显现出暗夜保护、南半球星空与夜景摄影的复合意义。",
+        "远离核心城镇光源后，山地观景台展现出极高的暗夜保护、南半球星空与夜景摄影复合价值。",
       cards: [
         {
           title: "低光污染条件",
@@ -298,7 +298,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
     faq: {
       title: "常见地质与出行释疑",
       intro:
-        "这类高频问题如果只依赖零散评论，很容易失真。以结构化答疑方式呈现，能更有效地回答“怎么去、值不值、风险在哪里”这类实际问题。",
+        "关于地质特征、气候影响与出行规划的高频释疑。",
       items: [
         {
           question: "到达 Tirolesa Mirador Del Sol 必须驾驶四驱越野车（4x4）吗？",
@@ -320,14 +320,14 @@ export const contentByLocale: Record<Locale, PageContent> = {
     photos: {
       title: "现场照片",
       intro:
-        "照片均来自站内图库，涵盖山谷视野、山地道路、观景平台与活动环境，可作为到访前的视觉参考。首屏背景同样取自这组现场影像。",
+        "涵盖山谷视野、山地道路、观景平台与活动环境的现场影像。",
       mapsCta: "在 Google 地图上查看位置",
       altPrefix: "山谷与观景台照片",
     },
     reviews: {
       title: "访客观察",
       intro:
-        "与其堆砌情绪化短评，不如把高频反馈归纳为三个更有判断价值的观察维度，帮助访客建立合理预期。",
+        "来自访客的高频反馈被归纳为三个具体的观察维度，帮助建立合理的到访预期。",
       mapsCta: "在 Google 地图上查看位置",
       themes: [
         {
@@ -355,22 +355,22 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "区域机场",
           body:
-            "若希望缩短地面路程，可优先关注 Valle del Conlara 方向的区域机场；若班次不合适，也可先飞往 San Luis 或 Cordoba，再转地面交通进入 Merlo。",
+            "距离最近的为 Valle del Conlara 国际机场 (RLO)，车程约 30 分钟。若航班班次有限，也可飞往 San Luis (LUQ，距约 200 公里) 或 Cordoba (COR，距约 250 公里)，随后转乘长途巴士或租赁汽车进入 Merlo。",
         },
         {
           title: "自驾抵达",
           body:
-            "自驾是最直接的方式。抵达 Merlo 后沿 Ruta 5 继续上山，弯道连续、坡度明显，建议白天行车并为观景停车、会车和返程留出余量。",
+            "从 Merlo 市区沿 Avenida de los Césares 向东接入 Ruta 5。这是一条全程铺装但蜿蜒的发夹弯山路（Camino al Filo），车程约 25-35 分钟。上下山务必使用低挡位发动机制动，观景台附近有非铺装停车区域。",
         },
         {
           title: "巴士加接驳",
           body:
-            "长途巴士通常先到 Villa de Merlo 客运站。此后仍需依靠出租车、remis、包车或同伴车辆完成上山段，因为观景点并不等同于市区平地目的地。",
+            "长途巴士均停靠 Villa de Merlo 镇中心客运站（Terminal de Ómnibus）。目前无公共巴士直达 Mirador del Sol，您需要在镇上租用 Remis（当地出租车）、乘坐专线旅游小巴或报名半日游旅行团。",
         },
         {
           title: "最后一段山路",
           body:
-            "接近观景台时，路面虽为常见山地旅游道路，但视野开阔、风力更强，停车点也较分散。无论自驾或接驳，都应把最后一段视作独立的山地到达过程。",
+            "接近 1470 米观景台时风力会显著增强。若骑行或徒步，请在早晨出发以避开午后高温与逆风；机动车抵达后，请将车辆停稳在路边宽阔处，注意开门时的强风。",
         },
       ],
     },
