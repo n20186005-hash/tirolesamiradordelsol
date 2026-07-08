@@ -1,0 +1,72 @@
+---
+import "../styles/global.css";
+import { alternateLinks, localizedPath, siteMeta, type Locale } from "../data/site";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const canonicalPath = localizedPath(locale);
+const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? `https://${siteMeta.domain}`;
+const canonicalUrl = `${siteOrigin}${canonicalPath}`;
+const tourismSchema = {
+  "@context": "https://schema.org",
+  "@type": "TouristAttraction",
+  name: siteMeta.name,
+  description,
+  url: canonicalUrl,
+  image: `${siteOrigin}${siteMeta.ogImage}`,
+  telephone: siteMeta.phone,
+  sameAs: [siteMeta.mapsUrl],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "ruta 5 sin numero",
+    addressLocality: "Merlo",
+    addressRegion: "San Luis",
+    addressCountry: "AR",
+    postalCode: "D5881",
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: siteMeta.rating,
+    reviewCount: siteMeta.reviewCount.replace(",", ""),
+  },
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {
+      alternateLinks.map((item) => (
+        <link
+          rel="alternate"
+          hreflang={item.locale === "zh" ? "zh-CN" : item.locale}
+          href={`${siteOrigin}${item.href}`}
+        />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={`${siteOrigin}/`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={`${siteOrigin}${siteMeta.ogImage}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteOrigin}${siteMeta.ogImage}`} />
+    <script type="application/ld+json" set:html={JSON.stringify(tourismSchema)} />
+  </head>
+  <body class="antialiased">
+    <slot />
+  </body>
+</html>
