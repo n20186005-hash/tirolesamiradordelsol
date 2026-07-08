@@ -1,0 +1,65 @@
+---
+import CookieSettingsPanel from "../components/CookieSettingsPanel.astro";
+import LegalPage from "../components/LegalPage.astro";
+import { legalAlternateUrls, legalContentByLocale, legalKeyBySlug, legalPageKeys, legalSlugByKey, localizedLegalPath, type LegalPageKey } from "../data/legal";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  return legalPageKeys.map((key) => ({ params: { slug: legalSlugByKey[key] } }));
+}
+
+const slug = Astro.params.slug ?? "";
+const pageKey = legalKeyBySlug[slug];
+
+if (!pageKey) {
+  throw new Error(`Unknown legal page slug: ${slug}`);
+}
+
+const locale = "zh";
+const legal = legalContentByLocale[locale];
+const page = legal[pageKey] as (typeof legal)["privacy"];
+const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? `https://tirolesamiradordelsol.com`;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: page.title,
+  description: page.description,
+  url: `${siteOrigin}${localizedLegalPath(locale, pageKey as LegalPageKey)}`,
+  inLanguage: "zh-CN",
+};
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${page.title} | Tirolesa Mirador Del Sol`}
+  description={page.description}
+  canonicalPath={localizedLegalPath(locale, pageKey as LegalPageKey)}
+  alternateUrls={legalAlternateUrls(pageKey as LegalPageKey, siteOrigin)}
+  structuredData={structuredData}
+>
+  <LegalPage
+    locale={locale}
+    homeLabel={legal.homeLabel}
+    backLabel={legal.backLabel}
+    title={page.title}
+    updatedLabel={page.updatedLabel}
+    updatedValue={page.updatedValue}
+    intro={page.intro}
+    sections={page.sections}
+  >
+    {
+      pageKey === "cookies" && (
+        <CookieSettingsPanel
+          categories={legal.cookies.categories}
+          consentTitle={legal.cookies.consentTitle}
+          consentBody={legal.cookies.consentBody}
+          note={legal.cookies.note}
+          saveLabel={legal.cookies.saveLabel}
+          rejectLabel={legal.cookies.rejectLabel}
+          savedMessage={legal.cookies.savedMessage}
+          rejectedMessage={legal.cookies.rejectedMessage}
+        />
+      )
+    }
+  </LegalPage>
+</BaseLayout>

@@ -6,10 +6,13 @@ interface Props {
   locale: Locale;
   title: string;
   description: string;
+  canonicalPath?: string;
+  alternateUrls?: Array<{ href: string; hreflang: string }>;
+  structuredData?: Record<string, unknown> | null;
 }
 
-const { locale, title, description } = Astro.props;
-const canonicalPath = localizedPath(locale);
+const { locale, title, description, canonicalPath: customCanonicalPath, alternateUrls, structuredData } = Astro.props;
+const canonicalPath = customCanonicalPath ?? localizedPath(locale);
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? `https://${siteMeta.domain}`;
 const canonicalUrl = `${siteOrigin}${canonicalPath}`;
 const tourismSchema = {
@@ -35,6 +38,7 @@ const tourismSchema = {
     reviewCount: siteMeta.reviewCount.replace(",", ""),
   },
 };
+const pageStructuredData = structuredData === undefined ? tourismSchema : structuredData;
 ---
 
 <!doctype html>
@@ -46,11 +50,15 @@ const tourismSchema = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     {
-      alternateLinks.map((item) => (
+      (alternateUrls ??
+        alternateLinks.map((item) => ({
+          hreflang: item.locale === "zh" ? "zh-CN" : item.locale,
+          href: `${siteOrigin}${item.href}`,
+        }))).map((item) => (
         <link
           rel="alternate"
-          hreflang={item.locale === "zh" ? "zh-CN" : item.locale}
-          href={`${siteOrigin}${item.href}`}
+          hreflang={item.hreflang}
+          href={item.href}
         />
       ))
     }
@@ -64,7 +72,7 @@ const tourismSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${siteOrigin}${siteMeta.ogImage}`} />
-    <script type="application/ld+json" set:html={JSON.stringify(tourismSchema)} />
+    {pageStructuredData && <script type="application/ld+json" set:html={JSON.stringify(pageStructuredData)} />}
   </head>
   <body class="antialiased">
     <slot />

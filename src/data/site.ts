@@ -2,6 +2,8 @@ export const locales = ["zh", "en", "it", "es"] as const;
 
 export type Locale = (typeof locales)[number];
 
+type TextCard = { title: string; body: string };
+
 export const siteMeta = {
   name: "Tirolesa Mirador Del Sol",
   domain: "tirolesamiradordelsol.com",
@@ -14,10 +16,10 @@ export const siteMeta = {
   rating: "4.7",
   reviewCount: "13,742",
   type: "Tourist attraction",
-  heroImage: "/gallery/tirolesa-mirador-del-sol-03.jpg",
-  ogImage: "/gallery/tirolesa-mirador-del-sol-03.jpg",
+  heroImage: "/gallery/tirolesamiradordelsol-1.jpg",
+  ogImage: "/gallery/tirolesamiradordelsol-1.jpg",
   galleryImages: Array.from({ length: 20 }, (_, index) => ({
-    src: `/gallery/tirolesa-mirador-del-sol-${String(index + 1).padStart(2, "0")}.jpg`,
+    src: `/gallery/tirolesamiradordelsol-${index + 1}.jpg`,
     index: index + 1,
   })),
 } as const;
@@ -37,6 +39,7 @@ export type PageContent = {
     overview: string;
     gallery: string;
     reviews: string;
+    transport: string;
     visit: string;
     links: string;
   };
@@ -57,7 +60,32 @@ export type PageContent = {
   story: {
     title: string;
     intro: string;
-    cards: Array<{ title: string; body: string }>;
+    cards: TextCard[];
+  };
+  insights: {
+    title: string;
+    intro: string;
+    cards: TextCard[];
+  };
+  technical: {
+    title: string;
+    intro: string;
+    rows: Array<{ dimension: string; value: string; note: string }>;
+  };
+  routeProfile: {
+    title: string;
+    intro: string;
+    stages: Array<{ title: string; elevation: string; body: string }>;
+  };
+  astronomy: {
+    title: string;
+    intro: string;
+    cards: TextCard[];
+  };
+  faq: {
+    title: string;
+    intro: string;
+    items: Array<{ question: string; answer: string }>;
   };
   photos: {
     title: string;
@@ -69,11 +97,16 @@ export type PageContent = {
     title: string;
     intro: string;
     mapsCta: string;
-    themes: Array<{ title: string; body: string }>;
+    themes: TextCard[];
+  };
+  transport: {
+    title: string;
+    intro: string;
+    cards: TextCard[];
   };
   visit: {
     title: string;
-    cards: Array<{ title: string; body: string }>;
+    cards: TextCard[];
   };
   editorial: {
     title: string;
@@ -86,6 +119,8 @@ export type PageContent = {
   };
   footer: {
     note: string;
+    copyright: string;
+    disclaimer: string;
     mapsLabel: string;
   };
 };
@@ -103,19 +138,20 @@ export const contentByLocale: Record<Locale, PageContent> = {
     localeName: "中文",
     title: "Tirolesa Mirador Del Sol | 阿根廷圣路易斯省四语景点指南",
     description:
-      "面向中文、英语、意大利语与西班牙语访客的 Tirolesa Mirador Del Sol 单页科普指南，涵盖地理背景、观景体验、到访建议、照片与权威延伸链接。",
+      "面向中文、英语、意大利语与西班牙语访客的 Tirolesa Mirador Del Sol 单页科普指南，涵盖地理背景、微气候、交通方式、照片与官方延伸链接。",
     nav: {
       overview: "概览",
       gallery: "照片",
       reviews: "评价",
+      transport: "交通",
       visit: "到访建议",
-      links: "友情链接",
+      links: "官方链接",
     },
     hero: {
       eyebrow: "阿根廷圣路易斯省 | 梅洛山地观景与高空滑索",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "这是一处位于 Villa de Merlo 东侧山脊公路沿线的高山观景点与冒险体验节点。页面以中性、科普化方式整理观景价值、地貌背景、到访安全与多语基础信息，避免旅游广告式表述。",
+        "这是一处位于 Villa de Merlo 东侧山脊道路上的高海拔观景点与冒险活动节点。页面以非商业、科普化方式整理地貌背景、微气候、交通方式、现场照片与安全提示，帮助访客在抵达前先理解地点本身。",
       ratingLabel: "Google 评分",
       typeLabel: "类型",
       addressLabel: "地址",
@@ -126,60 +162,215 @@ export const contentByLocale: Record<Locale, PageContent> = {
     },
     metricsTitle: "基础信息",
     metrics: [
-      { label: "景观特征", value: "山脊眺望、云海、峡谷公路" },
-      { label: "体验类型", value: "观景 + 高空滑索" },
-      { label: "区域背景", value: "Comechingones 山脉前缘" },
+      { label: "景观特征", value: "山脊眺望、山谷云海、盘山公路" },
+      { label: "体验类型", value: "观景平台 + 高空滑索" },
+      { label: "区域背景", value: "Comechingones 山脉西坡前缘" },
       { label: "适合人群", value: "自驾游客、摄影者、轻探险访客" },
     ],
     story: {
-      title: "为什么这个页面更像专业景点落地页",
+      title: "地理与地方语境",
       intro:
-        "与常见“打卡推荐”不同，这里把景点放回更大的地理与文化语境中，帮助访客先理解地点，再决定是否到访。",
+        "Mirador del Sol 的价值不只在单一活动项目，而在于它把山路、海拔、云层、地方命名与观景传统连成一个完整的到访语境。",
       cards: [
         {
-          title: "地理背景",
+          title: "地形抬升",
           body:
-            "Mirador del Sol 所在的山地道路由梅洛城区向东抬升，逐渐进入 Comechingones 山脉的观景带。高差变化带来显著的视野开阔感，也是云层翻涌、山风增强与温差变化较明显的原因。",
+            "从 Villa de Merlo 市区向东上山，海拔迅速抬升，山谷视野随之展开。正是这种明显的地形变化，塑造了观景平台的开阔感、风力增强与天气变化速度。",
         },
         {
-          title: "体验逻辑",
+          title: "微气候线索",
           body:
-            "这里的核心吸引力并不只是单一滑索项目，而是“山地公路抵达 + 观景平台停留 + 高空活动参与”三者叠加形成的完整到访过程。对许多访客而言，风景本身与到达路径同样重要。",
+            "Merlo 常被放在“微气候”语境中讨论。对访客而言，更直观的感受来自山体屏障、日夜温差与逆温层共同作用下形成的清晨云海、午后通风和较低体感温度。",
         },
         {
-          title: "地方叙事",
+          title: "Comechingones 山脉",
           body:
-            "与其虚构传奇，不如保留更可信的地方叙事：清晨逆温层形成的云海、傍晚山脊光线、以及来自山地观景传统的“Mirador del Sol”命名，共同构成此地最有辨识度的在地意象。",
+            "Mirador del Sol 的命名与这条山脉长期形成的观景文化有关。太阳升落、山脊线与季节光线，是理解这处地点最重要的地方性背景。",
+        },
+      ],
+    },
+    insights: {
+      title: "自然与工程观察",
+      intro:
+        "如果把这里视为一个科普节点，而不是普通打卡点，可以从生态、工程与光线三个维度理解这处山地景观。",
+      cards: [
+        {
+          title: "山地生态群落",
+          body:
+            "沿着上山道路前进，低处干燥林地逐渐过渡到更耐风的灌丛与草坡。观景平台附近不仅适合看山谷，也适合观察高地植被、裸岩与猛禽利用上升气流盘旋的现象。",
+        },
+        {
+          title: "滑索的重力逻辑",
+          body:
+            "山地滑索依靠起终点高差和钢缆张力工作，风速、体重与当日天气都会影响速度与体感。是否参与活动，应以现场设备状态、运营说明与安全口径为最终依据。",
+        },
+        {
+          title: "光线与云海",
+          body:
+            "清晨更容易观察低云与逆温层带来的层次感，傍晚则更适合观看山脊侧光。若主要目的为摄影或地貌观察，时段选择往往比“是否晴天”更关键。",
+        },
+      ],
+    },
+    technical: {
+      title: "基础空间与地质数据",
+      intro:
+        "专业景点页面通常需要一张可快速检索的技术卡片，用以概括坐标、海拔、岩性、气候与植被带。以下数据可帮助访客以更地理学的方式理解该地点。",
+      rows: [
+        {
+          dimension: "地理坐标",
+          value: "32°21'S, 64°58'W",
+          note: "位于南半球、阿根廷中部内陆的 Comechingones 山脉西侧。",
+        },
+        {
+          dimension: "海拔高度",
+          value: "约 1,470 米 / 4,822 英尺",
+          note: "大致位于 Villa de Merlo 市区与更高山脊主线之间的中继高度。",
+        },
+        {
+          dimension: "地质年代",
+          value: "古生代",
+          note: "属于 Comechingones 山脉较古老的基岩体系背景。",
+        },
+        {
+          dimension: "主要岩性",
+          value: "结晶岩、花岗岩、片麻岩",
+          note: "地表景观明显受到长期风化与水蚀塑形的影响。",
+        },
+        {
+          dimension: "年均气温",
+          value: "约 17°C（Merlo 基准）",
+          note: "观景台体感通常比市区低约 4 至 6°C，且受风寒影响更明显。",
+        },
+        {
+          dimension: "植被带",
+          value: "查科高山过渡带",
+          note: "以灌木、耐旱草本与高地草甸特征为主，呈现明显垂直变化。",
+        },
+      ],
+    },
+    routeProfile: {
+      title: "Ruta 5（Camino al Filo）垂直动线",
+      intro:
+        "Tirolesa Mirador Del Sol 并不是孤立的观景台节点，而是整条山脊景观公路上的关键中继点。理解这条爬升线，才能真正理解访客的空间体验。",
+      stages: [
+        {
+          title: "起点：梅洛市区",
+          elevation: "约 800 至 900 米",
+          body:
+            "这里是 Merlo 微气候叙事最集中的平地与山麓带。车辆由此进入 Ruta 5 后开始连续发夹弯攀升，植被较为茂密，城市与山地之间的过渡关系也最清晰。",
+        },
+        {
+          title: "中继：Tirolesa Mirador Del Sol",
+          elevation: "约 1,470 米",
+          body:
+            "这里是森林带向高山灌丛和草坡过渡的显著分界线。地形在此突然开阔，峡谷视野、风力条件与滑索工程对自然切口的利用都在这一高度集中体现。",
+        },
+        {
+          title: "终点：Filo Serrano 山脊线",
+          elevation: "约 2,100 米",
+          body:
+            "继续上行可接近山脊顶部及圣路易斯省与科尔多瓦省的自然地理边界。此处植被更贴地生长，远景可延伸至相邻省份平原，空间尺度显著放大。",
+        },
+      ],
+    },
+    astronomy: {
+      title: "夜空保护与天文观测",
+      intro:
+        "如果把这里视为长期观测点，夜间价值并不低于白天。远离核心城镇光源后，山地观景台会显现出暗夜保护、南半球星空与夜景摄影的复合意义。",
+      cards: [
+        {
+          title: "低光污染条件",
+          body:
+            "受山体遮挡与相对有限的城市灯光外溢影响，无云夜晚通常具备较好的暗夜观测条件。若以 Bortle 暗空尺度理解，这一区域常可被放在 3 至 4 级的可观测范围内。",
+        },
+        {
+          title: "南半球星空识别",
+          body:
+            "这里适合辨认南十字星、半人马座阿尔法星以及麦哲伦星云等典型南天目标。对北半球访客而言，这类天体构成了非常鲜明的区域差异体验。",
+        },
+        {
+          title: "星空摄影建议",
+          body:
+            "若进行夜景或银河拍摄，通常建议使用稳定三脚架和 14mm 至 24mm 广角镜头。若想同时保留观景台地景与银河结构，4 月至 9 月的无月夜条件更为理想。",
+        },
+      ],
+    },
+    faq: {
+      title: "常见地质与出行释疑",
+      intro:
+        "这类高频问题如果只依赖零散评论，很容易失真。以结构化答疑方式呈现，能更有效地回答“怎么去、值不值、风险在哪里”这类实际问题。",
+      items: [
+        {
+          question: "到达 Tirolesa Mirador Del Sol 必须驾驶四驱越野车（4x4）吗？",
+          answer:
+            "通常不需要。通往观景台的 Ruta 5 主要为铺装山路，标准两驱车辆一般即可抵达；但由于发夹弯密集、坡度变化明显，驾驶者仍应具备基本山路驾驶经验，并合理使用发动机制动。",
+        },
+        {
+          question: "这里的“微气候”会对高空滑索体验产生什么物理影响？",
+          answer:
+            "微气候在现场最直接的体现之一，是热气流与峡谷穿堂风对速度和体感的影响。实际运营通常需要依据实时风况监测决定是否暂停项目，因此风速阈值比宣传描述更重要。",
+        },
+        {
+          question: "如果不体验高空滑索，单纯观景的价值在哪里？",
+          answer:
+            "即使不参加滑索，这里依然提供约 180 度无遮挡山谷视野，可观察山体切割、谷地冲刷地貌以及不同海拔带的植被变化。作为一处地理地貌观测台，它本身就具有很高的独立价值。",
         },
       ],
     },
     photos: {
-      title: "照片",
+      title: "现场照片",
       intro:
-        "图库全部引用站内 `public/gallery` 资源，并统一改为适合 SEO 与多语言 URL 解析的文件名。首屏背景同样来自当前图库。",
+        "照片均来自站内图库，涵盖山谷视野、山地道路、观景平台与活动环境，可作为到访前的视觉参考。首屏背景同样取自这组现场影像。",
       mapsCta: "在 Google 地图上查看位置",
-      altPrefix: "Tirolesa Mirador Del Sol 现场照片",
+      altPrefix: "山谷与观景台照片",
     },
     reviews: {
-      title: "评价",
+      title: "访客观察",
       intro:
-        "页面不堆砌情绪化好评，而是把高频反馈归纳为三个更有参考价值的观察维度，帮助访客形成预期。",
+        "与其堆砌情绪化短评，不如把高频反馈归纳为三个更有判断价值的观察维度，帮助访客建立合理预期。",
       mapsCta: "在 Google 地图上查看位置",
       themes: [
         {
-          title: "观景视野",
+          title: "观景收益",
           body:
-            "高评分通常与山谷全景、山脊道路视角以及天气变化带来的戏剧性天空有关。即使不参加滑索，单纯观景也构成主要吸引力。",
+            "高评分首先来自山谷全景、山脊道路和天气变化带来的视觉层次。即使不参加高空活动，单纯停留观景也足以构成主要吸引力。",
         },
         {
-          title: "冒险感受",
+          title: "冒险强度",
           body:
-            "对参与滑索的访客而言，山体落差与开阔地形强化了速度感与高度感，因此建议在风力、装备与身体状况允许的前提下再参与高空项目。",
+            "对参与滑索的访客而言，地形落差与开阔坡面会明显放大高度感与速度感，因此身体状态与当天风况都比宣传语更重要。",
         },
         {
-          title: "到访条件",
+          title: "条件波动",
           body:
-            "实际体验往往受天气、能见度、道路状态与人流影响。专业落地页应把这些变量写清楚，而不是仅强调“值得去”。",
+            "实际体验会受到能见度、风力、道路状况与车流影响。相较于笼统的“值得去”，这些变量更值得提前写清楚。",
+        },
+      ],
+    },
+    transport: {
+      title: "怎么到这里",
+      intro:
+        "Tirolesa Mirador Del Sol 位于 Merlo 山地上方，通常需要先抵达 Villa de Merlo，再完成最后一段盘山路上升。以下方式最常见。",
+      cards: [
+        {
+          title: "区域机场",
+          body:
+            "若希望缩短地面路程，可优先关注 Valle del Conlara 方向的区域机场；若班次不合适，也可先飞往 San Luis 或 Cordoba，再转地面交通进入 Merlo。",
+        },
+        {
+          title: "自驾抵达",
+          body:
+            "自驾是最直接的方式。抵达 Merlo 后沿 Ruta 5 继续上山，弯道连续、坡度明显，建议白天行车并为观景停车、会车和返程留出余量。",
+        },
+        {
+          title: "巴士加接驳",
+          body:
+            "长途巴士通常先到 Villa de Merlo 客运站。此后仍需依靠出租车、remis、包车或同伴车辆完成上山段，因为观景点并不等同于市区平地目的地。",
+        },
+        {
+          title: "最后一段山路",
+          body:
+            "接近观景台时，路面虽为常见山地旅游道路，但视野开阔、风力更强，停车点也较分散。无论自驾或接驳，都应把最后一段视作独立的山地到达过程。",
         },
       ],
     },
@@ -187,72 +378,75 @@ export const contentByLocale: Record<Locale, PageContent> = {
       title: "到访建议",
       cards: [
         {
-          title: "最佳时段",
+          title: "最佳光线",
           body:
-            "清晨与傍晚通常拥有更具层次的光线；如果目标是拍摄山谷与云层变化，应优先关注能见度而非单纯晴天。",
+            "若以摄影和山地观察为主，建议优先考虑日出后或日落前 1 至 1.5 小时。清晨更适合看云层与逆温，傍晚更适合看山脊侧光。",
         },
         {
-          title: "交通方式",
+          title: "温差与风寒",
           body:
-            "适合自驾上山。山路弯道较多，出发前应确认车辆状态，并预留观景停车与返程时间。",
-        },
-        {
-          title: "安全提示",
-          body:
-            "山地风力和气温变化快，建议携带外套、防晒用品和饮水。若参加滑索，应以现场运营规范和安全口径为准。",
+            "随着海拔升高，体感温度通常会低于山下市区。山脊位置叠加风寒效应，即使暖季也建议携带防风外套、饮水和基础防晒。",
         },
         {
           title: "停留时长",
           body:
-            "纯观景拍照可停留约 30 至 60 分钟；若叠加高空项目或周边观景点，可安排半天。",
+            "纯观景拍照可安排约 30 至 60 分钟；若叠加滑索、邻近观景点或山路停靠拍摄，半天会更从容。",
+        },
+        {
+          title: "现场安全",
+          body:
+            "高空项目请始终以现场运营规范为准。若当天风力偏强、能见度较低或身体状态欠佳，优先选择停留观景而非勉强参与活动。",
         },
       ],
     },
     editorial: {
       title: "编辑说明",
       body:
-        "本站以非盈利景点科普为目标，因此页面结构优先提供位置、语境、到访建议、图片证据与官方延伸资料，而不是商业导流、价格刺激或夸张宣传语。",
+        "本站以非盈利景点科普为目标，因此页面优先提供位置、环境语境、交通方式、现场照片与官方资料，而不是商业导流、价格刺激或夸张宣传语。",
     },
     links: {
-      title: "友情链接",
+      title: "官方延伸链接",
       intro:
-        "以下链接已按你的要求替换为与 Villa de Merlo、圣路易斯省及阿根廷国家旅游体系直接相关的官方站点，更贴合 Tirolesa Mirador Del Sol 的地理位置、山地交通与探险语境。",
+        "这些站点可用于继续了解 Villa de Merlo、圣路易斯省及阿根廷国家层面的旅游公共信息、山地交通与政务资源。",
       items: [
         {
           title: "梅洛市官方旅游局",
           href: "https://villademerlo.tur.ar/",
           description:
-            "该景点所在城市的核心官方旅游网站，重点介绍梅洛著名的“微气候”与观景台环线，并覆盖高空滑索、四驱越野等山地活动，是与本站垂直度最高的匹配链接。",
+            "最贴近景点所在地的官方旅游网站，可继续查阅 Merlo 的微气候叙事、景观线路与周边山地活动信息。",
         },
         {
           title: "圣路易斯省旅游局官方门户",
           href: "https://turismo.sanluis.gov.ar/",
           description:
-            "圣路易斯省官方旅游推广入口，覆盖科门钦戈内斯山脉沿线的生态、探险与周边自然资源，适合规划梅洛周边更广阔的山地行程。",
+            "省级官方旅游入口，适合扩展阅读 Comechingones 山脉、探险活动和 Merlo 周边自然景观。",
         },
         {
           title: "阿根廷国家政府官网 - 圣路易斯省专页",
           href: "https://www.argentina.gob.ar/sanluis",
           description:
-            "阿根廷国家级政务门户下设的圣路易斯省专页，概括该省地理地貌、自然资源与公共服务体系，可作为提升页面权威度的国家级参考外链。",
+            "国家级政务门户下设的圣路易斯省页面，可作为高权威背景信息入口。",
         },
         {
-          title: "圣路易斯省政府官网 - 公共与应急资讯",
+          title: "圣路易斯省政府官网",
           href: "https://www.sanluis.gov.ar/",
           description:
-            "省级行政管理主站，可用于补充 Ruta 5 山路上行相关的基础设施路况、山区气候预警与应急救援联络方式。",
+            "适合补充山区公共信息、政务通知与基础服务资源。",
         },
         {
-          title: "阿根廷国家旅游局官方推广门户",
+          title: "阿根廷国家旅游门户",
           href: "https://www.argentina.travel/",
           description:
-            "面向全球游客的国家旅游入口，可作为国际访客了解阿根廷中部山脉、圣路易斯省风光与自驾路线安全信息的宏观参考。",
+            "面向国际访客的国家级旅游入口，适合查阅更宏观的交通、目的地与旅行背景信息。",
         },
       ],
     },
     footer: {
       note:
-        "本页为静态四语景点指南，聚焦地理环境、观景体验与到访安全，不承载预订、促销或品牌背书。",
+        "本站为聚焦地理环境、观景体验与到访安全，不承载预订、促销或品牌背书。该刊物完全免费，旨在促进阿根廷旅游业的发展。",
+      copyright: "© 2026 Tirolesa Mirador Del Sol指南 · 保留所有权利。",
+      disclaimer:
+        "本网站是一个独立的第三方非盈利科普指南项目，我们与阿根廷政府或任何官方机构均无隶属关系。",
       mapsLabel: "Google Maps →",
     },
   },
@@ -260,11 +454,12 @@ export const contentByLocale: Record<Locale, PageContent> = {
     localeName: "English",
     title: "Tirolesa Mirador Del Sol | Multilingual Visitor Guide in San Luis, Argentina",
     description:
-      "A four-language static guide to Tirolesa Mirador Del Sol with geographic context, photos, practical visiting notes, review synthesis, and official external resources.",
+      "A four-language guide to Tirolesa Mirador Del Sol with geographic context, microclimate notes, transport options, on-site photos, and official reference links.",
     nav: {
       overview: "Overview",
       gallery: "Photos",
       reviews: "Reviews",
+      transport: "Access",
       visit: "Plan",
       links: "Links",
     },
@@ -272,7 +467,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "San Luis Province, Argentina | Scenic ridge lookout and zipline",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "This page presents the site as a place-based guide rather than a tourism advertisement. It combines practical orientation, mountain context, visual evidence, and multilingual access for visitors heading toward the Mirador del Sol ridge above Villa de Merlo.",
+        "This page treats the site as a place-based guide rather than a tourism advertisement. It brings together mountain context, microclimate clues, access routes, on-site images, and practical advice for visitors heading above Villa de Merlo.",
       ratingLabel: "Google rating",
       typeLabel: "Type",
       addressLabel: "Address",
@@ -283,60 +478,215 @@ export const contentByLocale: Record<Locale, PageContent> = {
     },
     metricsTitle: "Key facts",
     metrics: [
-      { label: "Landscape", value: "ridge views, cloud inversions, mountain road" },
-      { label: "Experience", value: "lookout + zipline activity" },
-      { label: "Regional setting", value: "foothills of the Comechingones range" },
-      { label: "Best for", value: "drivers, photographers, light adventure visitors" },
+      { label: "Landscape", value: "ridge views, cloud layers, mountain road" },
+      { label: "Experience", value: "lookout platform + zipline" },
+      { label: "Regional setting", value: "western edge of the Comechingones range" },
+      { label: "Best for", value: "drivers, photographers, light-adventure visitors" },
     ],
     story: {
-      title: "What makes this page feel more professional",
+      title: "Geography and place context",
       intro:
-        "A strong attraction page should explain the place, not just praise it. The structure below gives visitors context before persuasion.",
+        "The value of Mirador del Sol comes from more than one activity. Road ascent, elevation gain, valley views, cloud behavior, and local naming traditions all shape the experience.",
       cards: [
         {
-          title: "Geographic reading",
+          title: "Topographic rise",
           body:
-            "The lookout sits along the ascending road east of Merlo, where elevation quickly opens broad views toward the valley. That topographic shift explains the stronger wind, wider sightlines, and dramatic cloud formations often associated with the site.",
+            "From central Merlo, the road climbs quickly toward the eastern ridge. That rapid gain in elevation explains the widening views, stronger wind, and changing sky conditions often associated with the site.",
         },
         {
-          title: "Experience sequence",
+          title: "Microclimate clues",
           body:
-            "Visitors do not encounter a zipline in isolation. The approach road, scenic stop, mountain exposure, and optional aerial activity work together as a single arrival experience.",
+            "Merlo is often described through its local microclimate. At this lookout, visitors mostly notice it through mountain shelter effects, day-night temperature contrast, and inversion layers that can produce morning cloud seas.",
         },
         {
-          title: "Local narrative",
+          title: "Comechingones backdrop",
           body:
-            "Instead of inventing legends, this guide preserves a more credible regional narrative: sunrise light, cloud seas after temperature inversions, and the broader viewpoint culture of the Comechingones ridge.",
+            "The name Mirador del Sol belongs to a broader ridge-view tradition linked to the Comechingones landscape. Sun angles, horizon lines, and seasonal light remain central to the site's identity.",
+        },
+      ],
+    },
+    insights: {
+      title: "Nature and engineering notes",
+      intro:
+        "Read as a field site rather than a simple stop, the lookout reveals useful clues about mountain ecology, zipline physics, and the timing of light.",
+      cards: [
+        {
+          title: "Mountain ecology",
+          body:
+            "As the road rises, lower dry woodland gives way to wind-tolerant shrubs, grasses, and exposed rock. The ridge also creates good conditions for observing soaring birds using thermal and slope lift.",
+        },
+        {
+          title: "Gravity and zipline systems",
+          body:
+            "Mountain ziplines rely on elevation difference and cable tension. Wind, body weight, and daily operating conditions all affect speed and comfort, so the operator's current briefing should always take priority.",
+        },
+        {
+          title: "Light and cloud timing",
+          body:
+            "Morning is often better for cloud layers and inversion effects, while late afternoon is stronger for side light on the ridge. For photography, timing matters as much as a clear forecast.",
+        },
+      ],
+    },
+    technical: {
+      title: "Technical landscape data",
+      intro:
+        "A stronger destination page benefits from a compact technical sheet summarizing coordinates, elevation, rock type, climate, and vegetation. These details give the site a more geographic reading frame.",
+      rows: [
+        {
+          dimension: "Coordinates",
+          value: "32°21'S, 64°58'W",
+          note: "Southern Hemisphere location in inland central Argentina along the western side of the Comechingones range.",
+        },
+        {
+          dimension: "Elevation",
+          value: "Approx. 1,470 m / 4,822 ft",
+          note: "An intermediate height between urban Merlo and the higher ridge crest above.",
+        },
+        {
+          dimension: "Geologic age",
+          value: "Paleozoic",
+          note: "Part of the older basement context associated with the Comechingones mountains.",
+        },
+        {
+          dimension: "Dominant lithology",
+          value: "Crystalline rock, granite, gneiss",
+          note: "The exposed landscape reflects long-term weathering and water erosion.",
+        },
+        {
+          dimension: "Mean annual temperature",
+          value: "About 17°C in Merlo",
+          note: "The lookout often feels 4 to 6°C cooler than the town below, especially under wind exposure.",
+        },
+        {
+          dimension: "Vegetation belt",
+          value: "Transitional Chaco upland zone",
+          note: "Shrubs, dry-adapted grasses, and highland meadow characteristics appear along the ascent.",
+        },
+      ],
+    },
+    routeProfile: {
+      title: "Ruta 5 (Camino al Filo) vertical profile",
+      intro:
+        "Tirolesa Mirador Del Sol makes more sense when read as one node along the climbing scenic road rather than as an isolated lookout. Elevation gain drives the visitor experience.",
+      stages: [
+        {
+          title: "Start: central Merlo",
+          elevation: "Approx. 800-900 m",
+          body:
+            "This lower zone concentrates the best-known Merlo microclimate setting. From here vehicles enter Ruta 5 and begin a sequence of switchbacks through denser vegetation and the clearest urban-mountain transition.",
+        },
+        {
+          title: "Middle node: Tirolesa Mirador Del Sol",
+          elevation: "Approx. 1,470 m",
+          body:
+            "This is the key transition between lower woodland and higher shrubland or grass slope. The land opens abruptly, which explains the stronger canyon view, wind exposure, and the engineering logic of the zipline location.",
+        },
+        {
+          title: "Upper end: Filo Serrano ridge line",
+          elevation: "Approx. 2,100 m",
+          body:
+            "Farther uphill, the road approaches the crest and the natural boundary between San Luis and Cordoba provinces. Vegetation becomes lower and more exposed, while the visual field expands toward adjacent plains.",
+        },
+      ],
+    },
+    astronomy: {
+      title: "Dark-sky and astronomy reading",
+      intro:
+        "Seen as an observation platform rather than only a daytime stop, the area also offers a useful framework for night-sky protection, southern-sky recognition, and astrophotography.",
+      cards: [
+        {
+          title: "Low light pollution",
+          body:
+            "With the ridge helping to block part of the urban glow, clear nights can offer comparatively strong dark-sky conditions. In practical terms, the area is often discussed within a Bortle 3 to 4 style observing range.",
+        },
+        {
+          title: "Southern-sky targets",
+          body:
+            "The site is well suited for identifying the Southern Cross, Alpha Centauri, and the Magellanic Clouds. For visitors from the Northern Hemisphere, these targets can be one of the most striking differences of place.",
+        },
+        {
+          title: "Astrophotography guidance",
+          body:
+            "Night photography generally benefits from a tripod and a wide lens in the 14 mm to 24 mm range. If the goal is to combine ridge foreground and Milky Way structure, moonless nights from roughly April to September are often preferred.",
+        },
+      ],
+    },
+    faq: {
+      title: "Structured visitor FAQ",
+      intro:
+        "Common practical questions are easier to trust when presented as concise technical answers instead of scattered comments.",
+      items: [
+        {
+          question: "Do I need a 4x4 vehicle to reach Tirolesa Mirador Del Sol?",
+          answer:
+            "Usually not. The main access section along Ruta 5 is paved and standard two-wheel-drive vehicles normally reach the lookout without issue. The real challenge comes from repeated switchbacks, grade changes, and mountain-driving technique.",
+        },
+        {
+          question: "How does the local microclimate affect the zipline experience?",
+          answer:
+            "One of the clearest physical effects is the interaction between thermal uplift and canyon wind. Real-time wind monitoring matters more than brochure language because strong airflow changes both safety thresholds and ride conditions.",
+        },
+        {
+          question: "Is the site still worthwhile without doing the zipline?",
+          answer:
+            "Yes. Even without the aerial activity, the location works as a high-value observation platform with a broad open view across the valley, visible erosional landforms, and a clear transition between elevation belts.",
         },
       ],
     },
     photos: {
-      title: "Photos",
+      title: "On-site photos",
       intro:
-        "All images come from the local gallery folder and now use SEO-friendly filenames. The hero background is also sourced from the same on-site image set.",
+        "The gallery uses local images of the valley, mountain road, lookout area, and activity setting, offering a visual reference before arrival. The hero background comes from the same on-site image set.",
       mapsCta: "View on Google Maps",
-      altPrefix: "Tirolesa Mirador Del Sol photo",
+      altPrefix: "Valley and lookout photo",
     },
     reviews: {
-      title: "Reviews",
+      title: "Visitor observations",
       intro:
-        "Rather than amplifying emotional praise, this page turns recurring feedback into three practical reading points.",
+        "Instead of amplifying emotional praise, this section turns recurring comments into three reading points that are more useful for planning a visit.",
       mapsCta: "View on Google Maps",
       themes: [
         {
-          title: "Panoramic reward",
+          title: "Panoramic return",
           body:
-            "High ratings are closely tied to the valley panorama, the mountain road approach, and shifting skies. For many visitors, the viewpoint alone is the main attraction.",
+            "High ratings are closely tied to the valley panorama, the ascent by mountain road, and changing cloud or light conditions. For many visitors, the viewpoint itself is enough.",
         },
         {
           title: "Adventure intensity",
           body:
-            "For zipline participants, the open slope and visible drop amplify the feeling of height and speed. Conditions on the day matter.",
+            "For zipline participants, the open slope and visible drop can greatly amplify the sensation of speed and height. Physical condition and wind on the day matter more than promotional wording.",
         },
         {
           title: "Variable conditions",
           body:
-            "Weather, visibility, road status, and crowd levels shape the experience more than most promotional pages admit, so they deserve explicit mention.",
+            "Visibility, wind, traffic, and road status can reshape the experience. These variables are often more useful than generic claims that the place is simply worth visiting.",
+        },
+      ],
+    },
+    transport: {
+      title: "How to get here",
+      intro:
+        "Most visitors first reach Villa de Merlo and then complete the final mountain ascent to Mirador del Sol. These are the most practical arrival patterns.",
+      cards: [
+        {
+          title: "Regional airports",
+          body:
+            "If you want the shortest overland approach, watch for flights serving the Valle del Conlara area. When schedules do not fit, San Luis or Cordoba are broader alternatives followed by road transfer to Merlo.",
+        },
+        {
+          title: "Self-drive route",
+          body:
+            "Driving is the most direct option. After reaching Merlo, continue uphill along Ruta 5 toward the lookout. Curves, grade changes, and scenic pull-offs make daylight driving the safest choice.",
+        },
+        {
+          title: "Bus plus transfer",
+          body:
+            "Long-distance buses usually stop in Villa de Merlo first. From there, the final uphill segment normally requires a taxi, remis, arranged transfer, or travel companion with a vehicle.",
+        },
+        {
+          title: "Final mountain segment",
+          body:
+            "Near the lookout the road feels like a distinct mountain approach rather than a simple urban arrival. Wind exposure, parking distribution, and visibility deserve separate attention.",
         },
       ],
     },
@@ -346,70 +696,73 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Best light",
           body:
-            "Early morning and late afternoon usually offer the most layered light. If photography matters, prioritize visibility and atmospheric conditions.",
+            "For landscape reading and photography, aim for shortly after sunrise or roughly 1 to 1.5 hours before sunset. Morning favors cloud layers; late afternoon favors ridge relief.",
         },
         {
-          title: "Access",
+          title: "Temperature and wind chill",
           body:
-            "The site is best reached by car. Mountain curves require careful driving and enough margin for parking, viewing, and descent.",
-        },
-        {
-          title: "Safety",
-          body:
-            "Mountain wind and temperature can shift quickly. Carry layers, water, and sun protection. Follow on-site safety instructions for zipline operations.",
+            "The ridge usually feels cooler than central Merlo. Add wind exposure and the perceived temperature drops further, so a light windproof layer, water, and sun protection are recommended.",
         },
         {
           title: "Suggested duration",
           body:
-            "Allow 30 to 60 minutes for viewpoint-only visits, or up to half a day if combining photos, nearby stops, and aerial activities.",
+            "Allow 30 to 60 minutes for a viewpoint-only stop, or up to half a day if you combine photos, nearby overlooks, and aerial activity.",
+        },
+        {
+          title: "On-site safety",
+          body:
+            "For adventure activities, the operator's active safety briefing always overrides general travel advice. If wind strengthens, visibility drops, or you do not feel fully fit, a lookout-only visit may be the better option.",
         },
       ],
     },
     editorial: {
       title: "Editorial note",
       body:
-        "As a non-profit attraction guide, this site privileges orientation, safety, geographic context, image evidence, and official reference links over booking prompts or promotional language.",
+        "As a non-profit attraction guide, this site prioritizes orientation, environmental context, access information, on-site photos, and official references over booking prompts or promotional language.",
     },
     links: {
-      title: "Related links",
+      title: "Official reference links",
       intro:
-        "Following your request, the previous link section has been replaced with official resources directly connected to Villa de Merlo, San Luis Province, and Argentina's national tourism and public-service network.",
+        "These resources help extend the page outward to Merlo, San Luis Province, and Argentina-wide public travel information.",
       items: [
         {
           title: "Villa de Merlo Tourism Office",
           href: "https://villademerlo.tur.ar/",
           description:
-            "The most directly relevant official tourism site for the city where the attraction is located, with information on Merlo's microclimate, scenic circuits, and mountain adventure activities including ziplining.",
+            "The most locally relevant official tourism source for Merlo, useful for broader context on scenic circuits, local climate narratives, and nearby attractions.",
         },
         {
           title: "Turismo San Luis",
           href: "https://turismo.sanluis.gov.ar/",
           description:
-            "The official provincial tourism portal, useful for understanding the broader ecological and adventure landscape of the Comechingones range around Merlo.",
+            "The official provincial tourism portal, suitable for expanding the ecological and mountain-travel context around the Comechingones range.",
         },
         {
           title: "San Luis Province - Argentina.gob.ar",
           href: "https://www.argentina.gob.ar/sanluis",
           description:
-            "A national government page summarizing the province's geography, natural resources, and public services under a high-authority .gob.ar domain.",
+            "A national government page offering a higher-authority overview of the province and its public context.",
         },
         {
           title: "Government of San Luis Province",
           href: "https://www.sanluis.gov.ar/",
           description:
-            "A practical source for provincial road conditions, mountain weather alerts, and emergency contacts relevant to the ascent along Ruta 5.",
+            "Useful for public notices, provincial services, and broader practical context.",
         },
         {
           title: "Argentina.travel",
           href: "https://www.argentina.travel/",
           description:
-            "Argentina's official international tourism gateway, suitable for multilingual route planning and broader self-drive safety context for overseas visitors.",
+            "Argentina's official travel gateway for international visitors seeking broader route and destination context.",
         },
       ],
     },
     footer: {
       note:
-        "Static four-language attraction guide focused on landscape interpretation, practical access, and visitor safety.",
+        "This site focuses on geography, viewpoint experience, and visitor safety. It does not provide booking, promotions, or brand endorsement. The publication is fully free and aims to support the development of tourism in Argentina.",
+      copyright: "© 2026 Tirolesa Mirador Del Sol Guide. All rights reserved.",
+      disclaimer:
+        "This website is an independent third-party non-profit educational guide project and has no institutional affiliation with the Government of Argentina or any official authority.",
       mapsLabel: "Google Maps →",
     },
   },
@@ -417,11 +770,12 @@ export const contentByLocale: Record<Locale, PageContent> = {
     localeName: "Italiano",
     title: "Tirolesa Mirador Del Sol | Guida multilingue per visitatori in Argentina",
     description:
-      "Guida statica in quattro lingue a Tirolesa Mirador Del Sol con contesto geografico, galleria fotografica, note pratiche di visita e collegamenti ufficiali.",
+      "Guida in quattro lingue a Tirolesa Mirador Del Sol con contesto geografico, note sul microclima, modi di arrivo, foto sul posto e link ufficiali.",
     nav: {
       overview: "Panoramica",
       gallery: "Foto",
       reviews: "Recensioni",
+      transport: "Accesso",
       visit: "Visita",
       links: "Link",
     },
@@ -429,7 +783,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "Provincia di San Luis, Argentina | Belvedere di cresta e tirolesa",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "La pagina presenta il luogo come guida territoriale e non come annuncio promozionale. Riunisce orientamento pratico, contesto montano, immagini e accesso multilingue per chi sale verso il Mirador del Sol sopra Villa de Merlo.",
+        "La pagina presenta il luogo come guida territoriale e non come annuncio promozionale. Riunisce contesto montano, indizi di microclima, modi di arrivo, immagini reali e consigli pratici per chi sale sopra Villa de Merlo.",
       ratingLabel: "Valutazione Google",
       typeLabel: "Tipologia",
       addressLabel: "Indirizzo",
@@ -440,60 +794,215 @@ export const contentByLocale: Record<Locale, PageContent> = {
     },
     metricsTitle: "Dati essenziali",
     metrics: [
-      { label: "Paesaggio", value: "cresta panoramica, mare di nuvole, strada montana" },
+      { label: "Paesaggio", value: "vista di cresta, nuvole basse, strada montana" },
       { label: "Esperienza", value: "belvedere + tirolesa" },
-      { label: "Contesto regionale", value: "fascia dei Comechingones" },
-      { label: "Adatto a", value: "automobilisti, fotografi, visitatori avventura light" },
+      { label: "Contesto regionale", value: "margine occidentale dei Comechingones" },
+      { label: "Adatto a", value: "automobilisti, fotografi, visitatori soft adventure" },
     ],
     story: {
-      title: "Perché questa pagina appare piu professionale",
+      title: "Geografia e contesto locale",
       intro:
-        "Una buona landing page per un sito culturale deve spiegare il luogo prima di invitarvi ad andare. Qui la struttura privilegia il contesto.",
+        "Il valore del Mirador del Sol non dipende solo da un'attivita. Salita stradale, quota, vista sulla valle, nuvole e tradizione del nome costruiscono insieme l'esperienza.",
       cards: [
         {
-          title: "Lettura geografica",
+          title: "Rapido aumento di quota",
           body:
-            "Il punto panoramico si trova lungo la strada che sale a est di Merlo. L'aumento rapido di quota apre la vista sulla valle e spiega vento piu forte, orizzonti piu ampi e cieli molto dinamici.",
+            "Dal centro di Merlo la strada sale rapidamente verso il filo orientale. Questo spiega l'apertura del panorama, il vento piu forte e la grande variabilita del cielo.",
         },
         {
-          title: "Sequenza dell'esperienza",
+          title: "Indizi di microclima",
           body:
-            "La tirolesa non e un elemento isolato: strada d'accesso, sosta panoramica, esposizione alla montagna e attivita aerea compongono un'unica esperienza di arrivo.",
+            "Merlo viene spesso raccontata attraverso il suo microclima. Qui il visitatore lo percepisce soprattutto nella protezione offerta dal rilievo, nell'escursione termica e nelle inversioni che possono generare nubi basse al mattino.",
         },
         {
-          title: "Narrazione locale",
+          title: "Sfondo dei Comechingones",
           body:
-            "Invece di inventare leggende, la guida conserva un racconto piu credibile: luce dell'alba, nubi da inversione termica e cultura dei miradores lungo la cresta dei Comechingones.",
+            "Il nome Mirador del Sol appartiene a una piu ampia cultura dei belvedere di cresta. Angolo del sole, linea dell'orizzonte e luce stagionale restano elementi chiave dell'identita del sito.",
+        },
+      ],
+    },
+    insights: {
+      title: "Osservazioni naturali e tecniche",
+      intro:
+        "Letto come punto di osservazione e non solo come sosta panoramica, il luogo offre spunti su ecologia montana, fisica della tirolesa e tempi della luce.",
+      cards: [
+        {
+          title: "Ecologia di montagna",
+          body:
+            "Salendo, il bosco secco inferiore lascia spazio a arbusti piu resistenti al vento, erbe alte e roccia affiorante. La cresta favorisce anche l'osservazione di uccelli che sfruttano le correnti ascensionali.",
+        },
+        {
+          title: "Logica gravitazionale della tirolesa",
+          body:
+            "Le tirolese di montagna funzionano grazie al dislivello e alla tensione del cavo. Vento, peso corporeo e condizioni operative del giorno influenzano velocita e comfort, quindi vale sempre il briefing attivo dell'operatore.",
+        },
+        {
+          title: "Luce e nubi",
+          body:
+            "Il mattino favorisce strati di nuvole e inversioni termiche; il tardo pomeriggio valorizza meglio la luce radente sul filo. Per fotografare, il momento giusto conta quasi quanto il meteo.",
+        },
+      ],
+    },
+    technical: {
+      title: "Scheda tecnica del paesaggio",
+      intro:
+        "Una pagina piu autorevole beneficia di una scheda sintetica con coordinate, quota, litologia, clima e fascia vegetazionale. Aiuta a leggere il luogo in chiave geografica e non solo turistica.",
+      rows: [
+        {
+          dimension: "Coordinate",
+          value: "32°21'S, 64°58'W",
+          note: "Posizione dell'emisfero australe nell'Argentina interna centrale, sul versante occidentale dei Comechingones.",
+        },
+        {
+          dimension: "Quota",
+          value: "Circa 1.470 m / 4.822 ft",
+          note: "Altezza intermedia tra Merlo urbana e la linea di cresta piu elevata.",
+        },
+        {
+          dimension: "Eta geologica",
+          value: "Paleozoico",
+          note: "Inserita nel contesto del basamento antico della catena.",
+        },
+        {
+          dimension: "Litologia principale",
+          value: "Rocce cristalline, granito, gneiss",
+          note: "Il paesaggio esposto riflette lunga alterazione e incisione idrica.",
+        },
+        {
+          dimension: "Temperatura media annua",
+          value: "Circa 17°C a Merlo",
+          note: "Il belvedere risulta spesso 4-6°C piu fresco del centro abitato, soprattutto con vento.",
+        },
+        {
+          dimension: "Fascia vegetazionale",
+          value: "Transizione alto Chaco",
+          note: "Arbusti, graminacee resistenti alla siccita e caratteri di prateria montana.",
+        },
+      ],
+    },
+    routeProfile: {
+      title: "Profilo verticale della Ruta 5",
+      intro:
+        "La tirolesa e il mirador si comprendono meglio come tappa di una strada panoramica in salita, non come luogo isolato. L'esperienza del visitatore e guidata soprattutto dal dislivello.",
+      stages: [
+        {
+          title: "Partenza: Merlo centro",
+          elevation: "Circa 800-900 m",
+          body:
+            "Qui si concentra il microclima piu noto della citta. Da questo punto la Ruta 5 sale con tornanti successivi tra vegetazione piu fitta e un chiaro passaggio tra urbano e montagna.",
+        },
+        {
+          title: "Nodo intermedio: Tirolesa Mirador Del Sol",
+          elevation: "Circa 1.470 m",
+          body:
+            "Questo tratto segna il passaggio tra bosco inferiore e arbusti o pendii erbosi piu alti. L'apertura improvvisa del rilievo spiega panorama, vento e logica ingegneristica della tirolesa.",
+        },
+        {
+          title: "Parte alta: Filo Serrano",
+          elevation: "Circa 2.100 m",
+          body:
+            "Più in alto la strada si avvicina alla cresta e al confine naturale tra San Luis e Cordoba. La vegetazione diventa piu bassa e la visuale si apre maggiormente verso le pianure vicine.",
+        },
+      ],
+    },
+    astronomy: {
+      title: "Cielo notturno e osservazione astronomica",
+      intro:
+        "Considerato come piattaforma di osservazione, il sito ha interesse anche notturno per condizioni di cielo scuro, riconoscimento del cielo australe e fotografia astronomica.",
+      cards: [
+        {
+          title: "Basso inquinamento luminoso",
+          body:
+            "La cresta aiuta a schermare parte della luce urbana, per cui le notti limpide possono offrire condizioni favorevoli di cielo buio. In termini pratici l'area viene spesso collocata in un intervallo simile a Bortle 3-4.",
+        },
+        {
+          title: "Riferimenti del cielo australe",
+          body:
+            "Il luogo e adatto a riconoscere Croce del Sud, Alpha Centauri e Nubi di Magellano. Per chi proviene dall'emisfero nord, questi oggetti sono tra gli elementi piu distintivi.",
+        },
+        {
+          title: "Suggerimenti fotografici",
+          body:
+            "Per fotografare il cielo convengono treppiede stabile e grandangolo tra 14 mm e 24 mm. Se si vuole includere la cresta e la Via Lattea, le notti senza luna tra aprile e settembre sono spesso le piu adatte.",
+        },
+      ],
+    },
+    faq: {
+      title: "FAQ strutturata",
+      intro:
+        "Le domande pratiche piu frequenti risultano piu affidabili se organizzate come risposte tecniche concise e non come commenti sparsi.",
+      items: [
+        {
+          question: "Serve un veicolo 4x4 per arrivare?",
+          answer:
+            "In genere no. Il tratto principale della Ruta 5 verso il mirador e asfaltato e una normale auto a due ruote motrici e di solito sufficiente. Le difficolta reali riguardano tornanti, pendenza e tecnica di guida in montagna.",
+        },
+        {
+          question: "In che modo il microclima influenza la tirolesa?",
+          answer:
+            "Uno degli effetti piu evidenti e l'interazione tra termiche e vento del canyon. Il monitoraggio del vento in tempo reale conta piu delle descrizioni promozionali, perche modifica sia la sicurezza sia la dinamica della corsa.",
+        },
+        {
+          question: "Vale la visita anche senza fare la tirolesa?",
+          answer:
+            "Si. Anche senza attivita aerea, il sito resta un ottimo punto di osservazione con ampia vista sulla valle, forme erosive leggibili e transizione evidente tra fasce altitudinali.",
         },
       ],
     },
     photos: {
-      title: "Foto",
+      title: "Foto sul posto",
       intro:
-        "Tutte le immagini provengono dalla galleria locale e ora usano nomi file piu leggibili per SEO e URL multilingue. Anche l'immagine hero proviene dallo stesso archivio.",
+        "La galleria raccoglie immagini reali della valle, della strada di salita, del belvedere e dell'area di attivita. Anche lo sfondo hero proviene dallo stesso archivio locale.",
       mapsCta: "Apri su Google Maps",
-      altPrefix: "Foto di Tirolesa Mirador Del Sol",
+      altPrefix: "Foto del paesaggio e del mirador",
     },
     reviews: {
-      title: "Recensioni",
+      title: "Osservazioni dei visitatori",
       intro:
-        "Invece di ripetere commenti entusiastici, la pagina sintetizza i riscontri ricorrenti in tre chiavi di lettura utili.",
+        "Invece di accumulare elogi emotivi, la pagina organizza i riscontri ricorrenti in tre chiavi di lettura piu utili per preparare la visita.",
       mapsCta: "Apri su Google Maps",
       themes: [
         {
-          title: "Ricompensa panoramica",
+          title: "Rendimento panoramico",
           body:
-            "Le valutazioni elevate sono strettamente legate alla vista sulla valle, alla strada panoramica e ai cambiamenti del cielo. Per molti visitatori il panorama basta da solo.",
+            "Le valutazioni alte dipendono soprattutto dalla vista sulla valle, dalla salita panoramica e dai cambi di luce o nuvolosita. Per molti il belvedere basta gia da solo.",
         },
         {
           title: "Intensita dell'avventura",
           body:
-            "Per chi prova la tirolesa, il versante aperto e il dislivello visibile aumentano la percezione di altezza e velocita. Le condizioni giornaliere contano molto.",
+            "Chi prova la tirolesa percepisce in modo piu forte altezza e velocita per via del versante aperto e del dislivello visibile. Contano molto le condizioni del giorno.",
         },
         {
           title: "Condizioni variabili",
           body:
-            "Meteo, visibilita, stato della strada e affluenza cambiano l'esperienza piu di quanto dicano molte pagine promozionali, quindi vanno esplicitati.",
+            "Visibilita, vento, traffico e stato della strada possono cambiare sensibilmente l'esperienza. Sono dati piu utili di una generica formula promozionale.",
+        },
+      ],
+    },
+    transport: {
+      title: "Come arrivare",
+      intro:
+        "Nella maggior parte dei casi si raggiunge prima Villa de Merlo e poi si completa l'ultima salita di montagna verso il Mirador del Sol.",
+      cards: [
+        {
+          title: "Aeroporti regionali",
+          body:
+            "Per ridurre il tratto su strada conviene controllare i voli verso l'area della Valle del Conlara. In alternativa si puo arrivare a San Luis o Cordoba e proseguire via terra fino a Merlo.",
+        },
+        {
+          title: "Arrivo in auto",
+          body:
+            "L'auto e il mezzo piu diretto. Una volta a Merlo si continua in salita lungo la Ruta 5 verso il mirador; curve, pendenza e soste panoramiche rendono preferibile la guida diurna.",
+        },
+        {
+          title: "Bus piu trasferimento",
+          body:
+            "I bus a lunga percorrenza arrivano di solito alla terminal di Villa de Merlo. Da li l'ultimo tratto richiede normalmente taxi, remis, trasferimento concordato o un veicolo privato.",
+        },
+        {
+          title: "Ultimo tratto montano",
+          body:
+            "Vicino al belvedere la strada va considerata come un vero accesso di montagna: esposizione al vento, soste distribuite e visibilita richiedono attenzione autonoma.",
         },
       ],
     },
@@ -503,70 +1012,73 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Luce migliore",
           body:
-            "Mattino presto e tardo pomeriggio offrono spesso la luce piu stratificata. Se fotografi, considera soprattutto visibilita e atmosfera.",
+            "Per leggere il paesaggio e fotografare, privilegia l'ora dopo l'alba oppure circa 1-1,5 ore prima del tramonto. Il mattino favorisce le nubi basse, il tardo pomeriggio il rilievo del crinale.",
         },
         {
-          title: "Accesso",
+          title: "Temperatura e vento",
           body:
-            "Il sito si raggiunge al meglio in auto. Le curve di montagna richiedono guida prudente e tempo sufficiente per sosta e discesa.",
-        },
-        {
-          title: "Sicurezza",
-          body:
-            "Vento e temperatura cambiano rapidamente. Porta strati leggeri, acqua e protezione solare. Per la tirolesa segui le indicazioni operative sul posto.",
+            "La cresta risulta di solito piu fresca del centro di Merlo. Con il vento la temperatura percepita scende ancora, quindi convengono giacca leggera antivento, acqua e protezione solare.",
         },
         {
           title: "Durata consigliata",
           body:
-            "Prevedi 30-60 minuti per sola osservazione panoramica, oppure fino a mezza giornata con foto, soste vicine e attivita aeree.",
+            "Calcola 30-60 minuti per sola sosta panoramica, oppure fino a mezza giornata se aggiungi foto, belvederi vicini e attivita aeree.",
+        },
+        {
+          title: "Sicurezza sul posto",
+          body:
+            "Per le attivita d'avventura conta sempre il briefing operativo attivo. Se il vento aumenta, la visibilita cala o non ti senti in piena forma, puo essere preferibile una visita solo panoramica.",
         },
       ],
     },
     editorial: {
       title: "Nota editoriale",
       body:
-        "Come guida non profit, il sito privilegia orientamento, sicurezza, contesto geografico, prove fotografiche e link istituzionali rispetto a prenotazioni o linguaggio commerciale.",
+        "Come guida non profit, il sito privilegia orientamento, contesto ambientale, modi di arrivo, immagini sul posto e riferimenti ufficiali rispetto a linguaggio commerciale o inviti alla prenotazione.",
     },
     links: {
-      title: "Link correlati",
+      title: "Link ufficiali di riferimento",
       intro:
-        "Come richiesto, la sezione precedente e stata sostituita con risorse ufficiali collegate direttamente a Villa de Merlo, alla provincia di San Luis e al sistema turistico nazionale argentino.",
+        "Queste risorse aiutano ad ampliare la lettura del luogo verso Merlo, la provincia di San Luis e il contesto pubblico nazionale argentino.",
       items: [
         {
           title: "Turismo ufficiale di Villa de Merlo",
           href: "https://villademerlo.tur.ar/",
           description:
-            "Il sito turistico ufficiale piu pertinente per la citta dove si trova l'attrazione, con informazioni su microclima, circuiti panoramici e attivita d'avventura come la tirolesa.",
+            "La fonte turistica ufficiale piu vicina al luogo, utile per il contesto locale su itinerari panoramici, clima e attrazioni della zona.",
         },
         {
           title: "Turismo San Luis",
           href: "https://turismo.sanluis.gov.ar/",
           description:
-            "Portale turistico ufficiale della provincia, utile per leggere in chiave piu ampia il paesaggio ecologico e avventuroso della catena dei Comechingones.",
+            "Portale turistico ufficiale della provincia, adatto a leggere in modo piu ampio il paesaggio montano dei Comechingones.",
         },
         {
           title: "Provincia di San Luis - Argentina.gob.ar",
           href: "https://www.argentina.gob.ar/sanluis",
           description:
-            "Pagina governativa nazionale che sintetizza geografia, risorse naturali e servizi pubblici della provincia sotto il dominio autorevole .gob.ar.",
+            "Pagina governativa nazionale con un quadro piu istituzionale della provincia e del suo contesto pubblico.",
         },
         {
           title: "Governo della Provincia di San Luis",
           href: "https://www.sanluis.gov.ar/",
           description:
-            "Riferimento pratico per viabilita provinciale, allerte meteo montane e contatti di emergenza utili per la salita lungo la Ruta 5.",
+            "Utile per avvisi pubblici, servizi provinciali e contesto pratico piu ampio.",
         },
         {
           title: "Argentina.travel",
           href: "https://www.argentina.travel/",
           description:
-            "Portale turistico nazionale rivolto ai visitatori internazionali, adatto a consultare informazioni multilingui su itinerari, sicurezza stradale e contesto generale del viaggio.",
+            "Portale ufficiale nazionale per i visitatori internazionali che cercano un riferimento piu generale su destinazioni e spostamenti.",
         },
       ],
     },
     footer: {
       note:
-        "Guida statica in quattro lingue dedicata a paesaggio, accesso pratico e sicurezza del visitatore.",
+        "Il sito si concentra su contesto geografico, esperienza panoramica e sicurezza di visita. Non ospita prenotazioni, promozioni o sostegni di marchio. La pubblicazione e completamente gratuita e intende favorire lo sviluppo del turismo in Argentina.",
+      copyright: "© 2026 Guida Tirolesa Mirador Del Sol. Tutti i diritti riservati.",
+      disclaimer:
+        "Questo sito e un progetto indipendente, non profit e divulgativo di terza parte; non ha alcun rapporto istituzionale con il governo argentino o con enti ufficiali.",
       mapsLabel: "Google Maps →",
     },
   },
@@ -574,11 +1086,12 @@ export const contentByLocale: Record<Locale, PageContent> = {
     localeName: "Español",
     title: "Tirolesa Mirador Del Sol | Guia multilingue del mirador en San Luis",
     description:
-      "Guia estatica en cuatro idiomas sobre Tirolesa Mirador Del Sol con contexto geografico, fotos, recomendaciones de visita y enlaces oficiales.",
+      "Guia en cuatro idiomas sobre Tirolesa Mirador Del Sol con contexto geografico, notas de microclima, formas de acceso, fotos del lugar y enlaces oficiales.",
     nav: {
       overview: "Panorama",
       gallery: "Fotos",
       reviews: "Reseñas",
+      transport: "Acceso",
       visit: "Visita",
       links: "Enlaces",
     },
@@ -586,7 +1099,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "Provincia de San Luis, Argentina | Mirador serrano y tirolesa",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "La pagina presenta el sitio como una guia territorial y no como una promocion turistica. Reune orientacion practica, contexto de montaña, evidencia fotografica y acceso multilingue para visitantes que suben al cordon del Mirador del Sol sobre Villa de Merlo.",
+        "La pagina presenta el sitio como una guia territorial y no como una promocion turistica. Reune contexto de montaña, claves de microclima, formas de llegada, imagenes reales y recomendaciones practicas para quienes suben sobre Villa de Merlo.",
       ratingLabel: "Calificacion de Google",
       typeLabel: "Tipo",
       addressLabel: "Direccion",
@@ -597,60 +1110,215 @@ export const contentByLocale: Record<Locale, PageContent> = {
     },
     metricsTitle: "Datos clave",
     metrics: [
-      { label: "Paisaje", value: "vista de filo, mar de nubes, camino serrano" },
+      { label: "Paisaje", value: "vista de filo, capas de nubes, camino serrano" },
       { label: "Experiencia", value: "mirador + tirolesa" },
-      { label: "Entorno regional", value: "frente de las Sierras de los Comechingones" },
+      { label: "Entorno regional", value: "borde occidental de los Comechingones" },
       { label: "Ideal para", value: "viajeros en auto, fotografia y aventura suave" },
     ],
     story: {
-      title: "Por que esta pagina se siente mas profesional",
+      title: "Geografia y contexto local",
       intro:
-        "Una buena pagina de destino debe explicar el lugar antes de persuadir. Aqui la estructura prioriza contexto, seguridad y lectura territorial.",
+        "El valor de Mirador del Sol no depende solo de una actividad. La subida, la altura, la vista del valle, el comportamiento de las nubes y la tradicion del nombre forman una sola experiencia territorial.",
       cards: [
         {
-          title: "Lectura geografica",
+          title: "Ascenso topografico",
           body:
-            "El mirador se encuentra sobre la ruta ascendente al este de Merlo. Ese cambio rapido de altura abre la vista del valle y explica el viento mas fuerte, el horizonte amplio y los cielos dramaticos que suelen asociarse al sitio.",
+            "Desde el centro de Merlo la ruta gana altura con rapidez hacia el cordon oriental. Ese cambio explica la amplitud de la vista, el viento mas fuerte y la variacion del cielo.",
         },
         {
-          title: "Secuencia de experiencia",
+          title: "Claves de microclima",
           body:
-            "La tirolesa no aparece aislada. El camino de acceso, la parada panoramica, la exposicion a la sierra y la actividad aerea forman una sola experiencia de llegada.",
+            "Merlo suele describirse a partir de su microclima. En este mirador eso se percibe sobre todo por el abrigo de la sierra, la amplitud termica y las inversiones que pueden generar nubes bajas por la mañana.",
         },
         {
-          title: "Relato local",
+          title: "Marco Comechingones",
           body:
-            "En lugar de inventar leyendas, la guia conserva una narrativa mas creible: amaneceres, inversiones termicas que producen nubes bajas y la tradicion de miradores sobre el filo serrano.",
+            "El nombre Mirador del Sol pertenece a una tradicion mas amplia de miradores de altura. Los angulos del sol, la linea del horizonte y la luz estacional siguen siendo parte central de la identidad del sitio.",
+        },
+      ],
+    },
+    insights: {
+      title: "Lecturas naturales y tecnicas",
+      intro:
+        "Si se observa como nodo de interpretacion y no solo como parada panoramica, el lugar permite hablar de ecologia serrana, fisica de la tirolesa y tiempos de la luz.",
+      cards: [
+        {
+          title: "Ecologia de altura",
+          body:
+            "A medida que el camino asciende, el bosque seco inferior deja paso a arbustos mas resistentes al viento, pastos serranos y roca expuesta. La cresta tambien favorece la observacion de aves planeadoras.",
+        },
+        {
+          title: "Logica gravitatoria de la tirolesa",
+          body:
+            "Las tirolesas de montaña funcionan por diferencia de altura y tension del cable. Viento, peso corporal y condiciones operativas del dia influyen en la velocidad y la sensacion, por lo que manda siempre la charla de seguridad activa.",
+        },
+        {
+          title: "Luz y nubosidad",
+          body:
+            "La mañana suele ser mejor para capas de nubes e inversiones termicas; el final de la tarde favorece la luz lateral sobre el filo. Para fotografiar, la hora elegida importa casi tanto como el pronostico.",
+        },
+      ],
+    },
+    technical: {
+      title: "Ficha tecnica del paisaje",
+      intro:
+        "Una pagina mas solida gana mucho con una ficha compacta de coordenadas, altura, litologia, clima y vegetacion. Esto permite leer el sitio con una logica geografica y no solo turistica.",
+      rows: [
+        {
+          dimension: "Coordenadas",
+          value: "32°21'S, 64°58'W",
+          note: "Ubicacion del hemisferio sur en el interior central argentino, sobre el lado occidental de los Comechingones.",
+        },
+        {
+          dimension: "Altitud",
+          value: "Aprox. 1.470 m / 4.822 ft",
+          note: "Cota intermedia entre el Merlo urbano y la cresta mas alta.",
+        },
+        {
+          dimension: "Edad geologica",
+          value: "Paleozoico",
+          note: "Parte del contexto de basamento antiguo de la sierra.",
+        },
+        {
+          dimension: "Litologia dominante",
+          value: "Roca cristalina, granito, gneis",
+          note: "El relieve visible refleja meteorizacion prolongada y erosion hidrica.",
+        },
+        {
+          dimension: "Temperatura media anual",
+          value: "Cerca de 17°C en Merlo",
+          note: "El mirador suele sentirse 4-6°C mas fresco que el pueblo, sobre todo con viento.",
+        },
+        {
+          dimension: "Piso de vegetacion",
+          value: "Transicion de Chaco serrano",
+          note: "Predominan arbustos, pastos resistentes a la sequia y rasgos de pastizal alto.",
+        },
+      ],
+    },
+    routeProfile: {
+      title: "Perfil vertical de la Ruta 5",
+      intro:
+        "La tirolesa y el mirador se entienden mejor como parte de una carretera panoramica en ascenso y no como un punto aislado. La ganancia de altura organiza la experiencia completa.",
+      stages: [
+        {
+          title: "Inicio: centro de Merlo",
+          elevation: "Aprox. 800-900 m",
+          body:
+            "Aqui se concentra el microclima mas conocido de la ciudad. Desde este punto la Ruta 5 asciende con curvas cerradas entre vegetacion mas densa y una transicion clara entre espacio urbano y serrano.",
+        },
+        {
+          title: "Nodo medio: Tirolesa Mirador Del Sol",
+          elevation: "Aprox. 1.470 m",
+          body:
+            "Este tramo marca la transicion entre bosque bajo y matorral o ladera herbacea de mayor altura. La apertura repentina del relieve explica el panorama, el viento y la logica tecnica del trazado de la tirolesa.",
+        },
+        {
+          title: "Final alto: Filo Serrano",
+          elevation: "Aprox. 2.100 m",
+          body:
+            "Mas arriba, la ruta se acerca a la cresta y al limite natural entre San Luis y Cordoba. La vegetacion se vuelve mas baja y la vista se expande hacia llanuras vecinas.",
+        },
+      ],
+    },
+    astronomy: {
+      title: "Cielo oscuro y observacion astronomica",
+      intro:
+        "Si se interpreta como plataforma de observacion, el sitio tambien tiene valor nocturno por sus condiciones de cielo oscuro, la lectura del cielo austral y la fotografia astronomica.",
+      cards: [
+        {
+          title: "Baja contaminacion luminica",
+          body:
+            "La sierra ayuda a bloquear parte del resplandor urbano, de modo que las noches despejadas pueden ofrecer condiciones favorables de observacion. En terminos practicos, la zona suele comentarse en un rango cercano a Bortle 3-4.",
+        },
+        {
+          title: "Referencias del cielo austral",
+          body:
+            "El lugar es adecuado para reconocer Cruz del Sur, Alpha Centauri y las Nubes de Magallanes. Para visitantes del hemisferio norte, estos objetos suelen ser uno de los rasgos mas distintivos.",
+        },
+        {
+          title: "Consejos de fotografia",
+          body:
+            "Para fotografiar el cielo convienen tripode estable y gran angular entre 14 mm y 24 mm. Si se desea combinar la cresta y la Via Lactea, las noches sin luna entre abril y septiembre suelen ser las mejores.",
+        },
+      ],
+    },
+    faq: {
+      title: "FAQ estructurada",
+      intro:
+        "Las preguntas practicas mas frecuentes resultan mas utiles cuando se presentan como respuestas tecnicas breves y no como comentarios dispersos.",
+      items: [
+        {
+          question: "¿Hace falta un vehiculo 4x4 para llegar?",
+          answer:
+            "Por lo general no. El tramo principal de la Ruta 5 hacia el mirador esta asfaltado y un auto comun de traccion simple suele ser suficiente. La dificultad real esta en las curvas cerradas, la pendiente y la tecnica de manejo serrano.",
+        },
+        {
+          question: "¿Como afecta el microclima a la experiencia de tirolesa?",
+          answer:
+            "Uno de los efectos mas claros es la interaccion entre termicas y viento de quebrada. El monitoreo de viento en tiempo real importa mas que cualquier frase promocional, porque condiciona tanto la seguridad como la dinamica del recorrido.",
+        },
+        {
+          question: "¿Vale la pena visitar el lugar sin hacer la tirolesa?",
+          answer:
+            "Si. Incluso sin actividad aerea, el sitio funciona como mirador de alto valor con amplia vista del valle, formas erosivas visibles y una transicion clara entre pisos altitudinales.",
         },
       ],
     },
     photos: {
-      title: "Fotos",
+      title: "Fotos del sitio",
       intro:
-        "Todas las imagenes provienen de la carpeta local `public/gallery` y ahora usan nombres mas legibles para SEO y URLs multilingues. La imagen principal tambien sale de ese conjunto.",
+        "La galeria reune imagenes reales del valle, la ruta de subida, el mirador y el entorno de actividad. La imagen principal tambien procede de este mismo archivo local.",
       mapsCta: "Ver en Google Maps",
-      altPrefix: "Foto de Tirolesa Mirador Del Sol",
+      altPrefix: "Foto del valle y del mirador",
     },
     reviews: {
-      title: "Reseñas",
+      title: "Observaciones de visitantes",
       intro:
-        "En vez de acumular elogios emocionales, esta pagina organiza los comentarios repetidos en tres observaciones utiles para planificar la visita.",
+        "En vez de acumular elogios emotivos, esta seccion organiza los comentarios repetidos en tres claves de lectura mas utiles para planificar la visita.",
       mapsCta: "Ver en Google Maps",
       themes: [
         {
-          title: "Premio panoramico",
+          title: "Retorno panoramico",
           body:
-            "Las valoraciones altas suelen relacionarse con la vista del valle, la subida por la ruta serrana y los cambios del cielo. Para muchas personas, el mirador por si solo ya justifica la visita.",
+            "Las valoraciones altas se relacionan sobre todo con la vista del valle, la subida por camino serrano y los cambios de luz o nubosidad. Para mucha gente, el mirador ya vale por si mismo.",
         },
         {
           title: "Intensidad de aventura",
           body:
-            "Quienes usan la tirolesa suelen destacar la sensacion de altura y velocidad reforzada por la pendiente abierta y el desnivel visible.",
+            "Quienes prueban la tirolesa suelen percibir con mas fuerza la velocidad y la altura por la pendiente abierta y el desnivel visible. Importan mucho las condiciones del dia.",
         },
         {
           title: "Condiciones variables",
           body:
-            "Clima, visibilidad, estado del camino y cantidad de gente modifican mucho la experiencia; por eso conviene mencionarlos de manera explicita.",
+            "Visibilidad, viento, trafico y estado del camino pueden modificar mucho la experiencia. Son datos mas utiles que una frase promocional generica.",
+        },
+      ],
+    },
+    transport: {
+      title: "Como llegar",
+      intro:
+        "En la practica, la mayoria de los visitantes llega primero a Villa de Merlo y luego completa el ultimo ascenso serrano hacia Mirador del Sol.",
+      cards: [
+        {
+          title: "Aeropuertos regionales",
+          body:
+            "Si buscas reducir el tramo terrestre, conviene revisar vuelos hacia el area de Valle del Conlara. Cuando no coinciden los horarios, San Luis o Cordoba son alternativas mas amplias antes de seguir por carretera hasta Merlo.",
+        },
+        {
+          title: "Llegada en auto",
+          body:
+            "El auto es la forma mas directa. Una vez en Merlo, la subida por Ruta 5 hacia el mirador presenta curvas, pendiente y paradas panoramicas, por lo que resulta preferible conducir de dia.",
+        },
+        {
+          title: "Bus y transferencia",
+          body:
+            "Los buses de larga distancia suelen terminar en la terminal de Villa de Merlo. Desde alli, el ultimo tramo normalmente requiere taxi, remis, traslado acordado o un vehiculo particular.",
+        },
+        {
+          title: "Ultimo tramo serrano",
+          body:
+            "Cerca del mirador el acceso debe leerse como un verdadero tramo de montaña y no como una llegada urbana simple. La exposicion al viento, la visibilidad y los puntos de estacionamiento merecen atencion propia.",
         },
       ],
     },
@@ -658,72 +1326,75 @@ export const contentByLocale: Record<Locale, PageContent> = {
       title: "Sugerencias de visita",
       cards: [
         {
-          title: "Mejor momento",
+          title: "Mejor luz",
           body:
-            "La primera hora de la mañana y el final de la tarde suelen ofrecer la luz mas interesante. Si vas a fotografiar, prioriza visibilidad y atmosfera.",
+            "Para leer el paisaje y fotografiar, conviene llegar poco despues del amanecer o entre 1 y 1,5 horas antes del atardecer. La mañana favorece las nubes bajas; la tarde, el relieve lateral del filo.",
         },
         {
-          title: "Acceso",
+          title: "Temperatura y viento",
           body:
-            "Conviene subir en auto. El camino de montaña tiene curvas y requiere manejar con cuidado y dejar margen para detenerse y bajar con calma.",
-        },
-        {
-          title: "Seguridad",
-          body:
-            "El viento y la temperatura cambian rapido en altura. Lleva abrigo liviano, agua y proteccion solar. Para la tirolesa, manda siempre la norma operativa del lugar.",
+            "La cresta suele sentirse mas fresca que el centro de Merlo. Si se suma el viento, baja aun mas la temperatura percibida, por lo que conviene llevar abrigo liviano cortaviento, agua y proteccion solar.",
         },
         {
           title: "Tiempo recomendado",
           body:
-            "Reserva 30 a 60 minutos para mirador y fotos; si sumas actividad aerea o paradas cercanas, puedes dedicar media jornada.",
+            "Reserva 30 a 60 minutos para una parada panoramica simple, o hasta media jornada si sumas fotos, miradores cercanos y actividad aerea.",
+        },
+        {
+          title: "Seguridad en sitio",
+          body:
+            "En actividades de aventura siempre prevalece la indicacion operativa vigente. Si aumenta el viento, cae la visibilidad o no te sientes en plena forma, puede ser mejor una visita solo panoramica.",
         },
       ],
     },
     editorial: {
       title: "Nota editorial",
       body:
-        "Como guia no lucrativa de divulgacion turistica, el sitio prioriza orientacion, seguridad, contexto geografico, evidencia fotografica y enlaces oficiales por encima del lenguaje comercial.",
+        "Como guia no lucrativa de divulgacion turistica, el sitio prioriza orientacion, contexto ambiental, formas de llegada, fotos del lugar y referencias oficiales por encima del lenguaje comercial.",
     },
     links: {
-      title: "Enlaces relacionados",
+      title: "Enlaces oficiales de referencia",
       intro:
-        "Tal como pediste, la antigua seccion de enlaces fue reemplazada por recursos oficiales directamente relacionados con Villa de Merlo, la provincia de San Luis y la red turistica y administrativa nacional.",
+        "Estos recursos permiten ampliar la lectura del lugar hacia Merlo, la provincia de San Luis y el sistema publico de informacion turistica de Argentina.",
       items: [
         {
           title: "Secretaria de Turismo de Villa de Merlo",
           href: "https://villademerlo.tur.ar/",
           description:
-            "El sitio oficial mas pertinente para la ciudad donde se ubica el atractivo, con informacion sobre microclima, circuitos panoramicos y actividades serranas como la tirolesa.",
+            "La fuente oficial mas cercana al lugar, util para ampliar contexto local sobre circuitos panoramicos, clima y atractivos cercanos.",
         },
         {
           title: "Turismo San Luis",
           href: "https://turismo.sanluis.gov.ar/",
           description:
-            "Portal oficial de turismo provincial, util para entender el contexto ecologico y de aventura de las Sierras de los Comechingones alrededor de Merlo.",
+            "Portal oficial de turismo provincial, adecuado para entender en escala mas amplia el paisaje serrano de los Comechingones.",
         },
         {
           title: "Provincia de San Luis - Argentina.gob.ar",
           href: "https://www.argentina.gob.ar/sanluis",
           description:
-            "Pagina del gobierno nacional que resume geografia, recursos naturales y servicios publicos de la provincia bajo un dominio estatal de alta autoridad.",
+            "Pagina gubernamental nacional con un marco mas institucional sobre la provincia y su contexto publico.",
         },
         {
           title: "Gobierno de la Provincia de San Luis",
           href: "https://www.sanluis.gov.ar/",
           description:
-            "Referencia practica para consultar estado de rutas provinciales, alertas climaticas de montaña y contactos de emergencia para la subida por Ruta 5.",
+            "Util para avisos publicos, servicios provinciales y contexto practico mas amplio.",
         },
         {
           title: "Argentina.travel",
           href: "https://www.argentina.travel/",
           description:
-            "Portal oficial de promocion turistica internacional, util para visitantes extranjeros que necesiten una referencia general sobre rutas, seguridad y contexto de viaje en Argentina.",
+            "Portal oficial nacional para visitantes internacionales que buscan una referencia mas general sobre destinos y desplazamientos.",
         },
       ],
     },
     footer: {
       note:
-        "Guia estatica en cuatro idiomas centrada en interpretacion del paisaje, acceso practico y seguridad de visita.",
+        "Este sitio se centra en el entorno geografico, la experiencia panoramica y la seguridad de visita. No ofrece reservas, promociones ni respaldo de marca. La publicacion es completamente gratuita y busca contribuir al desarrollo del turismo en Argentina.",
+      copyright: "© 2026 Guia Tirolesa Mirador Del Sol. Todos los derechos reservados.",
+      disclaimer:
+        "Este sitio web es un proyecto independiente, no lucrativo y divulgativo de terceros; no tiene relacion institucional con el Gobierno de Argentina ni con ninguna entidad oficial.",
       mapsLabel: "Google Maps →",
     },
   },
