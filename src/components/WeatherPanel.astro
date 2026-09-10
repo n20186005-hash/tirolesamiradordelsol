@@ -1,0 +1,588 @@
+---
+import { siteMeta, type Locale, type WeatherContent } from "../data/site";
+
+interface Props {
+  locale: Locale;
+  eyebrow: string;
+  weather: WeatherContent;
+}
+
+const { locale, eyebrow, weather } = Astro.props;
+const languageTag: Record<Locale, string> = {
+  zh: "zh-CN",
+  en: "en",
+  it: "it",
+  es: "es",
+};
+
+const labels = {
+  locale: languageTag[locale],
+  sep: locale === "zh" ? "：" : ": ",
+  loading: weather.loadingLabel,
+  error: weather.errorLabel,
+  updated: weather.updatedLabel,
+  refresh: weather.refreshLabel,
+  feelsLike: weather.feelsLikeLabel,
+  humidity: weather.humidityLabel,
+  wind: weather.windLabel,
+  gust: weather.gustLabel,
+  uv: weather.uvLabel,
+  precipitation: weather.precipitationLabel,
+  today: weather.todayLabel,
+  currentTitle: weather.currentTitle,
+  forecastTitle: weather.forecastTitle,
+  conditions: weather.conditions,
+  advice: weather.advice,
+};
+
+const endpoint = {
+  latitude: siteMeta.latitude,
+  longitude: siteMeta.longitude,
+  timezone: siteMeta.timezone,
+};
+
+const adviceIcons = {
+  travel:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M12 4a2 2 0 0 1 2 2c0 .9-.5 1.3-1.1 1.8L20 12.4V20H4v-7.6l7.1-4.6C10.5 7.3 10 6.9 10 6a2 2 0 0 1 2-2z"/></svg>',
+  plan:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14"/><path d="M15 6v14"/></svg>',
+  items:
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>',
+};
+---
+
+<section id="weather" class="border-y border-stone-200/70">
+  <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+    <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{eyebrow}</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{weather.title}</h2>
+        <p class="mt-5 text-base leading-7 text-slate-600">{weather.intro}</p>
+      </div>
+      <button
+        type="button"
+        data-weather-refresh
+        class="w-fit rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-800 transition-colors hover:border-slate-900 hover:text-slate-950"
+      >
+        {weather.refreshLabel}
+      </button>
+    </div>
+
+    <div
+      data-weather-alerts
+      hidden
+      class="mt-8 rounded-[1.5rem] border border-stone-200/80 bg-[#faf8f3] px-5 py-4"
+    >
+      <p class="text-sm leading-6 text-slate-500">{weather.loadingLabel}</p>
+    </div>
+
+    <div class="mt-6 grid gap-4 lg:grid-cols-[0.85fr_1.75fr]">
+      <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/90 p-6 shadow-sm shadow-stone-200/40">
+        <div class="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">{weather.currentTitle}</div>
+        <div class="mt-5 flex items-center gap-5">
+          <div class="h-16 w-16 shrink-0 text-slate-900" data-weather-current-icon aria-hidden="true"></div>
+          <div>
+            <div class="text-5xl font-semibold text-slate-950" data-weather-current-temp>--°</div>
+            <div class="mt-1 text-sm text-slate-600" data-weather-current-label>{weather.loadingLabel}</div>
+          </div>
+        </div>
+        <dl class="mt-6 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-3">
+            <dt class="text-xs tracking-[0.12em] text-slate-500 uppercase">{weather.feelsLikeLabel}</dt>
+            <dd class="mt-1 font-semibold text-slate-900" data-weather-current-feels>--°</dd>
+          </div>
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-3">
+            <dt class="text-xs tracking-[0.12em] text-slate-500 uppercase">{weather.humidityLabel}</dt>
+            <dd class="mt-1 font-semibold text-slate-900" data-weather-current-humidity>--%</dd>
+          </div>
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-3">
+            <dt class="text-xs tracking-[0.12em] text-slate-500 uppercase">{weather.windLabel}</dt>
+            <dd class="mt-1 font-semibold text-slate-900" data-weather-current-wind>--</dd>
+          </div>
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-3">
+            <dt class="text-xs tracking-[0.12em] text-slate-500 uppercase">{weather.gustLabel}</dt>
+            <dd class="mt-1 font-semibold text-slate-900" data-weather-current-gust>--</dd>
+          </div>
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-3">
+            <dt class="text-xs tracking-[0.12em] text-slate-500 uppercase">{weather.uvLabel}</dt>
+            <dd class="mt-1 font-semibold text-slate-900" data-weather-current-uv>--</dd>
+          </div>
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-3">
+            <dt class="text-xs tracking-[0.12em] text-slate-500 uppercase">{weather.precipitationLabel}</dt>
+            <dd class="mt-1 font-semibold text-slate-900" data-weather-current-rain>--%</dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-xs leading-6 text-slate-500" data-weather-updated>{weather.loadingLabel}</p>
+      </article>
+
+      <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/90 p-6 shadow-sm shadow-stone-200/40">
+        <div class="text-xs font-semibold tracking-[0.16em] text-slate-500 uppercase">{weather.forecastTitle}</div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4" data-weather-forecast>
+          <div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-4 text-sm text-slate-500">
+            {weather.loadingLabel}
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-10">
+      <h3 class="text-xl font-semibold tracking-tight text-slate-950">{weather.advice.title}</h3>
+      <div class="mt-4 grid gap-4 lg:grid-cols-3">
+        <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/90 p-6 shadow-sm shadow-stone-200/40">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-900 text-white"
+              aria-hidden="true"
+              set:html={adviceIcons.travel}
+            />
+            <h4 class="text-base font-semibold text-slate-900">{weather.advice.travelTitle}</h4>
+          </div>
+          <ul class="mt-4 grid gap-2" data-weather-travel>
+            <li class="text-sm leading-7 text-slate-500">{weather.loadingLabel}</li>
+          </ul>
+        </article>
+
+        <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/90 p-6 shadow-sm shadow-stone-200/40">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-900 text-white"
+              aria-hidden="true"
+              set:html={adviceIcons.plan}
+            />
+            <h4 class="text-base font-semibold text-slate-900">{weather.advice.planTitle}</h4>
+          </div>
+          <ul class="mt-4 grid gap-2" data-weather-plan>
+            <li class="text-sm leading-7 text-slate-500">{weather.loadingLabel}</li>
+          </ul>
+        </article>
+
+        <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/90 p-6 shadow-sm shadow-stone-200/40">
+          <div class="flex items-center gap-3">
+            <span
+              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-900 text-white"
+              aria-hidden="true"
+              set:html={adviceIcons.items}
+            />
+            <h4 class="text-base font-semibold text-slate-900">{weather.advice.itemsTitle}</h4>
+          </div>
+          <ul class="mt-4 grid gap-2" data-weather-items>
+            <li class="text-sm leading-7 text-slate-500">{weather.loadingLabel}</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <p class="mt-6 max-w-3xl text-sm leading-7 text-slate-500">{weather.altitudeNote}</p>
+  </div>
+</section>
+
+<script is:inline define:vars={{ labels, endpoint }}>
+  (function () {
+    const CACHE_KEY = "tmdl-weather-cache-v2";
+    const CACHE_TTL = 15 * 60 * 1000;
+
+    const forecastEl = document.querySelector("[data-weather-forecast]");
+    const tempEl = document.querySelector("[data-weather-current-temp]");
+    const labelEl = document.querySelector("[data-weather-current-label]");
+    const iconEl = document.querySelector("[data-weather-current-icon]");
+    const feelsEl = document.querySelector("[data-weather-current-feels]");
+    const humidityEl = document.querySelector("[data-weather-current-humidity]");
+    const windEl = document.querySelector("[data-weather-current-wind]");
+    const gustEl = document.querySelector("[data-weather-current-gust]");
+    const uvEl = document.querySelector("[data-weather-current-uv]");
+    const rainEl = document.querySelector("[data-weather-current-rain]");
+    const updatedEl = document.querySelector("[data-weather-updated]");
+    const refreshBtn = document.querySelector("[data-weather-refresh]");
+    const alertsEl = document.querySelector("[data-weather-alerts]");
+    const travelEl = document.querySelector("[data-weather-travel]");
+    const planEl = document.querySelector("[data-weather-plan]");
+    const itemsEl = document.querySelector("[data-weather-items]");
+
+    const ICONS = {
+      sun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="h-full w-full"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+      cloudSun: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full"><circle cx="8" cy="7.5" r="2.6"/><path d="M8 2.6v1.3M2.6 7.5h1.3M3.9 3.4l.9.9"/><path d="M7.5 18.5a4 4 0 0 1 .9-7.9 5 5 0 0 1 9.4 1.6 3.5 3.5 0 0 1-.5 6.3H7.5Z"/></svg>',
+      cloud: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full"><path d="M7 18.5a4 4 0 0 1 .9-7.9 5 5 0 0 1 9.4 1.6 3.5 3.5 0 0 1-.5 6.3H7Z"/></svg>',
+      fog: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full"><path d="M7 15a4 4 0 0 1 .9-7.9 5 5 0 0 1 9.4 1.6A3.5 3.5 0 0 1 16.8 15H7Z"/><path d="M4 19h16M6 21.6h12"/></svg>',
+      rain: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full"><path d="M7 15a4 4 0 0 1 .9-7.9 5 5 0 0 1 9.4 1.6A3.5 3.5 0 0 1 16.8 15H7Z"/><path d="M9 18.5l-1 2.8M13 18.5l-1 2.8M17 18.5l-1 2.8"/></svg>',
+      snow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full"><path d="M7 14a4 4 0 0 1 .9-7.9 5 5 0 0 1 9.4 1.6A3.5 3.5 0 0 1 16.8 14H7Z"/><path d="M9 18.5v2.6M7.7 19.8l2.6 1.3M10.3 19.8l-2.6 1.3M15 18.5v2.6M13.7 19.8l2.6 1.3M16.3 19.8l-2.6 1.3"/></svg>',
+      storm: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full"><path d="M7 14a4 4 0 0 1 .9-7.9 5 5 0 0 1 9.4 1.6A3.5 3.5 0 0 1 16.8 14H7Z"/><path d="M12.5 16.5l-2.4 4h3.2l-1.8 3.6"/></svg>',
+    };
+
+    const WARN_ICON =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M10.3 3.6 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.6a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>';
+    const OK_ICON =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4"><path d="M20 6 9 17l-5-5"/></svg>';
+
+    function conditionKey(code) {
+      if (code === 0) return "clear";
+      if (code === 1) return "mostlyClear";
+      if (code === 2) return "partlyCloudy";
+      if (code === 3) return "overcast";
+      if (code === 45 || code === 48) return "fog";
+      if (code >= 51 && code <= 57) return "drizzle";
+      if (code >= 61 && code <= 67) return "rain";
+      if (code >= 71 && code <= 77) return "snow";
+      if (code >= 80 && code <= 82) return "showers";
+      if (code === 85 || code === 86) return "snow";
+      if (code >= 95) return "thunderstorm";
+      return "partlyCloudy";
+    }
+
+    function iconName(key) {
+      if (key === "clear") return "sun";
+      if (key === "mostlyClear" || key === "partlyCloudy") return "cloudSun";
+      if (key === "overcast") return "cloud";
+      if (key === "fog") return "fog";
+      if (key === "drizzle" || key === "rain" || key === "showers") return "rain";
+      if (key === "snow") return "snow";
+      if (key === "thunderstorm") return "storm";
+      return "cloudSun";
+    }
+
+    function beaufort(kmh) {
+      const v = Number(kmh) || 0;
+      if (v < 1) return 0;
+      if (v < 6) return 1;
+      if (v < 12) return 2;
+      if (v < 20) return 3;
+      if (v < 29) return 4;
+      if (v < 39) return 5;
+      if (v < 50) return 6;
+      if (v < 62) return 7;
+      if (v < 75) return 8;
+      if (v < 89) return 9;
+      if (v < 103) return 10;
+      if (v < 118) return 11;
+      return 12;
+    }
+
+    function computeAdvice(data) {
+      const cur = data.current || {};
+      const daily = data.daily || {};
+      const code = cur.weather_code != null ? cur.weather_code : daily.weather_code ? daily.weather_code[0] : 0;
+      const key = conditionKey(code);
+      const tMax = daily.temperature_2m_max ? Math.round(daily.temperature_2m_max[0]) : null;
+      const tMin = daily.temperature_2m_min ? Math.round(daily.temperature_2m_min[0]) : null;
+      const swing = tMax != null && tMin != null ? tMax - tMin : null;
+      const uv = daily.uv_index_max ? daily.uv_index_max[0] : null;
+      const precipProb = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : null;
+      const rainSum = daily.precipitation_sum ? daily.precipitation_sum[0] : 0;
+      const windKmh =
+        cur.wind_speed_10m != null
+          ? cur.wind_speed_10m
+          : daily.wind_speed_10m_max
+            ? daily.wind_speed_10m_max[0]
+            : 0;
+      const gustKmh =
+        cur.wind_gusts_10m != null
+          ? cur.wind_gusts_10m
+          : daily.wind_gusts_10m_max
+            ? daily.wind_gusts_10m_max[0]
+            : windKmh;
+      const level = beaufort(windKmh);
+
+      const isThunder = key === "thunderstorm";
+      const isFog = key === "fog";
+      const isDrizzle = key === "drizzle";
+      const isRain = key === "rain" || key === "showers";
+      const heavyRain = isRain && (code === 63 || code === 65 || code === 81 || code === 82 || rainSum >= 8);
+      const rainLikely = precipProb != null && precipProb >= 60;
+      const hot = tMax != null && tMax >= 32;
+      const cold = tMax != null && tMax <= 10;
+      const heatAlert = tMax != null && tMax >= 38;
+      const coldAlert = tMax != null && tMax <= 3;
+      const strongUv = uv != null && uv >= 5;
+      const bigSwing = swing != null && swing > 8;
+      const windy = level >= 5;
+      const veryWindy = level >= 7;
+      const clearSky = key === "clear" || key === "mostlyClear";
+      const cloudy = key === "overcast" || key === "partlyCloudy";
+
+      const travel = [];
+      const plan = [];
+      const items = [];
+      const alerts = [];
+      const add = function (arr, id) {
+        if (id && arr.indexOf(id) === -1) arr.push(id);
+      };
+
+      if (isThunder) add(alerts, "thunderstorm");
+      if (heavyRain) add(alerts, "heavyRain");
+      if (veryWindy) add(alerts, "veryWindy");
+      if (isFog) add(alerts, "fog");
+      if (heatAlert) add(alerts, "heat");
+      if (coldAlert) add(alerts, "cold");
+
+      if (isThunder) add(travel, "thunderstorm");
+      else if (heavyRain) add(travel, "heavyRain");
+      else if (isDrizzle) add(travel, "drizzle");
+      else if (rainLikely) add(travel, "rainLikely");
+      if (hot) add(travel, "hot");
+      if (strongUv) add(travel, "uv");
+      if (bigSwing) add(travel, "tempSwing");
+      if (cold) add(travel, "cold");
+      if (veryWindy) add(travel, "veryWindy");
+      else if (windy) add(travel, "windy");
+      if (clearSky) add(travel, "clear");
+      else if (cloudy) add(travel, "overcast");
+
+      if (isThunder) add(plan, "thunderstorm");
+      else if (heavyRain) add(plan, "heavyRain");
+      else if (isDrizzle) add(plan, "drizzle");
+      else if (rainLikely) add(plan, "rainLikely");
+      if (hot) add(plan, "hot");
+      if (strongUv) add(plan, "uv");
+      if (cold) add(plan, "cold");
+      if (veryWindy) add(plan, "veryWindy");
+      else if (windy) add(plan, "windy");
+      if (isFog) add(plan, "fog");
+      if (clearSky) add(plan, "clear");
+      else if (cloudy) add(plan, "overcast");
+      add(plan, "mountain");
+
+      if (isThunder || heavyRain) add(items, "raincoat");
+      else if (isDrizzle || rainLikely) add(items, "umbrella");
+      if (strongUv || hot || clearSky) add(items, "sunscreen");
+      if (strongUv || hot) {
+        add(items, "sunglasses");
+        add(items, "hat");
+      }
+      if (hot || strongUv) add(items, "water");
+      if (bigSwing) add(items, "jacket");
+      if (cold) add(items, "warmCoat");
+      if (windy) add(items, "windproof");
+      if (isFog) add(items, "mask");
+
+      return { travel: travel, plan: plan, items: items, alerts: alerts, level: level };
+    }
+
+    function buildUrl() {
+      const params = [
+        "latitude=" + endpoint.latitude,
+        "longitude=" + endpoint.longitude,
+        "current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m,wind_gusts_10m",
+        "daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,uv_index_max,wind_speed_10m_max,wind_gusts_10m_max",
+        "timezone=" + encodeURIComponent(endpoint.timezone),
+        "wind_speed_unit=kmh",
+        "forecast_days=7",
+      ];
+      return "https://api.open-meteo.com/v1/forecast?" + params.join("&");
+    }
+
+    function readCache() {
+      try {
+        const raw = window.sessionStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.timestamp) return null;
+        if (Date.now() - parsed.timestamp > CACHE_TTL) return null;
+        return parsed.data;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function writeCache(data) {
+      try {
+        window.sessionStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: data }));
+      } catch (error) {}
+    }
+
+    function formatDay(dateString, index) {
+      if (index === 0) return labels.today;
+      try {
+        return new Intl.DateTimeFormat(labels.locale, { weekday: "short", day: "numeric" }).format(
+          new Date(dateString + "T12:00:00")
+        );
+      } catch (error) {
+        return dateString;
+      }
+    }
+
+    function formatUpdated(date) {
+      try {
+        const time = new Intl.DateTimeFormat(labels.locale, { hour: "2-digit", minute: "2-digit" }).format(date);
+        return labels.updated + " " + time;
+      } catch (error) {
+        return labels.updated;
+      }
+    }
+
+    function renderForecast(daily) {
+      if (!forecastEl || !daily || !daily.time) return;
+      const uvArr = daily.uv_index_max || [];
+      const cards = daily.time.slice(0, 7).map(function (dateString, index) {
+        const dayKey = conditionKey(daily.weather_code[index]);
+        const max = Math.round(daily.temperature_2m_max[index]);
+        const min = Math.round(daily.temperature_2m_min[index]);
+        const rain = daily.precipitation_probability_max ? daily.precipitation_probability_max[index] : null;
+        const uv = uvArr[index];
+        const rainText = rain === null || rain === undefined ? "--" : Math.round(rain) + "%";
+        const uvText = uv === null || uv === undefined ? "--" : Math.round(uv);
+        return (
+          '<div class="rounded-2xl border border-stone-200/70 bg-[#faf8f3] p-4">' +
+          '<div class="text-xs font-semibold tracking-[0.12em] text-slate-500 uppercase">' +
+          formatDay(dateString, index) +
+          "</div>" +
+          '<div class="mt-3 h-9 w-9 text-slate-800" aria-hidden="true">' +
+          (ICONS[iconName(dayKey)] || ICONS.cloud) +
+          "</div>" +
+          '<div class="mt-3 text-sm font-semibold text-slate-900">' +
+          max +
+          '° <span class="font-normal text-slate-500">/ ' +
+          min +
+          "°</span></div>" +
+          '<div class="mt-1 text-xs text-slate-600">' +
+          labels.conditions[dayKey] +
+          "</div>" +
+          '<div class="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-500">' +
+          "<span>" +
+          labels.precipitation +
+          ": " +
+          rainText +
+          "</span>" +
+          "<span>" +
+          labels.uv +
+          ": " +
+          uvText +
+          "</span>" +
+          "</div>" +
+          "</div>"
+        );
+      });
+      forecastEl.innerHTML = cards.join("");
+    }
+
+    function renderAlerts(keys) {
+      if (!alertsEl) return;
+      alertsEl.hidden = false;
+      if (!keys || keys.length === 0) {
+        alertsEl.className = "mt-8 rounded-[1.5rem] border border-stone-200/80 bg-[#faf8f3] px-5 py-4";
+        alertsEl.innerHTML =
+          '<p class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="shrink-0 text-emerald-600">' +
+          OK_ICON +
+          "</span>" +
+          labels.advice.noAlertLabel +
+          "</p>";
+        return;
+      }
+      const items = keys
+        .map(function (k) {
+          const name = labels.advice.alertNames[k] || "";
+          const detail = labels.advice.alerts[k] || "";
+          return (
+            '<li class="flex gap-3 text-red-800"><span class="mt-0.5 shrink-0">' +
+            WARN_ICON +
+            '</span><p class="text-sm leading-6"><span class="font-semibold">' +
+            name +
+            "</span>" +
+            labels.sep +
+            detail +
+            "</p></li>"
+          );
+        })
+        .join("");
+      alertsEl.className = "mt-8 rounded-[1.5rem] border border-red-200 bg-red-50 px-5 py-4";
+      alertsEl.innerHTML =
+        '<div class="flex items-center gap-2 text-red-700"><span class="shrink-0">' +
+        WARN_ICON +
+        '</span><p class="text-xs font-semibold uppercase tracking-[0.16em]">' +
+        labels.advice.alertTitle +
+        "</p></div>" +
+        '<ul class="mt-3 grid gap-2">' +
+        items +
+        "</ul>" +
+        '<p class="mt-3 text-xs leading-6 text-red-700/80">' +
+        labels.advice.alertIntro +
+        "</p>";
+    }
+
+    function renderList(container, keys, dict, fallback) {
+      if (!container) return;
+      const valid = (keys || []).filter(function (k) {
+        return dict[k];
+      });
+      if (valid.length === 0) {
+        container.innerHTML = '<li class="text-sm leading-7 text-slate-500">' + (fallback || "") + "</li>";
+        return;
+      }
+      container.innerHTML = valid
+        .map(function (k) {
+          return (
+            '<li class="flex gap-2 text-sm leading-7 text-slate-700"><span class="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400"></span><span>' +
+            dict[k] +
+            "</span></li>"
+          );
+        })
+        .join("");
+    }
+
+    function render(data) {
+      const cur = data.current || {};
+      const daily = data.daily || {};
+      const key = conditionKey(cur.weather_code);
+      const advice = computeAdvice(data);
+
+      if (tempEl) tempEl.textContent = Math.round(cur.temperature_2m) + "°";
+      if (labelEl) labelEl.textContent = labels.conditions[key] || "";
+      if (iconEl) iconEl.innerHTML = ICONS[iconName(key)] || ICONS.cloud;
+      if (feelsEl) feelsEl.textContent = Math.round(cur.apparent_temperature) + "°";
+      if (humidityEl) humidityEl.textContent = Math.round(cur.relative_humidity_2m) + "%";
+      if (windEl)
+        windEl.textContent =
+          Math.round(cur.wind_speed_10m) + " km/h · " + advice.level + labels.advice.windLevelSuffix;
+      if (gustEl)
+        gustEl.textContent =
+          Math.round(cur.wind_gusts_10m != null ? cur.wind_gusts_10m : cur.wind_speed_10m) + " km/h";
+      if (uvEl) uvEl.textContent = daily.uv_index_max ? String(Math.round(daily.uv_index_max[0])) : "--";
+      if (rainEl)
+        rainEl.textContent = daily.precipitation_probability_max
+          ? Math.round(daily.precipitation_probability_max[0]) + "%"
+          : "--%";
+      if (updatedEl) updatedEl.textContent = formatUpdated(new Date());
+
+      renderForecast(daily);
+      renderAlerts(advice.alerts);
+      renderList(travelEl, advice.travel, labels.advice.travel, labels.advice.travel.fallback);
+      renderList(planEl, advice.plan, labels.advice.plan, labels.advice.plan.fallback);
+      renderList(itemsEl, advice.items, labels.advice.items, labels.advice.items.fallback);
+    }
+
+    function showError() {
+      if (labelEl) labelEl.textContent = labels.error;
+      if (updatedEl) updatedEl.textContent = labels.error;
+      if (alertsEl) alertsEl.hidden = true;
+      [travelEl, planEl, itemsEl].forEach(function (el) {
+        if (el) el.innerHTML = '<li class="text-sm leading-7 text-slate-500">' + labels.error + "</li>";
+      });
+    }
+
+    async function load(force) {
+      if (!force) {
+        const cached = readCache();
+        if (cached) {
+          render(cached);
+          return;
+        }
+      }
+      if (labelEl) labelEl.textContent = labels.loading;
+      try {
+        const response = await fetch(buildUrl(), { headers: { Accept: "application/json" } });
+        if (!response.ok) throw new Error("bad status");
+        const data = await response.json();
+        writeCache(data);
+        render(data);
+      } catch (error) {
+        showError();
+      }
+    }
+
+    if (refreshBtn) {
+      refreshBtn.addEventListener("click", function () {
+        load(true);
+      });
+    }
+
+    load(false);
+  })();
+</script>

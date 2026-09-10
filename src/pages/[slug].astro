@@ -15,7 +15,7 @@ if (!pageKey) {
   throw new Error(`Unknown legal page slug: ${slug}`);
 }
 
-const locale = "zh";
+const locale = "es";
 const legal = legalContentByLocale[locale];
 const page = legal[pageKey] as (typeof legal)["privacy"];
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? `https://tirolesamiradordelsol.com`;
@@ -25,7 +25,7 @@ const structuredData = {
   name: page.title,
   description: page.description,
   url: `${siteOrigin}${localizedLegalPath(locale, pageKey as LegalPageKey)}`,
-  inLanguage: "zh-CN",
+  inLanguage: "es",
 };
 ---
 

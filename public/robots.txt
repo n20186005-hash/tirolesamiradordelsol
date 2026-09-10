@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# All content is public and crawlable. The site is served over HTTPS and is
+# reachable worldwide, which is required for Google Business Profile and
+# Search Console entity association.
+
+Sitemap: https://tirolesamiradordelsol.com/sitemap-index.xml

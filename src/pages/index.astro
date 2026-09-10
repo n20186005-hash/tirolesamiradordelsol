@@ -1,12 +1,18 @@
 ---
 import LandingPage from "../components/LandingPage.astro";
-import { contentByLocale } from "../data/site";
+import { contentByLocale, siteMeta } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const locale = "zh";
+const locale = "es";
 const content = contentByLocale[locale];
 ---
 
-<BaseLayout locale={locale} title={content.title} description={content.description}>
+<BaseLayout
+  locale={locale}
+  title={content.title}
+  description={content.description}
+  faqGroups={content.faq.groups}
+  preloadImage={siteMeta.heroImageWebp}
+>
   <LandingPage locale={locale} content={content} />
 </BaseLayout>

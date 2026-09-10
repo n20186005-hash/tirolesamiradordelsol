@@ -1,6 +1,7 @@
 ---
 import { alternateLinks, siteMeta, type Locale, type PageContent } from "../data/site";
 import { legalContentByLocale, localizedLegalPath } from "../data/legal";
+import WeatherPanel from "./WeatherPanel.astro";
 
 interface Props {
   locale: Locale;
@@ -16,7 +17,7 @@ const technicalHeaders: Record<Locale, { dimension: string; value: string; note:
   zh: { dimension: "测量维度", value: "核心数据", note: "备注说明" },
   en: { dimension: "Measure", value: "Core Data", note: "Notes" },
   it: { dimension: "Voce", value: "Dato", note: "Nota" },
-  es: { dimension: "Variable", value: "Dato", note: "Observacion" },
+  es: { dimension: "Variable", value: "Dato", note: "Observación" },
 };
 const typeValueByLocale: Record<Locale, string> = {
   zh: "旅游胜地",
@@ -24,16 +25,57 @@ const typeValueByLocale: Record<Locale, string> = {
   it: "Attrazione turistica",
   es: "Atracción turística",
 };
+const locationCopy: Record<Locale, { eyebrow: string; title: string; portal: string; portalCta: string }> = {
+  zh: {
+    eyebrow: "位置与地图",
+    title: "如何找到我们",
+    portal: "如需官方更新与区域旅游信息，请访问官方旅游门户：",
+    portalCta: "圣路易斯省官方旅游门户",
+  },
+  en: {
+    eyebrow: "Location & map",
+    title: "How to find us",
+    portal: "For official updates and regional tourism information, visit the official tourism portal:",
+    portalCta: "San Luis Province Official Tourism Portal",
+  },
+  it: {
+    eyebrow: "Posizione e mappa",
+    title: "Come trovarci",
+    portal: "Per aggiornamenti ufficiali e informazioni turistiche regionali, visita il portale ufficiale del turismo:",
+    portalCta: "Portale ufficiale del turismo di San Luis",
+  },
+  es: {
+    eyebrow: "Ubicación y mapa",
+    title: "Dónde está el Mirador del Sol",
+    portal: "Para información oficial y novedades regionales, visita el portal oficial de turismo:",
+    portalCta: "Portal oficial de Turismo de San Luis",
+  },
+};
+const breadcrumbCopy: Record<Locale, string[]> = {
+  zh: [siteMeta.country, siteMeta.state, siteMeta.city, siteMeta.name],
+  en: [siteMeta.country, siteMeta.state, siteMeta.city, siteMeta.name],
+  it: [siteMeta.country, siteMeta.state, siteMeta.city, siteMeta.name],
+  es: [siteMeta.country, siteMeta.state, siteMeta.city, siteMeta.name],
+};
+const heroAltSuffix: Record<Locale, string> = {
+  zh: `主视图，位于 ${siteMeta.city}，${siteMeta.country}`,
+  en: `Main view in ${siteMeta.city}, ${siteMeta.country}`,
+  it: `Vista principale a ${siteMeta.city}, ${siteMeta.country}`,
+  es: `Vista panorámica de la tirolesa y el valle en ${siteMeta.cityFull}, ${siteMeta.state}`,
+};
 ---
 
 <div class="min-h-screen">
   <header class="sticky top-0 z-30 border-b border-white/30 bg-[#f7f5ef]/85 backdrop-blur">
     <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 lg:px-8">
-      <a href={locale === "zh" ? "/" : `/${locale}/`} class="text-sm font-semibold tracking-[0.18em] text-slate-700 uppercase">
+      <a href={locale === "es" ? "/" : `/${locale}/`} class="text-sm font-semibold tracking-[0.18em] text-slate-700 uppercase">
         {siteMeta.name}
       </a>
-      <nav class="hidden gap-6 text-sm text-slate-600 md:flex">
+      <nav class="hidden flex-wrap gap-x-5 gap-y-2 text-sm text-slate-600 md:flex">
         <a href="#overview" class="hover:text-slate-900">{content.nav.overview}</a>
+        <a href="#history" class="hover:text-slate-900">{content.nav.history}</a>
+        <a href="#weather" class="hover:text-slate-900">{content.nav.weather}</a>
+        <a href="#amenities" class="hover:text-slate-900">{content.nav.amenities}</a>
         <a href="#gallery" class="hover:text-slate-900">{content.nav.gallery}</a>
         <a href="#reviews" class="hover:text-slate-900">{content.nav.reviews}</a>
         <a href="#transport" class="hover:text-slate-900">{content.nav.transport}</a>
@@ -66,10 +108,19 @@ const typeValueByLocale: Record<Locale, string> = {
 
   <main>
     <section class="relative isolate overflow-hidden">
-      <div
-        class="absolute inset-0 bg-cover bg-center"
-        style={`background-image:url(${siteMeta.heroImage});`}
-      ></div>
+      <picture>
+        <source srcset={siteMeta.heroImageWebp} type="image/webp" />
+        <img
+          src={siteMeta.heroImage}
+          alt={`${siteMeta.name} - ${heroAltSuffix[locale]}`}
+          width="1600"
+          height="1200"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+      </picture>
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,15,24,0.22),rgba(7,15,24,0.72))]"></div>
       <div class="relative mx-auto grid min-h-[84vh] max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1.3fr_0.7fr] lg:px-8 lg:py-24">
         <div class="flex flex-col justify-end">
@@ -96,6 +147,12 @@ const typeValueByLocale: Record<Locale, string> = {
               class="rounded-full border border-white/35 px-5 py-3 text-sm font-semibold text-white hover:border-white hover:bg-white/10"
             >
               {content.hero.galleryCta}
+            </a>
+            <a
+              href="#transport"
+              class="rounded-full border border-white/35 px-5 py-3 text-sm font-semibold text-white hover:border-white hover:bg-white/10"
+            >
+              {content.hero.directionsCta}
             </a>
           </div>
         </div>
@@ -169,6 +226,56 @@ const typeValueByLocale: Record<Locale, string> = {
       </div>
     </section>
 
+    <section id="history" class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.nav.history}</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{content.history.title}</h2>
+        <p class="mt-5 text-base leading-7 text-slate-600">{content.history.intro}</p>
+      </div>
+      <div class="mt-10 grid gap-4 md:grid-cols-3">
+        {
+          content.history.cards.map((card) => (
+            <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/85 p-6 shadow-sm shadow-stone-200/40">
+              <h3 class="text-lg font-semibold text-slate-900">{card.title}</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-600">{card.body}</p>
+            </article>
+          ))
+        }
+      </div>
+      <nav class="mt-8 flex flex-wrap items-center gap-2 text-xs text-slate-500" aria-label="Breadcrumb">
+        {
+          breadcrumbCopy[locale].map((crumb, index) => (
+            <span class="inline-flex items-center gap-2">
+              {index > 0 && <span class="text-slate-300">/</span>}
+              <span>{crumb}</span>
+            </span>
+          ))
+        }
+      </nav>
+    </section>
+
+    <section id="legends" class="border-y border-stone-200/70 bg-white/55">
+      <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.nav.history}</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{content.legends.title}</h2>
+          <p class="mt-5 text-base leading-7 text-slate-600">{content.legends.intro}</p>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-3">
+          {
+            content.legends.cards.map((card) => (
+              <article class="rounded-[1.75rem] border border-stone-200/80 bg-[#f7f5ef] p-6 shadow-sm shadow-stone-200/40">
+                <h3 class="text-lg font-semibold text-slate-900">{card.title}</h3>
+                <p class="mt-4 text-sm leading-7 text-slate-600">{card.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <WeatherPanel locale={locale} eyebrow={content.nav.weather} weather={content.weather} />
+
     <section id="gallery" class="border-y border-stone-200/70 bg-white/55">
       <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
         <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
@@ -194,12 +301,18 @@ const typeValueByLocale: Record<Locale, string> = {
           {
             siteMeta.galleryImages.map((image) => (
               <figure class="group overflow-hidden rounded-[1.5rem] border border-stone-200/70 bg-stone-100 shadow-sm shadow-stone-200/50">
-                <img
-                  src={image.src}
-                  alt={`${content.photos.altPrefix} ${image.index}`}
-                  loading="lazy"
-                  class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
-                />
+                <picture>
+                  <source srcset={image.webp} type="image/webp" />
+                  <img
+                    src={image.src}
+                    alt={`${content.photos.altPrefix} ${image.index} — ${siteMeta.cityFull}, ${siteMeta.state}, ${siteMeta.country}`}
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                    class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+                  />
+                </picture>
               </figure>
             ))
           }
@@ -307,6 +420,47 @@ const typeValueByLocale: Record<Locale, string> = {
       </div>
     </section>
 
+    <section id="amenities" class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.nav.amenities}</p>
+        <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{content.amenities.title}</h2>
+        <p class="mt-5 text-base leading-7 text-slate-600">{content.amenities.intro}</p>
+      </div>
+      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {
+          content.amenities.cards.map((card) => (
+            <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/85 p-6 shadow-sm shadow-stone-200/40">
+              <h3 class="text-lg font-semibold text-slate-900">{card.title}</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-600">{card.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="landmarks" class="border-y border-stone-200/70 bg-white/55">
+      <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.nav.overview}</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{content.landmarks.title}</h2>
+          <p class="mt-5 text-base leading-7 text-slate-600">{content.landmarks.intro}</p>
+        </div>
+        <div class="mt-10 grid gap-4 md:grid-cols-2">
+          {
+            content.landmarks.items.map((item) => (
+              <article class="rounded-[1.75rem] border border-stone-200/80 bg-white/85 p-6 shadow-sm shadow-stone-200/40">
+                <div class="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 class="text-lg font-semibold text-slate-900">{item.name}</h3>
+                  <span class="rounded-full border border-stone-300 px-3 py-1 text-xs text-slate-600">{item.distance}</span>
+                </div>
+                <p class="mt-4 text-sm leading-7 text-slate-600">{item.body}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <section id="reviews" class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
       <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div class="max-w-3xl">
@@ -388,6 +542,52 @@ const typeValueByLocale: Record<Locale, string> = {
       </div>
     </section>
 
+    <section id="location" class="border-y border-stone-200/70 bg-white/55">
+      <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+        <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-3xl">
+            <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">
+              {locationCopy[locale].eyebrow}
+            </p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{locationCopy[locale].title}</h2>
+            <p class="mt-5 text-base leading-7 text-slate-600">{displayAddress}</p>
+            <p class="mt-2 text-sm text-slate-500">{displayPlusCode}</p>
+          </div>
+          <a
+            href={siteMeta.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-fit rounded-full border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-800 hover:border-slate-900 hover:text-slate-950"
+          >
+            {content.hero.mapsCta}
+          </a>
+        </div>
+        <div class="mt-10 overflow-hidden rounded-[1.75rem] border border-stone-200/80 bg-white shadow-sm shadow-stone-200/40">
+          <iframe
+            src={siteMeta.mapsEmbedSrc}
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            title={`${siteMeta.name} · ${siteMeta.city}, ${siteMeta.state}`}
+          ></iframe>
+        </div>
+        <p class="mt-6 max-w-3xl text-sm leading-7 text-slate-600">
+          {locationCopy[locale].portal}{" "}
+          <a
+            href={siteMeta.govtTourismUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold text-slate-900 underline decoration-slate-300 underline-offset-4 hover:decoration-slate-900"
+          >
+            {locationCopy[locale].portalCta}
+          </a>
+        </p>
+      </div>
+    </section>
+
     <section id="links" class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
       <div class="max-w-3xl">
         <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">
@@ -413,7 +613,34 @@ const typeValueByLocale: Record<Locale, string> = {
       </div>
     </section>
 
-    <section class="border-t border-stone-200/70 bg-white/55">
+    <section id="sources" class="border-t border-stone-200/70">
+      <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.nav.links}</p>
+          <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">{content.sources.title}</h2>
+          <p class="mt-5 text-base leading-7 text-slate-600">{content.sources.intro}</p>
+        </div>
+        <ul class="mt-10 grid gap-4 md:grid-cols-2">
+          {
+            content.sources.items.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block rounded-[1.75rem] border border-stone-200/80 bg-white/85 p-6 shadow-sm shadow-stone-200/40 hover:border-slate-400"
+                >
+                  <h3 class="text-base font-semibold text-slate-900">{item.title}</h3>
+                  <p class="mt-3 text-sm leading-7 text-slate-600">{item.description}</p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq" class="border-t border-stone-200/70 bg-white/55">
       <div class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
         <div class="max-w-3xl">
           <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.nav.visit}</p>
@@ -449,7 +676,22 @@ const typeValueByLocale: Record<Locale, string> = {
 
   <footer class="border-t border-stone-200/70 bg-[#f4f1e8]">
     <div class="mx-auto max-w-7xl px-5 py-10 lg:px-8">
-      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <div class="grid gap-8 border-b border-stone-200/80 pb-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <h2 class="text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.footer.napTitle}</h2>
+          <p class="mt-4 text-base font-semibold text-slate-900">{siteMeta.name}</p>
+          <address class="mt-2 text-sm leading-7 text-slate-600 not-italic">{displayAddress}</address>
+          <p class="mt-1 text-sm text-slate-600">
+            <a href={phoneHref} class="hover:text-slate-900">{siteMeta.phone}</a>
+          </p>
+          <p class="mt-1 text-sm text-slate-500">{displayPlusCode}</p>
+        </div>
+        <div>
+          <h2 class="text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase">{content.imageCredits.title}</h2>
+          <p class="mt-4 text-sm leading-7 text-slate-600">{content.imageCredits.body}</p>
+        </div>
+      </div>
+      <div class="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div class="max-w-2xl">
           <p class="text-sm leading-relaxed text-slate-600 font-medium">
             {content.footer.disclaimer}

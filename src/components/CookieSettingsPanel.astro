@@ -105,6 +105,7 @@ const { categories, consentTitle, consentBody, note, saveLabel, rejectLabel, sav
   const savePreferences = (preferences, text) => {
     window.localStorage.setItem(storageKey, JSON.stringify(preferences));
     applyPreferences(preferences);
+    window.dispatchEvent(new CustomEvent("site-cookie-preferences", { detail: preferences }));
     if (messageEl) messageEl.textContent = text;
   };
 

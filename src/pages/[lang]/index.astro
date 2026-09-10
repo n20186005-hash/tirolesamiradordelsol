@@ -1,17 +1,23 @@
 ---
 import LandingPage from "../../components/LandingPage.astro";
-import { contentByLocale, locales, type Locale } from "../../data/site";
+import { contentByLocale, locales, siteMeta, type Locale } from "../../data/site";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export function getStaticPaths() {
-  return locales.filter((locale) => locale !== "zh").map((locale) => ({ params: { lang: locale } }));
+  return locales.filter((locale) => locale !== "es").map((locale) => ({ params: { lang: locale } }));
 }
 
 const langParam = Astro.params.lang as Locale;
-const locale = locales.includes(langParam) && langParam !== "zh" ? langParam : "en";
+const locale = locales.includes(langParam) && langParam !== "es" ? langParam : "en";
 const content = contentByLocale[locale];
 ---
 
-<BaseLayout locale={locale} title={content.title} description={content.description}>
+<BaseLayout
+  locale={locale}
+  title={content.title}
+  description={content.description}
+  faqGroups={content.faq.groups}
+  preloadImage={siteMeta.heroImageWebp}
+>
   <LandingPage locale={locale} content={content} />
 </BaseLayout>

@@ -1,0 +1,33 @@
+{
+  "name": "Tirolesa Mirador Del Sol",
+  "short_name": "Mirador del Sol",
+  "description": "Guía divulgativa de Tirolesa Mirador Del Sol en Villa de Merlo, San Luis, Argentina: historia, clima, acceso y servicios.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f7f5ef",
+  "theme_color": "#0f172a",
+  "categories": ["travel", "education", "navigation"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

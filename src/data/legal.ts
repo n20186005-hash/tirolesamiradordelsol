@@ -67,7 +67,7 @@ export const legalKeyBySlug = Object.fromEntries(
 ) as Record<string, LegalPageKey>;
 
 export const localizedLegalPath = (locale: Locale, key: LegalPageKey) =>
-  locale === "zh" ? `/${legalSlugByKey[key]}/` : `/${locale}/${legalSlugByKey[key]}/`;
+  locale === "es" ? `/${legalSlugByKey[key]}/` : `/${locale}/${legalSlugByKey[key]}/`;
 
 export const legalAlternateUrls = (key: LegalPageKey, siteOrigin: string) =>
   locales.map((locale) => ({

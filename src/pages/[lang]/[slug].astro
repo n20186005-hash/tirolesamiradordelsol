@@ -7,12 +7,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export function getStaticPaths() {
   return locales
-    .filter((locale) => locale !== "zh")
+    .filter((locale) => locale !== "es")
     .flatMap((locale) => legalPageKeys.map((key) => ({ params: { lang: locale, slug: legalSlugByKey[key] } })));
 }
 
 const langParam = Astro.params.lang as Locale;
-const locale = locales.includes(langParam) && langParam !== "zh" ? langParam : "en";
+const locale = locales.includes(langParam) && langParam !== "es" ? langParam : "en";
 const slug = Astro.params.slug ?? "";
 const pageKey = legalKeyBySlug[slug];
 
