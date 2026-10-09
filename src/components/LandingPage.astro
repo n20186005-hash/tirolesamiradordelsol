@@ -1,6 +1,7 @@
 ---
 import { alternateLinks, siteMeta, type Locale, type PageContent } from "../data/site";
 import { legalContentByLocale, localizedLegalPath } from "../data/legal";
+import { topicList } from "../data/topics";
 import WeatherPanel from "./WeatherPanel.astro";
 
 interface Props {
@@ -191,6 +192,38 @@ const heroAltSuffix: Record<Locale, string> = {
         </aside>
       </div>
     </section>
+
+    {
+      locale === "es" && (
+        <section class="border-b border-stone-200/70 bg-[#f7f5ef]">
+          <div class="mx-auto max-w-7xl px-5 py-14 lg:px-8">
+            <div class="max-w-3xl">
+              <p class="text-sm font-semibold tracking-[0.18em] text-slate-500 uppercase">Guías prácticas</p>
+              <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-950">Planificá tu visita al Mirador del Sol</h2>
+              <p class="mt-5 text-base leading-7 text-slate-600">
+                Accedé a guías específicas con indicaciones, estado de precios y horarios, y fotos reales del lugar.
+              </p>
+            </div>
+            <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {
+                topicList.map((item) => (
+                  <a
+                    href={item.canonicalPath}
+                    class="group rounded-[1.75rem] border border-stone-200/80 bg-white/85 p-6 shadow-sm shadow-stone-200/40 transition-colors hover:border-slate-400"
+                  >
+                    <h3 class="text-lg font-semibold text-slate-900">{item.hero.headline}</h3>
+                    <p class="mt-4 text-sm leading-7 text-slate-600">{item.hero.summary}</p>
+                    <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-slate-700 group-hover:text-slate-950">
+                      Leer más →
+                    </span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </section>
+      )
+    }
 
     <section id="overview" class="mx-auto max-w-7xl px-5 py-18 lg:px-8">
       <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">

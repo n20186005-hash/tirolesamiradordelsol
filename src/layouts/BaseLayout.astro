@@ -16,9 +16,10 @@ interface Props {
   structuredData?: Record<string, unknown> | null;
   faqGroups?: FaqGroup[];
   preloadImage?: string;
+  noindex?: boolean;
 }
 
-const { locale, title, description, canonicalPath: customCanonicalPath, alternateUrls, structuredData, faqGroups, preloadImage } = Astro.props;
+const { locale, title, description, canonicalPath: customCanonicalPath, alternateUrls, structuredData, faqGroups, preloadImage, noindex } = Astro.props;
 const canonicalPath = customCanonicalPath ?? localizedPath(locale);
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? `https://${siteMeta.domain}`;
 const canonicalUrl = `${siteOrigin}${canonicalPath}`;
@@ -96,12 +97,16 @@ const faqSchema =
       }
     : null;
 
-const resolvedAlternateUrls =
+const baseAlternateUrls =
   alternateUrls ??
   alternateLinks.map((item) => ({
     hreflang: item.locale === "zh" ? "zh-CN" : item.locale,
     href: `${siteOrigin}${item.href}`,
   }));
+
+const finalAlternateUrls = baseAlternateUrls.some((item) => item.hreflang === "x-default")
+  ? baseAlternateUrls
+  : [...baseAlternateUrls, { hreflang: "x-default", href: canonicalUrl }];
 ---
 
 <!doctype html>
@@ -111,16 +116,15 @@ const resolvedAlternateUrls =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"} />
     <meta name="author" content={`${siteMeta.name} guide`} />
     <link rel="canonical" href={canonicalUrl} />
 
     {
-      resolvedAlternateUrls.map((item) => (
+      finalAlternateUrls.map((item) => (
         <link rel="alternate" hreflang={item.hreflang} href={item.href} />
       ))
     }
-    <link rel="alternate" hreflang="x-default" href={`${siteOrigin}/`} />
 
     <!-- Icons & PWA -->
     <link rel="icon" href="/favicon.ico" sizes="any" />

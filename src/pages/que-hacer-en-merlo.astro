@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TopicPage from "../components/TopicPage.astro";
+import { topicBySlug, topicAlternate, type TopicSlug } from "../data/topics";
+
+const slug: TopicSlug = "que-hacer-en-merlo";
+const topic = topicBySlug[slug];
+const locale = "es";
+const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? "https://tirolesamiradordelsol.com";
+---
+<BaseLayout
+  locale={locale}
+  title={topic.title}
+  description={topic.description}
+  canonicalPath={topic.canonicalPath}
+  alternateUrls={topicAlternate(slug, siteOrigin)}
+  structuredData={null}
+  faqGroups={topic.faq.groups}
+>
+  <TopicPage locale={locale} topic={topic} />
+</BaseLayout>

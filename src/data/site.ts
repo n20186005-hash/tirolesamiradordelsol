@@ -79,7 +79,7 @@ export const siteMeta = {
   phone: "+54 2656 47-8290",
   phoneIntl: "+542656478290",
   rating: "4.7",
-  reviewCount: "13,831",
+  reviewCount: "13,857",
   type: "Tourist attraction",
   heroImage: "/images/hero-tirolesa-mirador-del-sol.jpg",
   heroImageWebp: "/images/hero-tirolesa-mirador-del-sol.webp",
@@ -2205,9 +2205,9 @@ export const contentByLocale: Record<Locale, PageContent> = {
   },
   es: {
     localeName: "Español",
-    title: "Tirolesa Mirador Del Sol | Precios, Horarios y Cómo Llegar - Merlo",
+    title: "Tirolesa Mirador del Sol en Merlo | Horarios y Cómo Llegar",
     description:
-      "¡Viví la mejor tirolesa en Villa de Merlo, San Luis! Vistas espectaculares en el Mirador del Sol. +13.000 opiniones (4.7★). Consultá precios, horarios y cómo llegar.",
+      "Visitá Tirolesa Mirador del Sol en Villa de Merlo, San Luis. Descubrí cómo llegar por Ruta 5, las vistas panorámicas, fotos y consejos para organizar tu visita.",
     nav: {
       overview: "Panorama",
       history: "Historia",
@@ -2221,9 +2221,9 @@ export const contentByLocale: Record<Locale, PageContent> = {
     },
     hero: {
       eyebrow: "Provincia de San Luis, Argentina | Mirador serrano y tirolesa",
-      headline: "Tirolesa Mirador Del Sol",
+      headline: "Tirolesa Mirador del Sol en Villa de Merlo",
       summary:
-        "Esta página presenta el sitio como una guía territorial y no como una promoción turística. Reúne contexto de montaña, claves de microclima, historia, clima en tiempo real, formas de llegada, imágenes reales y recomendaciones prácticas para quienes suben sobre Villa de Merlo.",
+        "Vení a conocer el mirador público y la tirolesa sobre Villa de Merlo: vistas de filo, mar de nubes, Ruta 5 (Camino al Filo), fotos reales y cómo llegar con tu propio vehículo. El acceso al mirador es libre; la tirolesa es un servicio de pago que depende del clima.",
       ratingLabel: "Calificación de Google",
       typeLabel: "Tipo",
       addressLabel: "Dirección",
