@@ -10,6 +10,12 @@ interface Props {
 }
 
 const { locale, content } = Astro.props;
+const operatorNotice: Record<Locale, string> = {
+  zh: "滑索的营业时间、价格、年龄和体重限制、装备及安全安排尚未向经营方核实；出发前请直接确认。",
+  en: "Zipline hours, prices, age and weight limits, equipment and safety arrangements have not been verified with the operator. Confirm directly before travelling.",
+  it: "Orari, prezzi, limiti di età e peso, attrezzatura e sicurezza della tirolesa non sono stati verificati con il gestore. Confermali direttamente prima di partire.",
+  es: "Los horarios, precios, límites de edad y peso, equipamiento y medidas de seguridad de la tirolesa no han sido verificados con el operador. Confírmalos directamente antes de viajar.",
+};
 const phoneHref = `tel:${siteMeta.phone.replace(/\s+/g, "")}`;
 const displayAddress = locale === "zh" ? siteMeta.addressZh : siteMeta.address;
 const displayPlusCode = locale === "zh" ? siteMeta.plusCodeZh : siteMeta.plusCode;
@@ -134,6 +140,7 @@ const heroAltSuffix: Record<Locale, string> = {
           <p class="mt-6 max-w-2xl text-base leading-7 text-white/85 md:text-lg">
             {content.hero.summary}
           </p>
+          <p class="mt-4 max-w-2xl text-sm font-semibold leading-6 text-white">{operatorNotice[locale]}</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a
               href={siteMeta.mapsUrl}

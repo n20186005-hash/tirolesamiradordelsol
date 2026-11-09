@@ -321,7 +321,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "安全与装备",
           body:
-            "滑索活动使用安全带、头盔与钢缆滑轮系统，出发前由现场教练进行安全讲解。装备与操作规范在每次发车前都会检查，是否开行由现场团队根据风力、能见度和降雨最终决定，请以现场说明为准。",
+            "装备、检查程序和开放情况尚未向经营方核实；请在参加前直接确认。",
         },
       ],
     },
@@ -635,17 +635,17 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "Mirador del Sol 的高空滑索多少钱？",
               answer:
-                "观景台本身是 Ruta Provincial 5 旁的公共开放空间，免费进入。高空滑索属于现场运营的付费项目，费用直接在售票处支付；票价会随季节、客流与当期活动浮动，建议上山前在现场或运营方官方渠道确认当日价格。",
+                "滑索价格、支付方式和观景台当前通行条件尚未向经营方或主管单位核实。请在出发前直接确认。",
             },
             {
               question: "Merlo 的 Mirador del Sol 开放时间是什么？",
               answer:
-                "观景台为露天公共空间，白天时段均可到访。滑索运营受天气与季节影响，通常中午前后班次较密；遇大风、降雨或雷暴可能临时停运。建议上山前先确认当天运营时间。",
+                "滑索和观景台的当前开放时间尚未核实；请在出发前向经营方及当地主管单位确认。天气可能影响运营。",
             },
             {
               question: "高空滑索有年龄或体重限制吗？",
               answer:
-                "有。除天气因素外，参与者需满足身体条件：通常要求体重在 30 至 100 公斤之间，以现场称重为准，以保证滑行动能与制动系统匹配。未成年人一般需监护人授权并陪同。患有心血管疾病、严重恐高或近期接受过手术者，建议仅作观景行程。",
+                "年龄、体重、健康限制和未成年人的要求尚未向经营方核实。出发前请直接确认；如有健康疑问，请咨询医疗专业人员。",
             },
             {
               question: "可以提前预约滑索吗？",
@@ -690,7 +690,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "山风会对高空滑索体验产生什么影响？",
               answer:
-                "滑索是一项依赖重力与空气动力学的户外项目。现场运营方配备了专业测风仪进行实时监控。当峡谷风速或横风超过工程安全阈值时，出于物理规律与访客安全考量，项目会强制暂停。因此，滑索体验具有一定的天气随机性。",
+                "天气可能影响活动。测风、停运标准和安全程序尚未向经营方核实；请直接确认。",
             },
           ],
         },
@@ -720,7 +720,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "高空滑索（Tirolesa）对参与者有什么具体的物理限制？",
               answer:
-                "除去天气变量，参与者自身需满足物理阈值。通常要求体重在 30 公斤至 100 公斤之间（具体以现场称重为准），以确保滑行动能与机械制动系统的最佳匹配，避免动能不足停在半空或动能过载。患有心血管疾病、严重恐高症或近期接受过手术的访客，建议将其作为纯粹的观景行程。",
+                "年龄、体重、健康限制和未成年人的要求尚未向经营方核实。出发前请直接确认；如有健康疑问，请咨询医疗专业人员。",
             },
           ],
         },
@@ -856,6 +856,11 @@ export const contentByLocale: Record<Locale, PageContent> = {
         "本站内容基于公开地理资料、地方政府与官方旅游门户整理，供访客进一步核实与延伸阅读。以下链接均为第三方权威或公共信息源。",
       items: [
         {
+          title: "圣路易斯国立大学旅游与城市规划学院 · 原生植物指南",
+          href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
+          description: "Florencia Arriola（旅游大学导游专业主任）于 2026 年 11 月 2 日推荐此 Villa de Merlo 原生植被指南，作为区域自然背景资料。本站尚未取得正文，不能据此确认滑索现场的具体植物；大学也未核实滑索运营或审核本站。链接可能出现访问验证。",
+        },
+        {
           title: "Villa de Merlo 官方旅游门户",
           href: "https://villademerlo.tur.ar/",
           description: "景点所在地最直接的官方旅游信息源，可核实景观线路、气候背景与周边活动。",
@@ -977,7 +982,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Safety and equipment",
           body:
-            "The ride uses a harness, helmet and a pulley system on a steel cable, with a briefing and specialist guides. Equipment and protocols are checked before each departure, and the final go/no-go decision rests with the on-site team according to wind, visibility and rain.",
+            "Equipment, inspection procedures and operating decisions have not been verified with the operator. Ask directly about equipment, instruction and safety arrangements before participating.",
         },
       ],
     },
@@ -1284,17 +1289,17 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "How much does the zipline at Mirador del Sol cost?",
               answer:
-                "Access to the lookout is free and open: it is a public space beside Ruta Provincial 5. The zipline, however, is an activity operated on site and paid directly at the ticket desk. The rate can vary with the season, demand and current promotions, so it is best confirmed on site or through the operator's official channels before heading up.",
+                "Zipline prices and payment arrangements and current lookout access have not been verified with the operator or responsible authority. Confirm before travelling.",
             },
             {
               question: "What are the opening hours of Mirador del Sol in Merlo?",
               answer:
-                "Because it is an open-air public space, the lookout can be visited during daylight hours. Zipline operation depends on weather and season, with most activity around the middle of the day, and may be suspended in strong wind, rain or storms. It is worth confirming the day's schedule before driving up Ruta 5.",
+                "Current lookout and zipline hours have not been verified. Confirm with the responsible authority and operator before travelling; weather may affect operation.",
             },
             {
               question: "Is there an age or weight limit for the zipline?",
               answer:
-                "Yes. Beyond the weather, physical requirements apply: weight is usually required to be between about 30 kg and 100 kg, confirmed by weighing on site, so that the ride's energy matches the braking system. Minors normally need authorisation and adult supervision. Visitors with cardiovascular conditions, severe vertigo or recent surgery should treat it as a viewpoint-only visit.",
+                "Age, weight, health and minor-participation requirements have not been verified with the operator. Confirm them directly before travelling; seek appropriate medical advice for individual health concerns.",
             },
             {
               question: "Can the zipline be booked in advance?",
@@ -1339,7 +1344,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "How does wind affect the zipline?",
               answer:
-                "A zipline is an outdoor activity that depends on gravity and aerodynamics. Operators use professional anemometers for real-time monitoring. When canyon or crosswind speeds exceed engineering safety thresholds, the ride is suspended for safety reasons, so the experience is partly weather-dependent.",
+                "Weather may affect the activity. Monitoring equipment, suspension criteria and safety procedures have not been verified with the operator; ask directly before travelling and participating.",
             },
           ],
         },
@@ -1369,7 +1374,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "Are there physical limits for the zipline?",
               answer:
-                "Beyond weather, participants must meet physical thresholds. Weight is typically required to be between about 30 kg and 100 kg (confirmed on-site by weighing) so that ride energy matches the braking system — avoiding stopping mid-air or overloading the brakes. Visitors with cardiovascular conditions, severe vertigo or recent surgery should treat it as a viewpoint-only visit.",
+                "Age, weight, health and minor-participation requirements have not been verified with the operator. Confirm them directly before travelling; seek appropriate medical advice for individual health concerns.",
             },
           ],
         },
@@ -1510,6 +1515,11 @@ export const contentByLocale: Record<Locale, PageContent> = {
         "This page is compiled from public geographic material and official local and national tourism portals, so that visitors can verify and extend what they read. All links below lead to third-party authoritative or public information sources.",
       items: [
         {
+          title: "UNSL Faculty of Tourism and Urbanism · Native plants guide",
+          href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
+          description: "Florencia Arriola, director of the University Tourism Guide program, recommended this guide to Villa de Merlo native vegetation on 2 November 2026 as regional background. We have not obtained the text and cannot confirm species at the zipline site. The university did not verify the operation or endorse this guide. The link may present an access check.",
+        },
+        {
           title: "Villa de Merlo official tourism portal",
           href: "https://villademerlo.tur.ar/",
           description: "The most locally relevant official tourism source, useful for scenic circuits, climate context and nearby activities.",
@@ -1631,7 +1641,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Sicurezza e attrezzatura",
           body:
-            "L'attivita si svolge con imbracatura, casco e sistema di carrucole su cavo, con briefing preliminare e guide specializzate. Attrezzatura e protocolli vengono controllati prima di ogni partenza e la decisione finale di operare spetta al team sul posto in base a vento, visibilita e pioggia.",
+            "Attrezzatura, controlli e decisioni operative non sono stati verificati con il gestore. Chiedi direttamente prima di partecipare.",
         },
       ],
     },
@@ -1938,17 +1948,17 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "Quanto costa la tirolesa al Mirador del Sol?",
               answer:
-                "L'accesso al belvedere e libero e gratuito: si tratta di uno spazio pubblico lungo la Ruta Provincial 5. La tirolesa, invece, e un'attivita gestita sul posto e si paga direttamente alla biglietteria. La tariffa puo variare con la stagione, la domanda e le promozioni in corso, quindi conviene confermarla sul posto o sui canali ufficiali prima di salire.",
+                "Prezzi, modalità di pagamento e condizioni attuali di accesso non sono stati verificati con il gestore o le autorità competenti. Confermali prima del viaggio.",
             },
             {
               question: "Quali sono gli orari del Mirador del Sol a Merlo?",
               answer:
-                "Trattandosi di uno spazio aperto, il belvedere e visitabile nelle ore di luce. L'operativita della tirolesa dipende dal meteo e dalla stagione, con maggiore attivita nelle ore centrali della giornata, e puo essere sospesa con vento forte, pioggia o temporale. Vale la pena confermare l'orario del giorno prima di salire lungo la Ruta 5.",
+                "Gli orari attuali del belvedere e della tirolesa non sono stati verificati. Confermali con le autorità competenti e il gestore prima del viaggio; il meteo può influire sul servizio.",
             },
             {
               question: "Ci sono limiti di eta o di peso per la tirolesa?",
               answer:
-                "Si. Oltre al meteo valgono requisiti fisici: di norma si richiede un peso tra circa 30 kg e 100 kg, confermato con pesatura sul posto, perche l'energia della corsa sia compatibile con il sistema frenante. I minori richiedono di solito autorizzazione e supervisione di un adulto. Chi ha patologie cardiovascolari, forte vertigine o interventi recenti dovrebbe considerarla una visita solo panoramica.",
+                "Limiti di età, peso, salute e condizioni per i minori non sono stati verificati con il gestore. Confermali direttamente prima del viaggio; per dubbi di salute chiedi a un professionista sanitario.",
             },
             {
               question: "Si puo prenotare la tirolesa in anticipo?",
@@ -1993,7 +2003,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "Come influisce il vento sulla tirolesa?",
               answer:
-                "La tirolesa è un'attività all'aperto che dipende da gravità e aerodinamica. Gli operatori usano anemometri professionali per il monitoraggio in tempo reale. Quando la velocità del vento di canyon o laterale supera le soglie di sicurezza, la corsa viene sospesa, quindi l'esperienza dipende in parte dal meteo.",
+                "Il meteo può influire sull’attività. Strumenti di monitoraggio, criteri di sospensione e procedure di sicurezza non sono stati verificati con il gestore: chiedi direttamente.",
             },
           ],
         },
@@ -2023,7 +2033,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "Ci sono limiti fisici per la tirolesa?",
               answer:
-                "Oltre al meteo, i partecipanti devono rispettare soglie fisiche. Il peso è di norma richiesto tra circa 30 kg e 100 kg (confermato sul posto con pesatura), così che l'energia della corsa sia compatibile con il sistema frenante. Chi ha patologie cardiovascolari, forte vertigine o interventi recenti dovrebbe considerarla una visita solo panoramica.",
+                "Limiti di età, peso, salute e condizioni per i minori non sono stati verificati con il gestore. Confermali direttamente prima del viaggio; per dubbi di salute chiedi a un professionista sanitario.",
             },
           ],
         },
@@ -2164,6 +2174,11 @@ export const contentByLocale: Record<Locale, PageContent> = {
         "Questa pagina è compilata da materiale geografico pubblico e da portali turistici ufficiali locali e nazionali, così che i visitatori possano verificare e approfondire. Tutti i link puntano a fonti terze autorevoli o pubbliche.",
       items: [
         {
+          title: "Facoltà di Turismo e Urbanistica UNSL · Guida alle piante native",
+          href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
+          description: "Florencia Arriola, direttrice del corso di Guida Universitaria di Turismo, ha consigliato il 2 novembre 2026 questa guida alla vegetazione nativa di Villa de Merlo come contesto regionale. Non abbiamo ottenuto il testo e non possiamo confermare specie presso la tirolesa. La facoltà non ha verificato il servizio né approvato questa guida. Il link può richiedere una verifica.",
+        },
+        {
           title: "Portale turistico ufficiale di Villa de Merlo",
           href: "https://villademerlo.tur.ar/",
           description: "La fonte ufficiale più vicina al luogo, utile per circuiti panoramici, contesto climatico e attività vicine.",
@@ -2285,7 +2300,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Seguridad y equipamiento",
           body:
-            "La actividad se realiza con arnés, casco y un sistema de poleas sobre cable, con charla previa y guías especializados. El equipamiento y los protocolos se revisan antes de cada salida, y la decisión final de operar corresponde al equipo del sitio según el viento, la visibilidad y la lluvia.",
+            "No hemos verificado con el operador el equipamiento, las inspecciones ni los procedimientos de seguridad. Consúltalos directamente antes de participar.",
         },
       ],
     },
@@ -2598,17 +2613,17 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "¿Cuánto cuesta la tirolesa en el Mirador del Sol?",
               answer:
-                "El acceso al mirador es libre y gratuito: se trata de un espacio público junto a la Ruta Provincial 5. La tirolesa, en cambio, es una actividad operada en el sitio y se abona directamente en la boletería. La tarifa puede variar según la temporada, la demanda y las promociones vigentes, así que conviene confirmarla en el lugar o en los canales oficiales antes de subir.",
+                "Los precios, la forma de pago y las condiciones actuales de acceso al mirador no han sido verificados con el operador ni con la autoridad responsable. Confírmalos antes de viajar.",
             },
             {
               question: "¿Qué horarios tiene el Mirador del Sol en Merlo?",
               answer:
-                "Al ser un espacio abierto, el mirador puede visitarse durante las horas de luz. La operación de la tirolesa depende del clima y de la temporada, con mayor actividad en las franjas centrales del día, y puede suspenderse con viento fuerte, lluvia o tormenta. Conviene confirmar el horario del día antes de subir por la Ruta 5.",
+                "Los horarios actuales del mirador y de la tirolesa no han sido verificados. Confírmalos con la autoridad responsable y el operador antes de viajar; el clima puede afectar la actividad.",
             },
             {
               question: "¿Hay límite de edad o peso para la tirolesa?",
               answer:
-                "Sí. Además del clima, rigen requisitos físicos: por lo general se pide un peso de entre unos 30 kg y 100 kg, confirmado con pesaje en el lugar, para que la energía del recorrido sea compatible con el sistema de frenado. Los menores de edad suelen requerir autorización y supervisión de un adulto. Personas con afecciones cardiovasculares, vértigo intenso o cirugía reciente deberían considerar la visita solo como mirador.",
+                "Los requisitos de edad, peso, salud y participación de menores no han sido verificados con el operador. Confírmalos directamente antes de viajar; ante dudas de salud consulta a un profesional sanitario.",
             },
             {
               question: "¿Se puede reservar la tirolesa con antelación?",
@@ -2653,7 +2668,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "¿Cómo afecta el viento a la tirolesa?",
               answer:
-                "La tirolesa es una actividad al aire libre que depende de la gravedad y la aerodinámica. Los operadores usan anemómetros profesionales para el monitoreo en tiempo real. Cuando la velocidad del viento de quebrada o lateral supera los umbrales de seguridad, el recorrido se suspende por seguridad, por lo que la experiencia depende en parte del clima.",
+                "El clima puede afectar la actividad. No hemos verificado con el operador los instrumentos de medición, criterios de suspensión ni procedimientos de seguridad; consúltalos directamente.",
             },
           ],
         },
@@ -2683,7 +2698,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "¿Hay límites físicos para la tirolesa?",
               answer:
-                "Además del clima, los participantes deben cumplir umbrales físicos. Normalmente se exige un peso de entre unos 30 kg y 100 kg (confirmado en el lugar con pesaje), para que la energía del recorrido sea compatible con el sistema de frenado y se evite detenerse en el aire o sobrecargar los frenos. Quienes tengan afecciones cardiovasculares, vértigo intenso o cirugía reciente deberían considerarla una visita solo panorámica.",
+                "Los requisitos de edad, peso, salud y participación de menores no han sido verificados con el operador. Confírmalos directamente antes de viajar; ante dudas de salud consulta a un profesional sanitario.",
             },
           ],
         },
@@ -2823,6 +2838,11 @@ export const contentByLocale: Record<Locale, PageContent> = {
       intro:
         "Esta página se compila a partir de material geográfico público y de portales turísticos oficiales locales y nacionales, para que el visitante pueda verificar y ampliar lo que lee. Todos los enlaces apuntan a fuentes terceras autorizadas o públicas.",
       items: [
+        {
+          title: "Facultad de Turismo y Urbanismo UNSL · Guía de plantas nativas",
+          href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
+          description: "Florencia Arriola, directora de la carrera Guía Universitario de Turismo, recomendó el 2 de noviembre de 2026 esta guía del monte nativo de Villa de Merlo como contexto regional. No hemos obtenido el texto y no podemos confirmar especies en el sitio de la tirolesa. La facultad no verificó la operación ni avaló esta guía. El enlace puede solicitar una verificación de acceso.",
+        },
         {
           title: "Portal turístico oficial de Villa de Merlo",
           href: "https://villademerlo.tur.ar/",

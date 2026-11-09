@@ -40,7 +40,7 @@ export const topicSlugs = [
 
 export type TopicSlug = (typeof topicSlugs)[number];
 
-const lastVerified = `Última verificación de precios y horarios: octubre de 2026. La información de la tirolesa se confirma en el lugar, ya que depende del clima y de la operación del día.`;
+const lastVerified = `Los precios y horarios de la tirolesa no han sido confirmados con el operador. Consulta directamente la disponibilidad y las condiciones antes de viajar.`;
 
 export const topicBySlug: Record<TopicSlug, TopicContent> = {
   "como-llegar": {
@@ -307,12 +307,12 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
     canonicalPath: "/tirolesa-precios-horarios/",
     title: "Precios y horarios de la Tirolesa Mirador del Sol | Estado y verificación",
     description:
-      "Estado de precios y horarios de la Tirolesa Mirador del Sol en Merlo: el mirador es libre, la tirolesa es un servicio de pago sujeto al clima. Confirmá en el lugar.",
+      "Estado de precios y horarios de la Tirolesa Mirador del Sol en Merlo: consulta al operador y a la autoridad responsable antes de viajar.",
     hero: {
       eyebrow: "Antes de venir",
       headline: "Precios y horarios de la tirolesa y el mirador",
       summary:
-        "El mirador es un espacio público de acceso libre. La tirolesa es un servicio de pago que opera según el clima del día. No manejamos venta ni tarifas oficiales: acá explicamos qué esperar y cómo confirmar.",
+        "Los precios, horarios y condiciones de acceso no han sido verificados con el operador o la autoridad responsable. Consulta antes de viajar.",
     },
     intro:
       "Queremos que llegues con información clara y sin promesas falsas. La tirolesa depende del viento, la lluvia y la visibilidad, por eso sus horarios y precios se confirman en el lugar.",
@@ -320,22 +320,22 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
       {
         id: "mirador-libre",
         eyebrow: "Acceso",
-        title: "El mirador es de acceso libre",
+        title: "Condiciones de acceso al mirador",
         intro:
-          "El Mirador del Sol es un espacio público junto a la Ruta 5. No se cobra entrada para estar en la zona de mirador y disfrutar las vistas.",
+          "El Mirador del Sol está junto a la Ruta 5. Consulta a la autoridad responsable sobre el acceso actual.",
         body: [
-          "Podés acercarte, fotografiar y recorrer la zona abierta sin pagar.",
-          "El estacionamiento es el área abierta junto al mirador.",
+          "Consulta si hay restricciones de acceso o cobros vigentes.",
+          "Consulta dónde está permitido estacionar.",
         ],
       },
       {
         id: "tirolesa-paga",
         eyebrow: "Tirolesa",
-        title: "La tirolesa es un servicio de pago",
+        title: "Precio de la tirolesa",
         intro:
-          "La tirolesa se opera en el lugar y se abona en el punto de venta. El valor puede variar por temporada, demanda y promociones del operador.",
+          "El precio y la forma de pago no han sido verificados con el operador.",
         body: [
-          "No publicamos un precio fijo porque cambia y preferimos que lo confirmes en el sitio.",
+          "Confirma el precio y la forma de pago antes de viajar.",
           "Consultalo directo en la base de la tirolesa o en los canales oficiales del operador antes de subir.",
         ],
       },
@@ -344,10 +344,10 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
         eyebrow: "Horarios",
         title: "Horarios sujetos al clima",
         intro:
-          "El mirador se puede visitar en horario diurno. La tirolesa opera según condiciones del día: con viento fuerte, lluvia o tormenta suele detenerse.",
+          "Los horarios y las condiciones de operación de la tirolesa no han sido verificados con el operador. Confírmalos directamente antes de salir.",
         body: [
           "No hay un horario fijo garantizado publicado por este sitio.",
-          "Los tramos de mediodía suelen tener más actividad, pero todo depende del clima.",
+          "El clima puede afectar la actividad; consulta al operador sobre la disponibilidad del día.",
         ],
       },
       {
@@ -360,7 +360,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
           {
             title: "Peso y edad",
             body:
-              "Suele solicitarse un rango de peso (aprox. 30–100 kg) y autorización para menores. El control final lo hace el personal en el lugar.",
+              "Los límites de edad y peso y las condiciones para menores no han sido verificados con el operador. Confírmalos directamente antes de viajar.",
           },
           {
             title: "Salud",
@@ -370,7 +370,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
           {
             title: "Seguridad",
             body:
-              "Arnés, casco y charla previa son parte del protocolo antes de cada salida.",
+              "El equipamiento, la instrucción y las medidas de seguridad no han sido verificadas con el operador. Consúltalos antes de participar.",
           },
         ],
       },
