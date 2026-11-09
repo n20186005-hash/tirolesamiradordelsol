@@ -2238,7 +2238,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "Provincia de San Luis, Argentina | Mirador serrano y tirolesa",
       headline: "Tirolesa Mirador del Sol en Villa de Merlo",
       summary:
-        "Vení a conocer el mirador público y la tirolesa sobre Villa de Merlo: vistas de filo, mar de nubes, Ruta 5 (Camino al Filo), fotos reales y cómo llegar con tu propio vehículo. El acceso al mirador es libre; la tirolesa es un servicio de pago que depende del clima.",
+        "Conocé el entorno del Mirador del Sol y la tirolesa sobre Villa de Merlo: paisaje serrano, Ruta 5 y referencias para planificar el viaje. Consulta al operador y a la autoridad responsable por el acceso y las condiciones actuales.",
       ratingLabel: "Calificación de Google",
       typeLabel: "Tipo",
       addressLabel: "Dirección",
