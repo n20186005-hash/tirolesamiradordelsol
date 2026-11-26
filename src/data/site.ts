@@ -422,7 +422,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "殖民与建镇",
           body:
-            "16 世纪后，西班牙殖民势力沿山谷推进，山麓地带出现牧场、驿站与传教据点。19 世纪中叶，Villa de Merlo 正式建镇，逐步发展为以山地气候与疗养环境闻名的内陆小镇。通往山脊的道路，正是这一地区与高地建立联系的历史产物。",
+            "16 世纪后，西班牙殖民势力沿山谷推进，山麓地带出现牧场、驿站与传教据点。根据市政府资料，Sobremonte 于 1796 年下令建镇，居民于 1797 年 1 月 1 日在教堂前集会。此后城镇逐步发展为以山地气候与疗养环境闻名的内陆小镇。通往山脊的道路，正是这一地区与高地建立联系的历史产物。",
         },
         {
           title: "公路时代的观景传统",
@@ -660,7 +660,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "科门钦戈内斯山脉（Comechingones）的地质稳定性如何？在这里进行高空滑索安全吗？",
               answer:
-                "该山脉属于阿根廷中部的潘帕斯断块山系（Sierras Pampeanas），基岩主要由古生代的结晶岩、花岗岩和片麻岩构成，地质结构极其古老且稳定。滑索工程的承重锚点均采用重型机械深度打入这些坚硬的无缝基岩中，其抗拉扯与承重能力远超常规土质或喀斯特地貌山体。",
+                "滑索的锚固和检查程序尚未得到运营方确认。参加前请向运营方咨询装备和安全措施，检查装备并遵循现场工作人员的指示。",
             },
             {
               question: "为什么观景台这一侧的山势如此陡峭，而山脉另一侧却很平缓？",
@@ -774,7 +774,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "巴士加接驳",
           body:
-            "长途巴士均停靠 Villa de Merlo 镇中心客运站（Terminal de Ómnibus）。目前无公共巴士直达 Mirador del Sol，您需要在镇上租用 Remis（当地出租车）、乘坐专线旅游小巴或报名半日游旅行团。",
+            "长途巴士可到 Villa de Merlo。市旅游局 2025 年指南指出，Reserva Florofaunística 之后禁止出租车和 remis 上行；可考虑自驾或通过旅行社安排游览，出发前请向旅游局确认现行规定。",
         },
         {
           title: "最后一段山路",
@@ -855,6 +855,8 @@ export const contentByLocale: Record<Locale, PageContent> = {
       intro:
         "本站内容基于公开地理资料、地方政府与官方旅游门户整理，供访客进一步核实与延伸阅读。以下链接均为第三方权威或公共信息源。",
       items: [
+        { title: "Villa de Merlo 市政府：地方历史", href: "https://villademerlo.gob.ar/mi-ciudad/identidad-merlina/index.php", description: "1796 / 1797" },
+        { title: "Villa de Merlo 市旅游局指南（2025）", href: "https://villademerlo.tur.ar/wp-content/uploads/2025/09/Guia-Informativa.pdf", description: "第 5 页说明保护区之后的交通限制；请确认现行规定。" },
         {
           title: "圣路易斯国立大学旅游与城市规划学院 · 原生植物指南",
           href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
@@ -1077,7 +1079,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Colonisation and the founding of Merlo",
           body:
-            "From the 16th century, Spanish colonial expansion moved up the valleys, bringing ranches, staging posts and mission outposts to the lower slopes. In the mid-19th century Villa de Merlo was formally established and gradually grew into an inland town known for its mountain climate and restorative setting. The road toward the ridge is a product of that link between settlement and highland.",
+            "From the 16th century, Spanish colonial expansion moved up the valleys, bringing ranches, staging posts and mission outposts to the lower slopes. According to the municipality, Sobremonte ordered the town’s founding in 1796, and residents gathered at the chapel on 1 January 1797. The settlement gradually grew into an inland town known for its mountain climate and restorative setting. The road toward the ridge is a product of that link between settlement and highland.",
         },
         {
           title: "The scenic-road era",
@@ -1314,7 +1316,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "How stable is the Comechingones range? Is the zipline safe?",
               answer:
-                "The range belongs to the Sierras Pampeanas block mountains of central Argentina, with a bedrock of ancient, stable Paleozoic crystalline rock, granite and gneiss. Zipline anchor points are driven deep into this hard, seamless bedrock, giving load and pull resistance well beyond what softer soils or karst terrain would allow.",
+                "The zipline anchors and inspection procedures have not been verified with the operator. Before participating, ask about equipment and safety arrangements, check your equipment and follow staff instructions.",
             },
             {
               question: "Why is the lookout side so steep while the other side is gentle?",
@@ -1433,7 +1435,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Bus, remis and transfers",
           body:
-            "Long-distance buses terminate at the Villa de Merlo bus station. There is no public bus service up to the lookout: the final segment requires a taxi, local remis, arranged transfer, a booked tour, or your own vehicle.",
+            "Long-distance buses reach Villa de Merlo. The municipal 2025 guide says taxis and remises cannot continue beyond Reserva Florofaunística; consider your own vehicle or a tour booked through an agency, and confirm current rules with the tourist office.",
         },
         {
           title: "Final mountain segment",
@@ -1514,6 +1516,8 @@ export const contentByLocale: Record<Locale, PageContent> = {
       intro:
         "This page is compiled from public geographic material and official local and national tourism portals, so that visitors can verify and extend what they read. All links below lead to third-party authoritative or public information sources.",
       items: [
+        { title: "Municipality of Villa de Merlo: local history", href: "https://villademerlo.gob.ar/mi-ciudad/identidad-merlina/index.php", description: "1796 / 1797" },
+        { title: "Villa de Merlo municipal tourism guide (2025)", href: "https://villademerlo.tur.ar/wp-content/uploads/2025/09/Guia-Informativa.pdf", description: "Page 5 describes transport restrictions beyond the reserve; confirm current rules." },
         {
           title: "UNSL Faculty of Tourism and Urbanism · Native plants guide",
           href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
@@ -1736,7 +1740,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Colonizzazione e fondazione di Merlo",
           body:
-            "Dal XVI secolo l'espansione coloniale spagnola risalì le valli, portando allevamenti, stazioni di posta e avamposti missionari sui versanti inferiori. A metà del XIX secolo Villa de Merlo fu fondata ufficialmente e crebbe come cittadina interna nota per il clima montano e la vocazione al riposo. La strada verso la cresta nasce da questo legame tra insediamento e alta montagna.",
+            "Dal XVI secolo l'espansione coloniale spagnola risalì le valli, portando allevamenti, stazioni di posta e avamposti missionari sui versanti inferiori. Secondo il comune, Sobremonte ordinò la fondazione nel 1796 e i residenti si riunirono davanti alla cappella il 1º gennaio 1797. La località crebbe come cittadina interna nota per il clima montano e la vocazione al riposo. La strada verso la cresta nasce da questo legame tra insediamento e alta montagna.",
         },
         {
           title: "L'era della strada panoramica",
@@ -1973,7 +1977,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "Quanto è stabile la catena dei Comechingones? La tirolesa è sicura?",
               answer:
-                "La catena appartiene alle Sierras Pampeanas dell'Argentina centrale, con un basamento di rocce cristalline paleozoiche antiche e stabili, granito e gneiss. Gli ancoraggi della tirolesa sono infissi in profondità in questo basamento duro e compatto, offrendo una resistenza molto superiore a quella di terreni più morbidi o carsici.",
+                "Gli ancoraggi e le procedure di controllo non sono stati verificati con il gestore. Prima di partecipare, chiedi informazioni su attrezzatura e sicurezza, controlla l'attrezzatura e segui le indicazioni del personale.",
             },
             {
               question: "Perché il versante del belvedere è ripido e l'altro è dolce?",
@@ -2092,7 +2096,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Bus, remis e transfer",
           body:
-            "I bus a lunga percorrenza terminano alla stazione di Villa de Merlo. Non esiste un servizio pubblico di bus fino al mirador: l'ultimo tratto richiede taxi, remis locale, transfer concordato, un'escursione prenotata o un veicolo proprio.",
+            "I bus a lunga percorrenza arrivano a Villa de Merlo. La guida municipale del 2025 indica che taxi e remis non possono proseguire oltre la Reserva Florofaunística; valuta un veicolo proprio o un'escursione con agenzia e verifica le regole attuali presso l'ufficio turistico.",
         },
         {
           title: "Ultimo tratto montano",
@@ -2173,6 +2177,8 @@ export const contentByLocale: Record<Locale, PageContent> = {
       intro:
         "Questa pagina è compilata da materiale geografico pubblico e da portali turistici ufficiali locali e nazionali, così che i visitatori possano verificare e approfondire. Tutti i link puntano a fonti terze autorevoli o pubbliche.",
       items: [
+        { title: "Comune di Villa de Merlo: storia locale", href: "https://villademerlo.gob.ar/mi-ciudad/identidad-merlina/index.php", description: "1796 / 1797" },
+        { title: "Guida turistica municipale di Villa de Merlo (2025)", href: "https://villademerlo.tur.ar/wp-content/uploads/2025/09/Guia-Informativa.pdf", description: "La pagina 5 descrive le restrizioni oltre la riserva; verifica le regole attuali." },
         {
           title: "Facoltà di Turismo e Urbanistica UNSL · Guida alle piante native",
           href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",
@@ -2401,7 +2407,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Colonización y fundación de Merlo",
           body:
-            "Desde el siglo XVI la expansión colonial española remontó los valles, trayendo estancias, postas y avanzadas misionales a las laderas bajas. A mediados del siglo XIX se fundó formalmente Villa de Merlo, que creció como una localidad serrana conocida por su clima y su carácter reparador. El camino hacia la cresta es producto de ese vínculo entre el poblado y la montaña alta.",
+            "Desde el siglo XVI la expansión colonial española remontó los valles, trayendo estancias, postas y avanzadas misionales a las laderas bajas. Según el municipio, Sobremonte ordenó la fundación en 1796 y los vecinos se reunieron frente a la capilla el 1 de enero de 1797. Merlo creció como una localidad serrana conocida por su clima y su carácter reparador. El camino hacia la cresta es producto de ese vínculo entre el poblado y la montaña alta.",
         },
         {
           title: "La era de la ruta panorámica",
@@ -2638,7 +2644,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
             {
               question: "¿Qué tan estable es la sierra de los Comechingones? ¿Es segura la tirolesa?",
               answer:
-                "La sierra pertenece a las Sierras Pampeanas del centro de Argentina, con un basamento de rocas cristalinas paleozoicas antiguas y estables, granito y gneis. Los anclajes de la tirolesa se clavan en profundidad en este basamento duro y compacto, ofreciendo una resistencia muy superior a la de suelos más blandos o kársticos.",
+                "Los anclajes y los procedimientos de inspección no han sido verificados con el operador. Antes de participar, consulta sobre el equipo y las medidas de seguridad, revisa tu equipo y sigue las indicaciones del personal.",
             },
             {
               question: "¿Por qué la ladera del mirador es tan empinada y la otra es suave?",
@@ -2757,7 +2763,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
         {
           title: "Bus, remis y transferencia",
           body:
-            "Los buses de larga distancia terminan en la terminal de Villa de Merlo. No hay servicio público de bus hasta el mirador: el último tramo requiere taxi, remis local, transfer acordado, excursión contratada o un vehículo particular.",
+            "Los buses de larga distancia llegan a Villa de Merlo. La guía municipal de 2025 indica que no se puede subir en taxi o remís más allá de la Reserva Florofaunística; considera un vehículo propio o una excursión contratada y confirma las reglas vigentes con turismo.",
         },
         {
           title: "Último tramo serrano",
@@ -2838,6 +2844,8 @@ export const contentByLocale: Record<Locale, PageContent> = {
       intro:
         "Esta página se compila a partir de material geográfico público y de portales turísticos oficiales locales y nacionales, para que el visitante pueda verificar y ampliar lo que lee. Todos los enlaces apuntan a fuentes terceras autorizadas o públicas.",
       items: [
+        { title: "Municipalidad de Villa de Merlo: historia local", href: "https://villademerlo.gob.ar/mi-ciudad/identidad-merlina/index.php", description: "1796 / 1797" },
+        { title: "Guía municipal de Villa de Merlo (2025)", href: "https://villademerlo.tur.ar/wp-content/uploads/2025/09/Guia-Informativa.pdf", description: "La página 5 describe restricciones de transporte después de la reserva; confirma las reglas vigentes." },
         {
           title: "Facultad de Turismo y Urbanismo UNSL · Guía de plantas nativas",
           href: "https://ftu.unsl.edu.ar/wp-content/uploads/libros-publicaciones-ftu/Guia-de-plantas-nativas.pdf",

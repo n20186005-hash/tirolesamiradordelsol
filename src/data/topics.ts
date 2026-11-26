@@ -53,7 +53,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
       eyebrow: "Acceso y ubicación",
       headline: "Cómo llegar al Mirador del Sol en Villa de Merlo",
       summary:
-        "El Mirador del Sol está sobre la Ruta 5 (Camino al Filo), a unos 8–10 km del centro de Villa de Merlo. Se llega en auto propio, remís o excursión; la subida es de curvas cerradas y ganancia de altura constante.",
+        "El Mirador del Sol está sobre la Ruta 5 (Camino al Filo), a unos 8–10 km del centro de Villa de Merlo. Consulta el acceso en auto propio o excursión; la subida es de curvas cerradas y ganancia de altura constante.",
     },
     intro:
       "La manera más común de llegar es en vehículo propio desde Villa de Merlo por la Ruta 5. A continuación gib datos prácticos para organizar el viaje sin sorpresas.",
@@ -112,7 +112,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
           {
             title: "Remís o taxi",
             body:
-              "Desde Villa de Merlo podés contratar un remís o taxi para la subida y el regreso. Conviene acordar el retorno antes de partir.",
+              "La guía municipal de 2025 indica que no se puede subir en remís o taxi más allá de la Reserva Florofaunística. Consultá con turismo las reglas actuales y las opciones para continuar en vehículo propio o excursión.",
           },
           {
             title: "Excursiones",
@@ -159,7 +159,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
             {
               question: "¿Hay transporte público hasta el mirador?",
               answer:
-                "No hay una línea regular que llegue directo al mirador. Sin auto, lo más práctico es remís, taxi o una excursión desde Villa de Merlo.",
+                "La guía municipal de 2025 sitúa el límite del transporte público en la Reserva Florofaunística e indica que no se puede seguir en taxi o remís. Consultá con turismo por excursiones y condiciones actuales.",
             },
             {
               question: "¿Cuánto tarda la subida desde el centro?",
