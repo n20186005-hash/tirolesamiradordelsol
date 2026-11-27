@@ -241,9 +241,9 @@ export const alternateLinks = locales.map((locale) => ({
 export const contentByLocale: Record<Locale, PageContent> = {
   zh: {
     localeName: "中文",
-    title: "Tirolesa Mirador Del Sol | 阿根廷圣路易斯省四语景点指南",
+    title: "Tirolesa Mirador del Sol｜阿根廷梅洛观景台与滑索指南",
     description:
-      "面向中文、英语、意大利语与西班牙语访客的 Tirolesa Mirador Del Sol 单页科普指南，涵盖地理背景、微气候、交通方式、照片与官方延伸链接。",
+      "了解阿根廷圣路易斯省梅洛的 Mirador del Sol：Ruta 5 交通路线、山谷全景、滑索项目、现场照片与游览建议。",
     nav: {
       overview: "概览",
       history: "历史",
@@ -259,7 +259,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "阿根廷圣路易斯省 | 梅洛山地观景与高空滑索",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "本站为聚焦地理环境、观景体验与到访安全，不承载预订、促销或品牌背书。该刊物完全免费，旨在促进阿根廷旅游业的发展。",
+        "沿 Ruta 5 山路探索梅洛上方的 Mirador del Sol：欣赏山谷景观，了解滑索活动、交通方式、现场照片与山地天气。",
       ratingLabel: "Google 评分",
       typeLabel: "类型",
       addressLabel: "地址",
@@ -904,9 +904,9 @@ export const contentByLocale: Record<Locale, PageContent> = {
   },
   en: {
     localeName: "English",
-    title: "Tirolesa Mirador Del Sol | Multilingual Visitor Guide in San Luis, Argentina",
+    title: "Tirolesa Mirador del Sol, Merlo | Views, Zipline & Directions",
     description:
-      "A four-language guide to Tirolesa Mirador Del Sol with geographic context, microclimate notes, transport options, on-site photos, and official reference links.",
+      "Plan your visit to Tirolesa Mirador del Sol in Villa de Merlo, San Luis: Ruta 5 directions, panoramic views, photos, weather and practical travel tips.",
     nav: {
       overview: "Overview",
       history: "History",
@@ -922,7 +922,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "San Luis Province, Argentina | Scenic ridge lookout and zipline",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "This page treats the site as a place-based guide rather than a tourism advertisement. It brings together mountain context, microclimate clues, access routes, on-site images, and practical advice for visitors heading above Villa de Merlo.",
+        "Explore panoramic valley views and the zipline at Mirador del Sol above Villa de Merlo, with directions along Ruta 5, local scenery and useful planning tips.",
       ratingLabel: "Google rating",
       typeLabel: "Type",
       addressLabel: "Address",
@@ -1565,9 +1565,9 @@ export const contentByLocale: Record<Locale, PageContent> = {
   },
   it: {
     localeName: "Italiano",
-    title: "Tirolesa Mirador Del Sol | Guida multilingue per visitatori in Argentina",
+    title: "Tirolesa Mirador del Sol a Merlo | Panorama e Come Arrivare",
     description:
-      "Guida in quattro lingue a Tirolesa Mirador Del Sol con contesto geografico, note sul microclima, modi di arrivo, foto sul posto e link ufficiali.",
+      "Visita Tirolesa Mirador del Sol a Villa de Merlo, San Luis: indicazioni lungo la Ruta 5, panorami, fotografie e consigli pratici per il viaggio.",
     nav: {
       overview: "Panoramica",
       history: "Storia",
@@ -1583,7 +1583,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "Provincia di San Luis, Argentina | Belvedere di cresta e tirolesa",
       headline: "Tirolesa Mirador Del Sol",
       summary:
-        "La pagina presenta il luogo come guida territoriale e non come annuncio promozionale. Riunisce contesto montano, indizi di microclima, modi di arrivo, immagini reali e consigli pratici per chi sale sopra Villa de Merlo.",
+        "Scopri il panorama sulla valle e la tirolesa del Mirador del Sol sopra Villa de Merlo, con informazioni sulla Ruta 5, sul paesaggio e sulla visita.",
       ratingLabel: "Valutazione Google",
       typeLabel: "Tipologia",
       addressLabel: "Indirizzo",
@@ -2244,7 +2244,7 @@ export const contentByLocale: Record<Locale, PageContent> = {
       eyebrow: "Provincia de San Luis, Argentina | Mirador serrano y tirolesa",
       headline: "Tirolesa Mirador del Sol en Villa de Merlo",
       summary:
-        "Conocé el entorno del Mirador del Sol y la tirolesa sobre Villa de Merlo: paisaje serrano, Ruta 5 y referencias para planificar el viaje. Consulta al operador y a la autoridad responsable por el acceso y las condiciones actuales.",
+        "Descubrí el Mirador del Sol y la tirolesa sobre Villa de Merlo: vistas al valle, paisajes serranos, acceso por Ruta 5, fotos del lugar y consejos para tu visita.",
       ratingLabel: "Calificación de Google",
       typeLabel: "Tipo",
       addressLabel: "Dirección",
