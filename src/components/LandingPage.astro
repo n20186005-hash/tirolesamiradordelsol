@@ -11,10 +11,10 @@ interface Props {
 
 const { locale, content } = Astro.props;
 const operatorNotice: Record<Locale, string> = {
-  zh: "滑索的营业时间、价格、年龄和体重限制、装备及安全安排尚未向经营方核实；出发前请直接确认。",
-  en: "Zipline hours, prices, age and weight limits, equipment and safety arrangements have not been verified with the operator. Confirm directly before travelling.",
-  it: "Orari, prezzi, limiti di età e peso, attrezzatura e sicurezza della tirolesa non sono stati verificati con il gestore. Confermali direttamente prima di partire.",
-  es: "Los horarios, precios, límites de edad y peso, equipamiento y medidas de seguridad de la tirolesa no han sido verificados con el operador. Confírmalos directamente antes de viajar.",
+  zh: "滑索的价格、营业时段和参与条件由经营方公布；山区天气可能影响活动安排。",
+  en: "Zipline prices, opening times and participation rules are set by the operator; mountain weather may affect availability.",
+  it: "Prezzi, orari e requisiti della tirolesa sono stabiliti dal gestore; il meteo di montagna può influire sull'attività.",
+  es: "Los precios, horarios y requisitos de la tirolesa los establece el operador; el clima de montaña puede afectar la actividad.",
 };
 const phoneHref = `tel:${siteMeta.phone.replace(/\s+/g, "")}`;
 const displayAddress = locale === "zh" ? siteMeta.addressZh : siteMeta.address;

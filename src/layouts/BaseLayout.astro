@@ -23,7 +23,7 @@ const { locale, title, description, canonicalPath: customCanonicalPath, alternat
 const canonicalPath = customCanonicalPath ?? localizedPath(locale);
 const siteOrigin = Astro.site?.toString().replace(/\/$/, "") ?? `https://${siteMeta.domain}`;
 const canonicalUrl = `${siteOrigin}${canonicalPath}`;
-const businessId = `${siteOrigin}/#business`;
+const attractionId = `${siteOrigin}/#attraction`;
 const heroImageUrl = `${siteOrigin}${siteMeta.heroImage}`;
 const ogImageUrl = `${siteOrigin}${siteMeta.ogImage}`;
 const languageTag: Record<Locale, string> = {
@@ -35,52 +35,61 @@ const languageTag: Record<Locale, string> = {
 
 const tourismSchema = {
   "@context": "https://schema.org",
-  "@type": ["TouristAttraction", "LocalBusiness"],
-  "@id": businessId,
-  name: siteMeta.name,
-  alternateName: [siteMeta.shortName, `${siteMeta.cityFull} ${siteMeta.name}`],
-  description,
-  url: canonicalUrl,
-  image: [heroImageUrl, ogImageUrl],
-  telephone: siteMeta.phoneIntl,
-  isAccessibleForFree: true,
-  publicAccess: true,
-  sameAs: [siteMeta.mapsUrl, siteMeta.merloTourismUrl, siteMeta.govtTourismUrl],
-  hasMap: siteMeta.mapsUrl,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Ruta Provincial 5 s/n",
-    addressLocality: siteMeta.cityFull,
-    addressRegion: siteMeta.state,
-    addressCountry: siteMeta.countryCode,
-    postalCode: siteMeta.postalCode,
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: siteMeta.latitude,
-    longitude: siteMeta.longitude,
-  },
-  touristType: ["Aventura", "Familias", "Fotografía"],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: siteMeta.rating,
-    reviewCount: siteMeta.reviewCount.replace(",", ""),
-    bestRating: "5",
-    worstRating: "1",
-  },
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${siteOrigin}/#website`,
+      name: `${siteMeta.name} — guía de viaje independiente`,
+      url: siteOrigin,
+      inLanguage: ["es", "en", "it", "zh-CN"],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalUrl}#webpage`,
+      name: title,
+      description,
+      url: canonicalUrl,
+      inLanguage: languageTag[locale],
+      isPartOf: { "@id": `${siteOrigin}/#website` },
+      about: { "@id": attractionId },
+    },
+    {
+      "@type": "TouristAttraction",
+      "@id": attractionId,
+      name: siteMeta.name,
+      alternateName: siteMeta.shortName,
+      description: "Mirador serrano y tirolesa en el Camino al Filo, Villa de Merlo, San Luis, Argentina.",
+      image: [heroImageUrl, ogImageUrl],
+      hasMap: siteMeta.mapsUrl,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Ruta Provincial 5 s/n",
+        addressLocality: siteMeta.cityFull,
+        addressRegion: siteMeta.state,
+        addressCountry: siteMeta.countryCode,
+        postalCode: siteMeta.postalCode,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: siteMeta.latitude,
+        longitude: siteMeta.longitude,
+      },
+    },
+  ],
 };
 const pageStructuredData = structuredData === undefined ? tourismSchema : structuredData;
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: siteMeta.country, item: siteOrigin },
-    { "@type": "ListItem", position: 2, name: siteMeta.state },
-    { "@type": "ListItem", position: 3, name: siteMeta.city },
-    { "@type": "ListItem", position: 4, name: siteMeta.name, item: canonicalUrl },
-  ],
-};
+const breadcrumbSchema =
+  ["/", "/en/", "/it/", "/zh/"].includes(canonicalPath) || noindex
+    ? null
+    : {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Inicio", item: `${siteOrigin}/` },
+          { "@type": "ListItem", position: 2, name: title, item: canonicalUrl },
+        ],
+      };
 
 const faqSchema =
   faqGroups && faqGroups.length > 0
@@ -106,7 +115,7 @@ const baseAlternateUrls =
 
 const finalAlternateUrls = baseAlternateUrls.some((item) => item.hreflang === "x-default")
   ? baseAlternateUrls
-  : [...baseAlternateUrls, { hreflang: "x-default", href: canonicalUrl }];
+  : [...baseAlternateUrls, { hreflang: "x-default", href: `${siteOrigin}/` }];
 ---
 
 <!doctype html>
@@ -160,7 +169,7 @@ const finalAlternateUrls = baseAlternateUrls.some((item) => item.hreflang === "x
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     {pageStructuredData && <script type="application/ld+json" set:html={JSON.stringify(pageStructuredData)} />}
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
     {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 
     <!-- Google Analytics 4 (consent mode: analytics stays denied until the visitor opts in) -->
