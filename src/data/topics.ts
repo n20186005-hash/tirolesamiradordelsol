@@ -40,7 +40,7 @@ export const topicSlugs = [
 
 export type TopicSlug = (typeof topicSlugs)[number];
 
-const lastVerified = `Los precios y horarios de la tirolesa no han sido confirmados con el operador. Consulta directamente la disponibilidad y las condiciones antes de viajar.`;
+const lastVerified = `La tarifa y los horarios los establece el operador y pueden variar según la temporada y el clima. Consultá los valores vigentes antes de subir.`;
 
 export const topicBySlug: Record<TopicSlug, TopicContent> = {
   "como-llegar": {
@@ -56,7 +56,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
         "El Mirador del Sol está sobre la Ruta 5 (Camino al Filo), a unos 8–10 km del centro de Villa de Merlo. Consulta el acceso en auto propio o excursión; la subida es de curvas cerradas y ganancia de altura constante.",
     },
     intro:
-      "La manera más común de llegar es en vehículo propio desde Villa de Merlo por la Ruta 5. A continuación gib datos prácticos para organizar el viaje sin sorpresas.",
+      "La manera más común de llegar es en vehículo propio desde Villa de Merlo por la Ruta 5. A continuación, reunimos datos prácticos para organizar el viaje sin sorpresas.",
     sections: [
       {
         id: "desde-merlo",
@@ -100,7 +100,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
           "El Mirador del Sol cuenta con un área de estacionamiento abierta y sin pavimentar junto a la zona de mirador y la base de la tirolesa.",
         body: [
           "Estacioná en lugar amplio, frenos puestos y fuera del paso de otros vehículos.",
-          "En temporada alta y fines de semana el espacio se reduce por la tarde; id con tiempo.",
+          "En temporada alta y fines de semana el espacio se reduce por la tarde; llegá con tiempo.",
           "Abrí con cuidado las puertas: el viento de cresta puede ser fuerte.",
         ],
       },
@@ -169,7 +169,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
             {
               question: "¿Dónde se estaciona?",
               answer:
-                "Hay un área abierta y sin pavimentar junto al mirador. Llénala con cuidado, frenos puestos y fuera del paso; los fines de semana se llena por la tarde.",
+                "Hay un área abierta y sin pavimentar junto al mirador. Estacioná con cuidado, frenos puestos y fuera del paso; los fines de semana se llena por la tarde.",
             },
           ],
         },
@@ -305,17 +305,17 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
   "tirolesa-precios-horarios": {
     slug: "tirolesa-precios-horarios",
     canonicalPath: "/tirolesa-precios-horarios/",
-    title: "Precios y horarios de la Tirolesa Mirador del Sol | Estado y verificación",
+    title: "Tirolesa Mirador del Sol: precios, horarios y requisitos | Merlo",
     description:
-      "Estado de precios y horarios de la Tirolesa Mirador del Sol en Merlo: consulta al operador y a la autoridad responsable antes de viajar.",
+      "Guía para planificar la tirolesa en Mirador del Sol, Merlo: tarifas, horarios sujetos al clima, condiciones de acceso y requisitos de participación.",
     hero: {
       eyebrow: "Antes de venir",
       headline: "Precios y horarios de la tirolesa y el mirador",
       summary:
-        "Los precios, horarios y condiciones de acceso no han sido verificados con el operador o la autoridad responsable. Consulta antes de viajar.",
+        "Organizá tu visita a la tirolesa del Mirador del Sol: conocé qué consultar sobre tarifas, horarios, condiciones de acceso y requisitos.",
     },
     intro:
-      "Queremos que llegues con información clara y sin promesas falsas. La tirolesa depende del viento, la lluvia y la visibilidad, por eso sus horarios y precios se confirman en el lugar.",
+      "La tirolesa suma una experiencia de aventura al paisaje del Mirador del Sol. Para organizarla, revisá las tarifas, horarios y condiciones de participación, que pueden variar con el clima.",
     sections: [
       {
         id: "mirador-libre",
@@ -333,7 +333,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
         eyebrow: "Tirolesa",
         title: "Precio de la tirolesa",
         intro:
-          "El precio y la forma de pago no han sido verificados con el operador.",
+          "La tarifa y los medios de pago vigentes los informa el operador de la tirolesa.",
         body: [
           "Confirma el precio y la forma de pago antes de viajar.",
           "Consultalo directo en la base de la tirolesa o en los canales oficiales del operador antes de subir.",
@@ -344,7 +344,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
         eyebrow: "Horarios",
         title: "Horarios sujetos al clima",
         intro:
-          "Los horarios y las condiciones de operación de la tirolesa no han sido verificados con el operador. Confírmalos directamente antes de salir.",
+          "La operación depende del viento, la lluvia y las condiciones de seguridad de cada jornada. Consultá los horarios con el operador.",
         body: [
           "No hay un horario fijo garantizado publicado por este sitio.",
           "El clima puede afectar la actividad; consulta al operador sobre la disponibilidad del día.",
@@ -360,7 +360,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
           {
             title: "Peso y edad",
             body:
-              "Los límites de edad y peso y las condiciones para menores no han sido verificados con el operador. Confírmalos directamente antes de viajar.",
+              "Consultá al operador los requisitos de edad y peso y las condiciones para participar con menores.",
           },
           {
             title: "Salud",
@@ -370,14 +370,14 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
           {
             title: "Seguridad",
             body:
-              "El equipamiento, la instrucción y las medidas de seguridad no han sido verificadas con el operador. Consúltalos antes de participar.",
+              "Antes de participar, pedí al equipo indicaciones sobre el arnés, los procedimientos y las medidas de seguridad.",
           },
         ],
       },
       {
         id: "verificacion",
         eyebrow: "Transparencia",
-        title: "Estado y verificación",
+        title: "Información para planificar",
         intro: lastVerified,
         body: [
           "Este sitio es una guía independiente: no vendemos ni fijamos tarifas.",
@@ -401,7 +401,7 @@ export const topicBySlug: Record<TopicSlug, TopicContent> = {
             {
               question: "¿El mirador tiene costo de entrada?",
               answer:
-                "No. El Mirador del Sol es un espacio público de acceso libre; no se cobra para disfrutar las vistas.",
+                "El acceso al mirador y el servicio de tirolesa tienen condiciones diferentes. Consultá la señalización local y a la autoridad responsable sobre eventuales cargos de acceso.",
             },
             {
               question: "¿A qué hora abre la tirolesa?",

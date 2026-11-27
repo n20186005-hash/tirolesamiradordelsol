@@ -1,0 +1,37 @@
+name: Validate Astro SEO build
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build static site
+        run: npm run build
+      - name: Verify canonical travel routes in sitemap
+        run: |
+          test -f dist/sitemap-index.xml
+          test -f dist/sitemap-0.xml
+          for slug in como-llegar que-hacer-en-merlo tirolesa-precios-horarios fotos; do
+            grep -Fq "https://tirolesamiradordelsol.com/$slug/" dist/sitemap-0.xml
+          done
+          ! grep -Eq '/(privacy-policy|terms-of-service|cookie-settings)/' dist/sitemap-0.xml
+          test -f dist/_redirects
+          grep -Fq '/es/ / 301' dist/_redirects
